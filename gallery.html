@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Dr. Poornima Fertility Centre</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Add specific styles for the gallery page here */
+        .gallery-page-section {
+            padding: 60px 20px;
+            background-color: #f9f9f9;
+        }
+
+        .gallery-page-section h2 {
+            text-align: center;
+            color: #e91e63;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+        }
+
+        .gallery-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-category {
+            margin-bottom: 60px;
+        }
+
+        .gallery-category h3 {
+            color: #c2185b;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            border-bottom: 2px solid #e91e63;
+            padding-bottom: 10px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px; /* Adjust as needed */
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item iframe {
+             width: 100%;
+             height: 200px; /* Adjust as needed */
+             display: block;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            margin: 0 0 5px 0;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .gallery-overlay p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Include your existing header/navbar here -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="assets/images/logo.png" alt="Logo" />
+            <span>Dr. Poornima Fertility Centre</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="about-dr.html">About</a></li>
+            <li class="dropdown">
+                <a href="index.html#services">Services <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-content">
+                    <li class="dropdown-submenu">
+                        <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right"></i></a>
+                        <ul class="submenu-content">
+                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li>
+                            <li><a href="infertility-services.html#ovulation-induction">Ovulation Induction</a></li>
+                            <li><a href="infertility-services.html#iui">IUI</a></li>
+                            <li><a href="infertility-services.html#psychological-counselling">Psychological Counselling</a></li>
+                            <li><a href="infertility-services.html#fertility-evaluation">Fertility Evaluation</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right"></i></a>
+                        <ul class="submenu-content">
+                            <li><a href="ivf-services.html#ivf">In Vitro Fertilization (IVF)</a></li>
+                            <li><a href="ivf-services.html#egg-freezing">Egg Freezing</a></li>
+                            <li><a href="ivf-services.html#embryo-freezing">Embryo Freezing</a></li>
+                            <li><a href="ivf-services.html#fet">Frozen Embryo Transfer (FET)</a></li>
+                            <li><a href="icsi.html">Intracytoplasmic Sperm Injection (ICSI)</a></li>
+                            <li><a href="sperm-freezing.html">Sperm Freezing</a></li>
+                        </ul>
+                    </li>
+                     <li class="dropdown-submenu">
+                        <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right"></i></a>
+                        <ul class="submenu-content">
+                            <li><a href="male-infertility-services.html#dfi">DNA Fragmentation Index (DFI)</a></li>
+                            <li><a href="male-infertility-services.html#micro-fluidics">Micro Fluidics</a></li>
+                            <li><a href="male-infertility-services.html#micro-tese">Micro TESE (Testicular Sperm Extraction)</a></li>
+                            <li><a href="male-infertility-services.html#semen-analysis">Semen Analysis</a></li>
+                            <li><a href="male-infertility-services.html#tesa">TESA (Testicular Sperm Aspiration)</a></li>
+                        </ul>
+                    </li>
+                     <li class="dropdown-submenu">
+                        <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right"></i></a>
+                        <ul class="submenu-content">
+                            <li><a href="advanced-ivf-services.html#era">Endometrial Receptivity Array (ERA)</a></li>
+                            <li><a href="advanced-ivf-services.html#blastocyst-culture">Blastocyst Culture</a></li>
+                            <li><a href="advanced-ivf-services.html#prp-stem-cell">Ovarian and Endometrial PRP and Stem Cell Therapy</a></li>
+                            <li><a href="advanced-ivf-services.html#pgt">Pre-implantation Genetic Testing (PGT)</a></li>
+                            <li><a href="advanced-ivf-services.html#assisted-hatching">Assisted Hatching</a></li>
+                        </ul>
+                    </li>
+                     <li class="dropdown-submenu">
+                        <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right"></i></a>
+                        <ul class="submenu-content">
+                            <li><a href="fertility-preservation-services.html#cancer-patients">Preservation for Cancer Patients</a></li>
+                            <li><a href="fertility-preservation-services.html#egg-freezing">Egg Freezing</a></li>
+                            <li><a href="fertility-preservation-services.html#embryo-freezing">Embryo Freezing</a></li>
+                        </ul>
+                    </li>
+                     <li class="dropdown-submenu">
+                        <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right"></i></a>
+                        <ul class="submenu-content">
+                            <li><a href="third-party-reproduction-services.html#donor-egg">Donor Egg</a></li>
+                            <li><a href="third-party-reproduction-services.html#donor-sperm">Donor Sperm</a></li>
+                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li>
+                        </ul>
+                    </li>
+                     <li class="dropdown-submenu">
+                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right"></i></a>
+                        <ul class="submenu-content">
+                            <li><a href="endoscopy-services.html#diagnostic-laparoscopy">Diagnostic Laparoscopy & Tubal Testing</a></li>
+                            <li><a href="endoscopy-services.html#hysteroscopy">Hysteroscopy</a></li>
+                            <li><a href="endoscopy-services.html#laparoscopy-treatment">Laparoscopic Treatment of Fibroids, Endometriosis & Ovarian Cysts</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="gallery.html">Gallery</a></li> <!-- Updated link -->
+            <li><a href="index.html#book">Contact</a></li>
+            <li><a href="#" class="consultation-btn" onclick="document.getElementById('consultation-popup').style.display='block'">Book Free Consultation</a></li>
+        </ul>
+    </nav>
+
+    <section class="gallery-page-section">
+        <h2>Our Gallery</h2>
+        <div class="gallery-content">
+            <div class="gallery-category">
+                <h3>Photos</h3>
+                <div class="gallery-grid">
+                    <!-- Add your photo gallery items here -->
+                    <div class="gallery-item photos">
+                        <img src="assets/images/clinic1.jpg" alt="Clinic Interior">
+                        <div class="gallery-overlay">
+                            <h3>Modern Facilities</h3>
+                            <p>State-of-the-art treatment rooms</p>
+                        </div>
+                    </div>
+                    <!-- Example: -->
+                    <!--
+                    <div class="gallery-item photos">
+                        <img src="assets/images/photo2.jpg" alt="Description of photo 2">
+                        <div class="gallery-overlay">
+                            <h3>Photo Title 2</h3>
+                            <p>Short description of photo 2</p>
+                        </div>
+                    </div>
+                    -->
+                    <!-- Add more photo items as needed -->
+                </div>
+            </div>
+
+            <div class="gallery-category">
+                <h3>Videos</h3>
+                <div class="gallery-grid">
+                    <!-- Add your video gallery items here -->
+                     <div class="gallery-item videos">
+                        <div class="video-thumbnail">
+                            <iframe src="https://www.youtube.com/embed/GK2RLSzARRI" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="gallery-overlay">
+                            <h3>Patient Testimonials</h3>
+                            <p>Hear success stories from our patients</p>
+                        </div>
+                    </div>
+                     <div class="gallery-item videos">
+                        <div class="video-thumbnail">
+                            <iframe src="https://www.youtube.com/embed/nY2vcUD6e9M" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="gallery-overlay">
+                            <h3>Understanding IVF</h3>
+                            <p>An informative video about the IVF process</p>
+                        </div>
+                    </div>
+                    <!-- Example: -->
+                    <!--
+                    <div class="gallery-item videos">
+                        <div class="video-thumbnail">
+                            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="gallery-overlay">
+                            <h3>Video Title 2</h3>
+                            <p>Short description of video 2</p>
+                        </div>
+                    </div>
+                    -->
+                    <!-- Add more video items as needed -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Include your existing footer here -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="assets/images/logo.png" alt="Dr Poornima Fertility Centre Logo">
+                <p>Dr Poornima Fertility Centre is the Best Fertility Centre in Karimnagar offering advanced fertility treatments with personalized care, state-of-the-art technology, and a compassionate, patient-centered approach to success.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/your-profile" target="_blank" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://facebook.com/your-profile" target="_blank" class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://youtube.com/your-channel" target="_blank" class="social-icon">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-icon">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#doctors">Doctors</a></li>
+                    <li><a href="gallery.html">Gallery</a></li> <!-- Updated link -->
+                    <li><a href="index.html#book">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="contact-details">
+                <h3>Contact Details</h3>
+                <div class="address">
+                    <p>House No 3-3-139, Doctor's Street</p>
+                    <p>Civil Hospital Road, Near Raja Theater</p>
+                    <p>Karimnagar, Telangana - 505001</p>
+                </div>
+                <div class="contact-info">
+                    <p>Email: drpoornimafertility@gmail.com</p>
+                    <p>Phone: +91-1234567890</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Dr Poornima Fertility Centre. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Add this at the end of the body tag -->
+    <div id="consultation-popup" class="popup-modal">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <h2>Are you suffering from <span class="highlight">infertility</span> and <span class="highlight">pregnancy</span> related issues?</h2>
+            <h3>Upto 50% Off on Fertility Treatments</h3>
+            <div class="popup-buttons">
+                <button class="popup-btn">Free Consultation</button>
+                <button class="popup-btn">Free USG Scan</button>
+                <button class="popup-btn">Zero cost EMI</button>
+            </div>
+            <form class="popup-form">
+                <input type="text" placeholder="Full Name" required />
+                <input type="tel" placeholder="Mobile Number" required />
+                <div class="security-message">
+                    <img src="assets/images/google.png" alt="Security Icon" />
+                    <span>No need to worry, your data is 100% safe with us!</span>
+                </div>
+                <button type="submit" class="popup-book-btn">Book Now</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="assets/script.js"></script>
+    <script>
+        // Add any specific JavaScript for the gallery page here if needed
+        // For example, if you want to implement filtering or lightboxes
+    </script>
+</body>
+</html>
