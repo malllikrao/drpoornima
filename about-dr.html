@@ -14,11 +14,11 @@
         }
 
         .about-doctor-container {
-            max-width: 1000px;
+            max-width: 1100px; /* Slightly increased max-width for more space */
             margin: 0 auto;
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
+            gap: 40px; /* Gap between image and text */
             background-color: #fff; /* White background for content */
             padding: 30px;
             border-radius: 10px;
@@ -26,36 +26,42 @@
         }
 
         .doctor-image {
-            flex: 1 1 300px;
+            flex: 2; /* Give image 2 parts of the available space */
+            min-width: 350px; /* Ensure a minimum width for the image container */
             text-align: center;
         }
 
         .doctor-image img {
             max-width: 100%;
-            height: auto;
+            height: auto; /* Maintain aspect ratio */
             border-radius: 8px;
+            object-fit: cover; /* Ensures the image covers the area, cropping if necessary */
+            min-height: 400px; /* Set a minimum height to make the image larger */
+            max-height: 550px; /* Optional: cap maximum height if needed */
         }
 
         .doctor-details {
-            flex: 2 1 600px;
+            flex: 3; /* Give details 3 parts of the available space (making it 40% image, 60% text) */
+            min-width: 500px; /* Ensure a minimum width for the details section */
         }
 
         .doctor-details h2 {
             color: #e91e63; /* Pink color */
             margin-bottom: 10px;
-            font-size: 2rem;
+            font-size: 2.2rem; /* Slightly larger heading */
         }
 
         .doctor-details h3 {
             color: #c2185b; /* Darker pink */
             margin-bottom: 20px;
-            font-size: 1.5rem;
+            font-size: 1.6rem; /* Slightly larger sub-heading */
         }
 
         .doctor-details p {
             color: #555;
-            line-height: 1.6;
+            line-height: 1.7; /* Increased line height for readability */
             margin-bottom: 15px;
+            font-size: 1.05rem; /* Slightly larger text */
         }
 
         .doctor-details ul {
@@ -63,6 +69,7 @@
             margin-left: 20px;
             color: #555;
             margin-bottom: 15px;
+            font-size: 1.05rem; /* Slightly larger text */
         }
 
         .doctor-details ul li {
@@ -70,10 +77,10 @@
         }
 
         .area-of-expertise h3 {
-             color: #c2185b; /* Darker pink */
-             margin-top: 20px;
-             margin-bottom: 10px;
-             font-size: 1.5rem;
+            color: #c2185b; /* Darker pink */
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.6rem; /* Slightly larger heading */
         }
 
         .area-of-expertise ul {
@@ -84,129 +91,34 @@
         .area-of-expertise ul li {
             margin-bottom: 8px;
             color: #555;
+            font-size: 1.05rem; /* Slightly larger text */
         }
 
-         .area-of-expertise ul li i {
+        .area-of-expertise ul li i {
             color: #4CAF50; /* Green color */
             margin-right: 10px;
-         }
-
+        }
 
         @media (max-width: 768px) {
             .about-doctor-container {
                 flex-direction: column;
                 gap: 20px;
+                padding: 20px; /* Adjust padding for smaller screens */
             }
             .doctor-image {
                 flex: none;
                 width: 100%;
+                min-width: unset; /* Remove min-width for mobile */
             }
-             .doctor-details {
+            .doctor-image img {
+                min-height: 300px; /* Adjust min-height for mobile */
+            }
+            .doctor-details {
                 flex: none;
                 width: 100%;
+                min-width: unset; /* Remove min-width for mobile */
             }
-        }
-    </style>
-    <style>
-        /* Add specific styles for the about doctor page here */
-        .about-doctor-section {
-            padding: 60px 20px;
-            background-color: #f9f9f9; /* Light background */
-        }
-
-        .about-doctor-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            background-color: #fff; /* White background for content */
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .doctor-image {
-            flex: 1 1 300px;
-            text-align: center;
-        }
-
-        .doctor-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .doctor-details {
-            flex: 2 1 600px;
-        }
-
-        .doctor-details h2 {
-            color: #e91e63; /* Pink color */
-            margin-bottom: 10px;
-            font-size: 2rem;
-        }
-
-        .doctor-details h3 {
-            color: #c2185b; /* Darker pink */
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .doctor-details p {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .doctor-details ul {
-            list-style: disc;
-            margin-left: 20px;
-            color: #555;
-            margin-bottom: 15px;
-        }
-
-        .doctor-details ul li {
-            margin-bottom: 8px;
-        }
-
-        .area-of-expertise h3 {
-             color: #c2185b; /* Darker pink */
-             margin-top: 20px;
-             margin-bottom: 10px;
-             font-size: 1.5rem;
-        }
-
-        .area-of-expertise ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .area-of-expertise ul li {
-            margin-bottom: 8px;
-            color: #555;
-        }
-
-         .area-of-expertise ul li i {
-            color: #4CAF50; /* Green color */
-            margin-right: 10px;
-         }
-
-
-        @media (max-width: 768px) {
-            .about-doctor-container {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .doctor-image {
-                flex: none;
-                width: 100%;
-            }
-             .doctor-details {
-                flex: none;
-                width: 100%;
-            }
-             .popup-content {
+            .popup-content {
                 width: 90%;
                 margin: 10% auto;
             }
@@ -215,7 +127,6 @@
 </head>
 <body>
 
-    <!-- Include your existing header/navbar here -->
     <nav class="navbar">
         <div class="logo">
             <img src="assets/images/logo.png" alt="Logo" />
@@ -223,16 +134,17 @@
         </div>
         <ul class="nav-links">
             <li><a href="index.html#home">Home</a></li>
-            <li><a href="about-dr.html">About</a></li> <!-- Updated link -->
-            <li class="dropdown">
+            <li><a href="about-dr.html">About</a></li> <li class="dropdown">
                 <a href="index.html#services">Services <i class="fas fa-caret-down"></i></a>
                 <ul class="dropdown-content">
                     <li class="dropdown-submenu">
                         <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right"></i></a>
                         <ul class="submenu-content">
-                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li>
-                            <li><a href="infertility-services.html#ovulation-induction">Ovulation Induction</a></li>
-                            <li><a href="infertility-services.html#iui">IUI</a></li>
+                            <li><a href="infertility-services.html#pre-martial-assesment">Pre Martial Fertility Assessment And Counselling For Both Partners</a></li>
+                            <li><a href="infertility-services.html#ovulation-induction">OI (Ovulation Induction)</a></li>
+                            <li><a href="infertility-services.html#iui">IUI (Intrauterine Insemination)</a></li>
+                            <li><a href="infertility-services.html#unexplained-fertility">Treatment For Unexplained InFertility</a></li>
+                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li> 
                             <li><a href="infertility-services.html#psychological-counselling">Psychological Counselling</a></li>
                             <li><a href="infertility-services.html#fertility-evaluation">Fertility Evaluation</a></li>
                         </ul>
@@ -241,55 +153,67 @@
                         <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right"></i></a>
                         <ul class="submenu-content">
                             <li><a href="ivf-services.html#ivf">In Vitro Fertilization (IVF)</a></li>
-                            <li><a href="ivf-services.html#egg-freezing">Egg Freezing</a></li>
-                            <li><a href="ivf-services.html#embryo-freezing">Embryo Freezing</a></li>
-                            <li><a href="ivf-services.html#fet">Frozen Embryo Transfer (FET)</a></li>
                             <li><a href="ivf-services.html#icsi">Intracytoplasmic Sperm Injection (ICSI)</a></li>
+                            <li><a href="ivf-services.html#embryo-freezing">Embryo Freezing</a></li>
+                            <li><a href="ivf-services.html#frozen-embryo-transfer">Frozen Embryo Transfer (FET)</a></li>
+                            <li><a href="ivf-services.html#fresh-embryo-transfer">Fresh Embryo Transfer</a></li>
+                            <li><a href="ivf-services.html#sequential-embryo-transfer">Sequential Embryo Transfer</a></li>
+                            <li><a href="ivf-services.html#oocyte-freezing">Oocyte Freezing</a></li>
                             <li><a href="ivf-services.html#sperm-freezing">Sperm Freezing</a></li>
+                            <li><a href="ivf-services.html#single-embryo-transfer">Single Embryo Transfer</a></li>
                         </ul>
                     </li>
-                     <li class="dropdown-submenu">
+                    <li class="dropdown-submenu">
+                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right"></i></a>
+                        <ul class="submenu-content">
+                            <li><a href="endoscopy-services.html#diagnostic-hysteroscopy">Diagnostic Hysteroscopy</a></li>
+                            <li><a href="endoscopy-services.html#diagnostic-laparoscopy">Diagnostic Laparoscopy </a></li>
+                            <li><a href="endoscopy-services.html#theraputic-hysterolaparoscopy">Theraputic Hysterolaparoscopy</a></li>
+                            <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids,Pid,Herine Septum,Post Tubaltmic Cases,Endometriosis,Ovarian Cysts)</a></li> 
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
                         <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right"></i></a>
                         <ul class="submenu-content">
-                            <li><a href="male-infertility-services.html#dfi">DNA Fragmentation Index (DFI)</a></li>
-                            <li><a href="male-infertility-services.html#micro-fluidics">Micro Fluidics</a></li>
-                            <li><a href="male-infertility-services.html#micro-tese">Micro TESE (Testicular Sperm Extraction)</a></li>
                             <li><a href="male-infertility-services.html#semen-analysis">Semen Analysis</a></li>
-                            <li><a href="male-infertility-services.html#tesa">TESA (Testicular Sperm Aspiration)</a></li>
+                            <li><a href="male-infertility-services.html#dfi">DNA Fragmentation Index (DFI)</a></li>
+                            <li><a href="male-infertility-services.html#low-sperm">Low Sperm Analysis And Treatment</a></li>
+                            <li><a href="male-infertility-services.html#low-sperm-evaluation">Low Sperm Motility And Morphology Evaluation</a></li>
+                            <li><a href="male-infertility-services.html#azoospermia-evaluation">Azoospermia Evaluation</a></li>
+                            <li><a href="male-infertility-services.html#macs">Microfluidics And Magnetic Activated Cell Sorting(MACS)</a></li>
+                            <li><a href="male-infertility-services.html#tesa">Testicular Sperm Aspiration(TESA)</a></li>
+                            <li><a href="male-infertility-services.html#tese">Testicular Sperm Extraction(TESE)</a></li>
+                            <li><a href="male-infertility-services.html#micro-tese">Micro TESE</a></li>
                         </ul>
                     </li>
-                     <li class="dropdown-submenu">
+                    <li class="dropdown-submenu">
                         <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right"></i></a>
                         <ul class="submenu-content">
-                            <li><a href="advanced-ivf-services.html#era">Endometrial Receptivity Array (ERA)</a></li>
                             <li><a href="advanced-ivf-services.html#blastocyst-culture">Blastocyst Culture</a></li>
-                            <li><a href="advanced-ivf-services.html#prp-stem-cell">Ovarian and Endometrial PRP and Stem Cell Therapy</a></li>
-                            <li><a href="advanced-ivf-services.html#pgt">Pre-implantation Genetic Testing (PGT)</a></li>
+                            <li><a href="advanced-ivf-services.html#era">Endometrial Receptivity Array (ERA)</a></li>
+                            <li><a href="advanced-ivf-services.html#pgt">Pre-implantation Genetic Testing (PGT),(PGT-A,PGT-M,PGT-S)</a></li>
                             <li><a href="advanced-ivf-services.html#assisted-hatching">Assisted Hatching</a></li>
+                            <li><a href="advanced-ivf-services.html#ovarian-prp">Ovarian Prp For Low AMH</a></li>
+                            <li><a href="advanced-ivf-services.html#endometrial-prp">Endometrial Prp For Thin Endometrium</a></li>
+                            <li><a href="advanced-ivf-services.html#prp-stem-cell">Stem Cell Therapy</a></li>
                         </ul>
                     </li>
-                     <li class="dropdown-submenu">
+                    <li class="dropdown-submenu">
                         <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right"></i></a>
                         <ul class="submenu-content">
                             <li><a href="fertility-preservation-services.html#cancer-patients">Preservation for Cancer Patients</a></li>
-                            <li><a href="fertility-preservation-services.html#egg-freezing">Egg Freezing</a></li>
-                            <li><a href="fertility-preservation-services.html#embryo-freezing">Embryo Freezing</a></li>
+                            <li><a href="fertility-preservation-services.html#rheumatology">Rhuematology And SLE(Lupus) Patients</a></li>
+                            <li><a href="fertility-preservation-services.html#industrial">Industrial And Coal Mine Workers</a></li>
+                            <li><a href="fertility-preservation-services.html#personal-reasons">For Personal Reasons-(Wishing For Delayed Child Bearing)</a></li>
+                            <li><a href="fertility-preservation-services.html#genetic-conditions">Genetic Conditions</a></li>
                         </ul>
                     </li>
-                     <li class="dropdown-submenu">
+                    <li class="dropdown-submenu">
                         <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right"></i></a>
                         <ul class="submenu-content">
                             <li><a href="third-party-reproduction-services.html#donor-egg">Donor Egg</a></li>
                             <li><a href="third-party-reproduction-services.html#donor-sperm">Donor Sperm</a></li>
-                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li>
-                        </ul>
-                    </li>
-                     <li class="dropdown-submenu">
-                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right"></i></a>
-                        <ul class="submenu-content">
-                            <li><a href="endoscopy-services.html#diagnostic-laparoscopy">Diagnostic Laparoscopy & Tubal Testing</a></li>
-                            <li><a href="endoscopy-services.html#hysteroscopy">Hysteroscopy</a></li>
-                            <li><a href="endoscopy-services.html#laparoscopy-treatment">Laparoscopic Treatment of Fibroids, Endometriosis & Ovarian Cysts</a></li>
+                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li> 
                         </ul>
                     </li>
                 </ul>
@@ -297,20 +221,24 @@
             <li><a href="index.html#gallery">Gallery</a></li>
             <li><a href="index.html#book">Contact</a></li>
             <li><a href="#" class="consultation-btn" onclick="document.getElementById('consultation-popup').style.display='block'">Book Free Consultation</a></li>
+            <li class="search-container">
+                <input type="text" id="searchInput" placeholder="Search treatments...">
+                <button id="searchButton"><i class="fas fa-search"></i></button>
+                <div id="searchResults" class="search-results-overlay" style="display: none;">
+                    <div id="searchResultsContent" class="search-results-content">
+                    </div>
+                </div>
+            </li>
         </ul>
     </nav>
 
     <section class="about-doctor-section">
         <div class="about-doctor-container">
             <div class="doctor-image">
-                <img src="assets/images/docpoornima.jfif" alt="Dr. Poornima"> <!-- Replace with the actual image path -->
-            </div>
+                <img src="assets/images/docpoornima.jfif" alt="Dr. Poornima"> </div>
             <div class="doctor-details">
                 <h2>About Dr. Poornima</h2>
-                <h3>Dr. POORNIMA, MS(OBG)</h3> <!-- Replace with actual name and qualification -->
-                <p>14+ Years Of Experience</p> <!-- Replace with actual years of experience -->
-
-                <h4>QUALIFICATION</h4>
+                <h3>Dr. POORNIMA, MS(OBG)</h3> <p>14+ Years Of Experience</p> <h4>QUALIFICATION</h4>
                 <ul>
                     <li>MBBS, MS - Obstetrics and Gynaecology, Certified Advanced Laparoscopy and Ultrasonography</li>
                     <li>Dr. POORNIMA is the Chief Gynaecologist, Obstetrician, Infertility Specialist and Laparoscopic Surgeon at POORNIMA FERTILITY CENTRE, Karimnagar.</li>
@@ -353,8 +281,6 @@
         </div>
     </section>
 
-
-    <!-- Include your existing footer here -->
     <footer class="footer-section">
         <div class="footer-container">
             <div class="footer-logo">
@@ -380,11 +306,9 @@
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="index.html#home">Home</a></li>
-                    <li><a href="about-dr.html">About Us</a></li> <!-- Updated link -->
-                    <li><a href="index.html#services">Services</a></li>
-                    <li><a href="#doctors">Doctors</a></li> <!-- You might want to link this to the about-dr page or a specific section -->
-                    <li><a href="index.html#gallery">Gallery</a></li>
-                    <li><a href="index.html#book">Contact</a></li>
+                    <li><a href="about-dr.html">About Us</a></li> <li><a href="index.html#services">Services</a></li>
+                    <li><a href="#doctors">Doctors</a></li> <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="index.html#book">Contact Us</a></li>
                 </ul>
             </div>
 
@@ -418,12 +342,10 @@
             <p>© 2025 Dr Poornima Fertility Centre. All Rights Reserved.</p>
         </div>
     </footer>
-    <!-- End of footer -->
 
-    <!-- Add this at the end of the body tag -->
     <div id="consultation-popup" class="popup-modal">
         <div class="popup-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-btn">×</span>
             <h2>Are you suffering from <span class="highlight">infertility</span> and <span class="highlight">pregnancy</span> related issues?</h2>
             <h3>Upto 50% Off on Fertility Treatments</h3>
             <div class="popup-buttons">
@@ -443,7 +365,6 @@
         </div>
     </div>
 
-    <script src="assets/script.js"></script>
     <script>
         // Get the modal
         var modal = document.getElementById("consultation-popup");
@@ -455,13 +376,17 @@
         var span = document.getElementsByClassName("close-btn")[0];
 
         // When the user clicks the button, open the modal
-        btn.onclick = function() {
-          modal.style.display = "block";
+        if(btn) { // Add null check
+            btn.onclick = function() {
+              modal.style.display = "block";
+            }
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-          modal.style.display = "none";
+        if(span) { // Add null check
+            span.onclick = function() {
+              modal.style.display = "none";
+            }
         }
 
         // When the user clicks anywhere outside of the modal, close it
@@ -472,5 +397,10 @@
         }
     </script>
 
+    <a href="https://wa.me/yourwhatsappnumber" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="assets/script.js"></script>
 </body>
 </html>

@@ -7,28 +7,35 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Add specific styles for the advanced IVF services page here */
+        /* Specific styles for the Advanced IVF services page content */
         .service-detail-section {
-            padding: 60px 20px;
+            padding: 80px 20px; /* Increased padding for more vertical space */
             background-color: #f9f9f9;
         }
 
         .service-detail-section h2 {
             text-align: center;
             color: #e91e63;
-            margin-bottom: 40px;
-            font-size: 2.5rem;
+            margin-bottom: 50px; /* More space below the main heading */
+            font-size: 3rem; /* Slightly larger heading for prominence */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Subtle text shadow for depth */
         }
 
         .service-item {
             background-color: #fff;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px; /* Slightly more rounded corners */
+            padding: 40px; /* Increased padding inside each service item */
+            margin-bottom: 40px; /* More space between service items */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12); /* Enhanced shadow for lift */
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 40px; /* Increased gap between image and text */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on hover */
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px); /* Slight lift on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
         }
 
         .service-item:nth-child(even) {
@@ -36,40 +43,80 @@
         }
 
         .service-item img {
-            width: 150px;
-            height: 150px;
+            width: 250px; /* Significantly increased image size */
+            height: 250px; /* Significantly increased image size */
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 10px; /* Adjusted border-radius for images */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Small shadow for images */
+        }
+
+        .service-content {
+            flex: 1; /* Allows content to take available space */
         }
 
         .service-content h3 {
             color: #c2185b;
-            margin-bottom: 15px;
-            font-size: 1.8rem;
+            margin-bottom: 20px; /* More space below sub-heading */
+            font-size: 2rem; /* Larger sub-heading for readability */
+            line-height: 1.3;
         }
 
         .service-content p {
-            color: #555;
-            line-height: 1.6;
+            color: #444; /* Slightly darker text for better contrast */
+            line-height: 1.6; /* Adjusted line height for brevity */
+            font-size: 1.05rem; /* Slightly reduced body text size for conciseness */
         }
 
-        @media (max-width: 768px) {
+        /* Media Queries for service content responsiveness */
+        @media (max-width: 992px) { /* Adjust for medium screens */
             .service-item {
                 flex-direction: column;
                 text-align: center;
+                gap: 25px;
+                padding: 30px;
             }
             .service-item:nth-child(even) {
                 flex-direction: column;
             }
             .service-item img {
                 margin-bottom: 20px;
+                width: 200px;
+                height: 200px;
+            }
+            .service-detail-section h2 {
+                font-size: 2.2rem;
+            }
+            .service-content h3 {
+                font-size: 1.6rem;
+            }
+            .service-content p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .service-detail-section {
+                padding: 40px 15px;
+            }
+            .service-item {
+                padding: 25px;
+                gap: 20px;
+            }
+            .service-item img {
+                width: 180px;
+                height: 180px;
+            }
+            .service-content h3 {
+                font-size: 1.5rem;
+            }
+            .service-content p {
+                font-size: 0.95rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Include your existing header/navbar here -->
     <nav class="navbar">
         <div class="logo">
             <img src="assets/images/logo.png" alt="Logo" />
@@ -84,9 +131,11 @@
                     <li class="dropdown-submenu">
                         <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right"></i></a>
                         <ul class="submenu-content">
-                            <li><a href="infertility-services.html#ovulation-induction">Ovulation Induction</a></li>
-                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li>
-                            <li><a href="infertility-services.html#iui">IUI</a></li>
+                            <li><a href="infertility-services.html#pre-martial-assesment">Pre Martial Fertility Assessment And Counselling For Both Partners</a></li>
+                            <li><a href="infertility-services.html#ovulation-induction">OI (Ovulation Induction)</a></li>
+                            <li><a href="infertility-services.html#iui">IUI (Intrauterine Insemination)</a></li>
+                            <li><a href="infertility-services.html#unexplained-fertility">Treatment For Unexplained InFertility</a></li>
+                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li> 
                             <li><a href="infertility-services.html#psychological-counselling">Psychological Counselling</a></li>
                             <li><a href="infertility-services.html#fertility-evaluation">Fertility Evaluation</a></li>
                         </ul>
@@ -95,54 +144,67 @@
                         <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right"></i></a>
                         <ul class="submenu-content">
                             <li><a href="ivf-services.html#ivf">In Vitro Fertilization (IVF)</a></li>
-                            <li><a href="ivf-services.html#egg-freezing">Egg Freezing</a></li>
-                            <li><a href="ivf-services.html#embryo-freezing">Embryo Freezing</a></li>
-                            <li><a href="ivf-services.html#fet">Frozen Embryo Transfer (FET)</a></li>
                             <li><a href="ivf-services.html#icsi">Intracytoplasmic Sperm Injection (ICSI)</a></li>
+                            <li><a href="ivf-services.html#embryo-freezing">Embryo Freezing</a></li>
+                            <li><a href="ivf-services.html#frozen-embryo-transfer">Frozen Embryo Transfer (FET)</a></li>
+                            <li><a href="ivf-services.html#fresh-embryo-transfer">Fresh Embryo Transfer</a></li>
+                            <li><a href="ivf-services.html#sequential-embryo-transfer">Sequential Embryo Transfer</a></li>
+                            <li><a href="ivf-services.html#oocyte-freezing">Oocyte Freezing</a></li>
                             <li><a href="ivf-services.html#sperm-freezing">Sperm Freezing</a></li>
+                            <li><a href="ivf-services.html#single-embryo-transfer">Single Embryo Transfer</a></li>
                         </ul>
                     </li>
-                     <li class="dropdown-submenu">
+                    <li class="dropdown-submenu">
+                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right"></i></a>
+                        <ul class="submenu-content">
+                            <li><a href="endoscopy-services.html#diagnostic-hysteroscopy">Diagnostic Hysteroscopy</a></li>
+                            <li><a href="endoscopy-services.html#diagnostic-laparoscopy">Diagnostic Laparoscopy </a></li>
+                            <li><a href="endoscopy-services.html#theraputic-hysterolaparoscopy">Theraputic Hysterolaparoscopy</a></li>
+                            <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids,Pid,Herine Septum,Post Tubaltmic Cases,Endometriosis,Ovarian Cysts)</a></li> 
+                        </ul>
+                    </li>
+                    <li class="dropdown-submenu">
                         <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right"></i></a>
                         <ul class="submenu-content">
-                            <li><a href="male-infertility-services.html#dfi">DNA Fragmentation Index (DFI)</a></li>
-                            <li><a href="male-infertility-services.html#micro-fluidics">Micro Fluidics</a></li>
-                            <li><a href="male-infertility-services.html#micro-tese">Micro TESE (Testicular Sperm Extraction)</a></li>
                             <li><a href="male-infertility-services.html#semen-analysis">Semen Analysis</a></li>
+                            <li><a href="male-infertility-services.html#dfi">DNA Fragmentation Index (DFI)</a></li>
+                            <li><a href="male-infertility-services.html#low-sperm">Low Sperm Analysis And Treatment</a></li>
+                            <li><a href="male-infertility-services.html#low-sperm-evaluation">Low Sperm Motility And Morphology Evaluation</a></li>
+                            <li><a href="male-infertility-services.html#azoospermia-evaluation">Azoospermia Evaluation</a></li>
+                            <li><a href="male-infertility-services.html#macs">Microfluidics And Magnetic Activated Cell Sorting(MACS)</a></li>
+                            <li><a href="male-infertility-services.html#tesa">Testicular Sperm Aspiration(TESA)</a></li>
+                            <li><a href="male-infertility-services.html#tese">Testicular Sperm Extraction(TESE)</a></li>
+                            <li><a href="male-infertility-services.html#micro-tese">Micro TESE</a></li>
                         </ul>
                     </li>
-                     <li class="dropdown-submenu">
+                    <li class="dropdown-submenu">
                         <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right"></i></a>
                         <ul class="submenu-content">
-                            <li><a href="advanced-ivf-services.html#era">Endometrial Receptivity Array (ERA)</a></li>
                             <li><a href="advanced-ivf-services.html#blastocyst-culture">Blastocyst Culture</a></li>
-                            <li><a href="advanced-ivf-services.html#prp-stem-cell">Ovarian and Endometrial PRP and Stem Cell Therapy</a></li>
-                            <li><a href="advanced-ivf-services.html#pgt">Pre-implantation Genetic Testing (PGT)</a></li>
+                            <li><a href="advanced-ivf-services.html#era">Endometrial Receptivity Array (ERA)</a></li>
+                            <li><a href="advanced-ivf-services.html#pgt">Pre-implantation Genetic Testing (PGT),(PGT-A,PGT-M,PGT-S)</a></li>
                             <li><a href="advanced-ivf-services.html#assisted-hatching">Assisted Hatching</a></li>
+                            <li><a href="advanced-ivf-services.html#ovarian-prp">Ovarian Prp For Low AMH</a></li>
+                            <li><a href="advanced-ivf-services.html#endometrial-prp">Endometrial Prp For Thin Endometrium</a></li>
+                            <li><a href="advanced-ivf-services.html#prp-stem-cell">Stem Cell Therapy</a></li>
                         </ul>
                     </li>
-                     <li class="dropdown-submenu">
+                    <li class="dropdown-submenu">
                         <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right"></i></a>
                         <ul class="submenu-content">
                             <li><a href="fertility-preservation-services.html#cancer-patients">Preservation for Cancer Patients</a></li>
-                            <li><a href="fertility-preservation-services.html#egg-freezing">Egg Freezing</a></li>
-                            <li><a href="fertility-preservation-services.html#embryo-freezing">Embryo Freezing</a></li>
+                            <li><a href="fertility-preservation-services.html#rheumatology">Rhuematology And SLE(Lupus) Patients</a></li>
+                            <li><a href="fertility-preservation-services.html#industrial">Industrial And Coal Mine Workers</a></li>
+                            <li><a href="fertility-preservation-services.html#personal-reasons">For Personal Reasons-(Wishing For Delayed Child Bearing)</a></li>
+                            <li><a href="fertility-preservation-services.html#genetic-conditions">Genetic Conditions</a></li>
                         </ul>
                     </li>
-                     <li class="dropdown-submenu">
+                    <li class="dropdown-submenu">
                         <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right"></i></a>
                         <ul class="submenu-content">
                             <li><a href="third-party-reproduction-services.html#donor-egg">Donor Egg</a></li>
                             <li><a href="third-party-reproduction-services.html#donor-sperm">Donor Sperm</a></li>
-                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li>
-                        </ul>
-                    </li>
-                     <li class="dropdown-submenu">
-                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right"></i></a>
-                        <ul class="submenu-content">
-                            <li><a href="endoscopy-services.html#diagnostic-laparoscopy">Diagnostic Laparoscopy & Tubal Testing</a></li>
-                            <li><a href="endoscopy-services.html#hysteroscopy">Hysteroscopy</a></li>
-                            <li><a href="endoscopy-services.html#laparoscopic-treatment">Laparoscopic Treatment of Fibroids, Endometriosis & Ovarian Cysts</a></li>
+                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li> 
                         </ul>
                     </li>
                 </ul>
@@ -150,19 +212,32 @@
             <li><a href="index.html#gallery">Gallery</a></li>
             <li><a href="index.html#book">Contact</a></li>
             <li><a href="#" class="consultation-btn" onclick="document.getElementById('consultation-popup').style.display='block'">Book Free Consultation</a></li>
+            <li class="search-container">
+                <input type="text" id="searchInput" placeholder="Search treatments...">
+                <button id="searchButton"><i class="fas fa-search"></i></button>
+                <div id="searchResults" class="search-results-overlay" style="display: none;">
+                    <div id="searchResultsContent" class="search-results-content">
+                    </div>
+                </div>
+            </li>
         </ul>
     </nav>
-    <!-- End of header/navbar -->
-
-
     <section class="service-detail-section">
         <h2>Advanced IVF Services</h2>
+
+        <div class="service-item" id="blastocyst-culture">
+            <img src="assets/images/blastocyst-culture.jpg" alt="Blastocyst Culture">
+            <div class="service-content">
+                <h3>Blastocyst Culture</h3>
+                <p>Blastocyst culture involves extending the in-vitro fertilization (IVF) embryo culture in the laboratory for five to six days, allowing embryos to develop into a more advanced stage called a blastocyst. This extended culture period enables us to select the most robust and viable embryos for transfer, significantly improving implantation rates and pregnancy success, while also reducing the risk of multiple pregnancies.</p>
+            </div>
+        </div>
 
         <div class="service-item" id="era">
             <img src="assets/images/era.jpg" alt="Endometrial Receptivity Array (ERA)">
             <div class="service-content">
                 <h3>Endometrial Receptivity Array (ERA)</h3>
-                <p>ERA testing involves an endometrial biopsy and gene expression analysis to determine each woman's optimal embryo transfer timing, synchronizing the transfer with her unique window of implantation for improved success.</p>
+                <p>The Endometrial Receptivity Array (ERA) is a sophisticated diagnostic test that analyzes the receptivity of the uterine lining (endometrium) to embryo implantation. By identifying the precise optimal "window of implantation" for each individual woman, ERA helps personalize the timing of embryo transfer. This is particularly beneficial for patients who have experienced recurrent implantation failure, greatly increasing their chances of a successful pregnancy.</p>
             </div>
         </div>
 
@@ -170,37 +245,44 @@
             <img src="assets/images/pgt.jpg" alt="Pre-implantation Genetic Testing (PGT)">
             <div class="service-content">
                 <h3>Pre-implantation Genetic Testing (PGT)</h3>
-                <p>Preimplantation genetic testing (PGT) is a screening procedure for embryos created through in vitro fertilization (IVF), allowing genetic analysis before transfer to identify potential genetic abnormalities.</p>
-            </div>
-        </div>
-
-        <div class="service-item" id="blastocyst-culture">
-            <img src="assets/images/blastocyst-culture.jpg" alt="Blastocyst Culture">
-            <div class="service-content">
-                <h3>Blastocyst Culture</h3>
-                <p>Blastocyst culture in IVF involves growing fertilized eggs for up to five days, allowing selection of embryos that develop into blastocysts, which have a higher potential for successful pregnancy.</p>
+                <p>PGT involves genetically testing embryos before they are transferred during an IVF cycle. There are different types: PGT-A screens for chromosomal abnormalities, PGT-M identifies specific gene defects, and PGT-SR detects structural chromosomal rearrangements. This testing helps select healthy embryos, significantly reducing the risk of miscarriage, failed implantation, and preventing the inheritance of genetic diseases, thereby leading to higher success rates in IVF.</p>
             </div>
         </div>
 
         <div class="service-item" id="assisted-hatching">
             <img src="assets/images/assisted-hatching.jpg" alt="Assisted Hatching">
             <div class="service-content">
-                <h3>Assisted Hatching</h3>
-                <p>Assisted hatching is a technique that artificially thins or breaches the zona pellucida, aimed at improving implantation and pregnancy rates after in vitro fertilization (IVF).</p>
+                <h3>Assisted Hatching (AH)</h3>
+                <p>Assisted Hatching is a delicate micro-procedure performed on embryos just before transfer. A tiny opening is made in the embryo's outer shell, known as the zona pellucida. This helps the embryo "hatch" more easily from its shell and successfully implant into the uterine lining. It is often recommended for older women, embryos with a thick zona, or patients who have experienced previous implantation failures in IVF cycles.</p>
+            </div>
+        </div>
+
+        <div class="service-item" id="ovarian-prp">
+            <img src="assets/images/ovarian-prp.jpg" alt="Ovarian PRP for Low AMH">
+            <div class="service-content">
+                <h3>Ovarian PRP For Low AMH</h3>
+                <p>Ovarian Platelet-Rich Plasma (PRP) therapy is an innovative treatment where a concentrated solution of a woman's own platelets is injected into the ovaries. The growth factors in PRP are believed to rejuvenate ovarian function, potentially improving ovarian reserve, and increasing the number and quality of eggs retrieved. This therapy offers new hope for women with low AMH (Anti-Müllerian Hormone) levels or those experiencing premature ovarian insufficiency.</p>
+            </div>
+        </div>
+
+        <div class="service-item" id="endometrial-prp">
+            <img src="assets/images/endometrial-prp.jpg" alt="Endometrial PRP for Thin Endometrium">
+            <div class="service-content">
+                <h3>Endometrial PRP For Thin Endometrium</h3>
+                <p>Endometrial Platelet-Rich Plasma (PRP) therapy involves infusing a concentrated solution of a woman's own platelets directly into the uterine lining. This therapy is specifically designed to improve the thickness and receptivity of a thin endometrium, which can often be a significant barrier to successful embryo implantation. By promoting tissue regeneration, Endometrial PRP enhances the chances of a successful pregnancy in IVF cycles.</p>
             </div>
         </div>
 
         <div class="service-item" id="prp-stem-cell">
-            <img src="assets/images/prp-stem-cell.jpg" alt="Ovarian and Endometrial PRP and Stem Cell Therapy">
+            <img src="assets/images/stem-cell-therapy.jpg" alt="Stem Cell Therapy">
             <div class="service-content">
-                <h3>Ovarian and Endometrial PRP and Stem Cell Therapy</h3>
-                <p>PRP and stem cell therapy offer innovative approaches to enhance fertility for endometrium and ovary issues.</p>
+                <h3>Stem Cell Therapy</h3>
+                <p>Stem cell therapy is an advanced and largely experimental treatment that involves using specialized stem cells to potentially regenerate or repair damaged reproductive tissues. While still in its developmental stages for fertility applications, it holds significant promise for challenging conditions such as premature ovarian failure, very thin endometrium unresponsive to conventional treatments, or severe forms of male factor infertility, aiming to restore and improve reproductive function.</p>
             </div>
         </div>
 
     </section>
 
-    <!-- Include your existing footer here -->
     <footer class="footer-section">
       <div class="footer-container">
         <div class="footer-logo">
@@ -264,12 +346,9 @@
         <p>© 2025 Dr Poornima Fertility Centre. All Rights Reserved.</p>
       </div>
     </footer>
-    <!-- End of footer -->
-
-    <!-- Add this at the end of the body tag -->
     <div id="consultation-popup" class="popup-modal">
         <div class="popup-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-btn">×</span>
             <h2>Are you suffering from <span class="highlight">infertility</span> and <span class="highlight">pregnancy</span> related issues?</h2>
             <h3>Upto 50% Off on Fertility Treatments</h3>
             <div class="popup-buttons">
@@ -289,7 +368,6 @@
         </div>
     </div>
 
-    
     <script>
         // Get the modal
         var modal = document.getElementById("consultation-popup");
@@ -301,13 +379,17 @@
         var span = document.getElementsByClassName("close-btn")[0];
 
         // When the user clicks the button, open the modal
-        btn.onclick = function() {
-          modal.style.display = "block";
+        if(btn) { // Add null check
+            btn.onclick = function() {
+              modal.style.display = "block";
+            }
         }
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-          modal.style.display = "none";
+        if(span) { // Add null check
+            span.onclick = function() {
+              modal.style.display = "none";
+            }
         }
 
         // When the user clicks anywhere outside of the modal, close it

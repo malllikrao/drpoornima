@@ -17,20 +17,21 @@ html {
 /* Navbar Styles */
 .navbar {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between; /* Distribute space between logo and the rest */
     align-items: center;
     background: #fff;
     padding: 15px 30px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 1000; /* Base z-index for the entire navbar */
 }
 
 .logo {
     display: flex;
     align-items: center;
-    margin-right: 50px;
+    margin-right: 15px;
+    flex-shrink: 0; /* Prevent logo from shrinking */
 }
 
 .logo img {
@@ -42,19 +43,25 @@ html {
     font-weight: bold;
     color: #e91e63;
     margin-left: 10px;
+    white-space: nowrap; /* Keep logo text on one line */
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 20px;
-    list-style: none; /* Ensure list style is none */
-    padding: 0; /* Ensure padding is 0 */
-    margin: 0; /* Ensure margin is 0 */
+    gap: 20px; /* Increased gap for better spacing between nav items */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Allow nav links to take up available space */
+    justify-content: flex-end; /* Push nav links content to the right */
+    flex-wrap: nowrap; /* CRUCIAL: Force main nav items to stay on a single line */
+    flex-shrink: 1; /* Allow nav links container to shrink if needed */
+    min-width: 0; /* Allow the flex container to shrink below its content size */
 }
 
 .nav-links li {
-    position: relative; /* Needed for dropdown positioning */
+    position: relative; /* Essential for positioning dropdowns and search results */
 }
 
 .nav-links a {
@@ -62,11 +69,138 @@ html {
     color: #333;
     font-weight: 500;
     transition: color 0.3s ease;
+    white-space: nowrap; /* CRUCIAL: Force text inside main nav links to stay on a single line */
 }
 
 .nav-links a:hover {
     color: #e91e63;
 }
+
+/* Search Field Styles */
+.search-container {
+    position: relative; /* Essential for positioning the results overlay */
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    overflow: visible; /* Important: Ensures results overlay isn't clipped by search container */
+    background-color: #f0f0f0;
+    z-index: 1070; /* HIGHER than dropdowns (1060), and the overall navbar (1000) */
+    flex-grow: 0; /* Let nav-links grow more */
+    flex-shrink: 1; /* Allow search bar to shrink more aggressively */
+    min-width: 100px; /* Further reduced min-width to allow more shrinking */
+    max-width: 200px; /* Slightly reduced max-width for better control */
+}
+
+#searchInput {
+    border: none;
+    padding: 8px 15px;
+    outline: none;
+    font-size: 0.9rem;
+    width: 100%; /* Ensure input fills its container */
+    background-color: transparent;
+}
+
+#searchButton {
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 0 20px 20px 0; /* Only right side rounded */
+    flex-shrink: 0; /* Prevent button part from shrinking */
+}
+
+#searchButton:hover {
+    background-color: #c2185b;
+}
+
+/* Search Results Overlay Styles */
+.search-results-overlay {
+    display: none; /* Hidden by default */
+    position: absolute; /* Position relative to .search-container */
+    top: 100%; /* Position directly below the search input/button */
+    left: 0;
+    width: 100%; /* Match the width of the search container */
+    max-width: 400px; /* Adjust maximum width for results if needed */
+    background-color: #fff;
+    border: 1px solid #ffc0cb;
+    border-top: none; /* Remove top border as it's below the input */
+    border-radius: 0 0 8px 8px; /* Rounded corners only at the bottom */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 1080; /* HIGHER than search container itself to ensure it's always on top of the search bar boundary */
+    overflow-y: auto; /* Enable scrolling if results are too long */
+    max-height: 300px; /* Max height before scrolling */
+}
+
+.search-results-content {
+    padding: 10px;
+    text-align: left;
+}
+
+.search-results-overlay h2 {
+    display: none; /* Hide the "Search Results" title here, as it's an overlay */
+}
+
+.search-result-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background-color: #f9f9f9;
+}
+
+.search-result-item h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.search-result-item h3 a {
+    color: #e91e63; /* Pink for link title */
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.search-result-item h3 a:hover {
+    text-decoration: underline;
+}
+
+.search-result-item p {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.search-result-item .learn-more-link { /* A new class for "Learn More" */
+    display: inline-block;
+    background-color: #2e7d32; /* Green color for the button */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.search-result-item .learn-more-link:hover {
+    background-color: #1e5a21;
+}
+
+.no-match-found {
+    font-size: 1rem;
+    color: #e91e63;
+    text-align: center;
+    padding: 20px;
+}
+
 
 /* Dropdown styles */
 .dropdown .fas {
@@ -78,15 +212,17 @@ html {
     display: none; /* Hide dropdown by default */
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 200px;
+    min-width: 220px; /* Slightly increased min-width */
+    max-width: 320px; /* Increased max-width to give more room before wrapping */
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 1060; /* Adjusted: Lower than search overlay, higher than default */
     list-style: none;
     padding: 10px 0;
     margin: 0;
     border-radius: 5px;
     top: 100%; /* Position below the parent link */
-    left: 0;
+    left: 0; /* Aligns to the left edge of the parent li */
+    right: auto; /* Ensures it doesn't push off the right if left is set */
 }
 
 .dropdown-content li {
@@ -102,6 +238,9 @@ html {
     display: block; /* Make links block level for padding */
     text-align: left;
     transition: background-color 0.3s ease;
+    white-space: normal; /* Allow text to wrap within the dropdown link */
+    word-wrap: break-word; /* Ensures long words break if needed */
+    overflow-wrap: break-word; /* Modern equivalent */
 }
 
 .dropdown-content a:hover {
@@ -123,21 +262,26 @@ html {
 .submenu-content {
     display: none; /* Hide submenu by default */
     position: absolute;
-    background-color: #f9f9f9; /* Same background or slightly different */
-    min-width: 200px;
+    background-color: #f9f9f9;
+    min-width: 220px; /* Slightly increased min-width */
+    max-width: 320px; /* Increased max-width to give more room before wrapping */
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 1065; /* Adjusted: Higher than parent dropdown, lower than search overlay */
     list-style: none;
     padding: 10px 0;
     margin: 0;
     border-radius: 5px;
     top: 0; /* Align top of submenu with parent item */
-    left: 100%; /* Position to the right of the parent item */
+    left: 100%; /* Opens to the right of the parent */
+    white-space: normal; /* Already there, but confirm it's applied */
+    max-height: 250px; /* Control height before scrollbar */
+    overflow-y: auto; /* Enable scrolling for many items */
+    -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
 }
 
 .submenu-content li {
-     padding: 0;
-     margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .submenu-content a {
@@ -147,6 +291,9 @@ html {
     display: block;
     text-align: left;
     transition: background-color 0.3s ease;
+    white-space: normal; /* Allow text to wrap within the submenu link */
+    word-wrap: break-word; /* Ensures long words break if needed */
+    overflow-wrap: break-word; /* Modern equivalent */
 }
 
 .submenu-content a:hover {
@@ -255,7 +402,7 @@ html {
     background: #fff;
 }
 
-/* Responsive Styles */
+/* Responsive Styles for Hero */
 @media (max-width: 768px) {
     .content h1 {
         font-size: 2rem;
@@ -265,9 +412,7 @@ html {
     }
 }
 
-/* Doctor Info Section */
-/* Doctor Info Section - Larger Image and Right Content */
-/* About Section */
+/* Doctor Info Section / About Section */
 .about-section {
     display: flex;
     align-items: center;
@@ -323,7 +468,7 @@ html {
     background-color: #1e5a21;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments for About Section */
 @media (max-width: 768px) {
     .about-section {
         flex-direction: column;
@@ -342,7 +487,6 @@ html {
     }
 }
 
-/* Services Section */
 /* Services Section */
 .services-section {
     padding: 60px 20px;
@@ -415,8 +559,6 @@ html {
     background-color: #c2185b;
 }
 
-/* Why Choose Us */
-/* Why Choose Us */
 /* Why Choose Us */
 .why-choose-us {
     padding: 50px 20px;
@@ -581,7 +723,7 @@ html {
 }
 
 .faq-answer.active {
-    max-height: 500px;
+    max-height: 500px; /* Sufficient height to reveal answer */
     padding-bottom: 10px;
 }
 
@@ -589,7 +731,6 @@ html {
     line-height: 1.6;
 }
 
-/* Testimonials Section */
 /* Testimonials Section */
 .testimonials-section {
     padding: 60px 20px;
@@ -732,6 +873,7 @@ html {
     text-decoration: underline;
 }
 
+/* Footer Section */
 .footer-section {
     background-color: #e91e63;
     color: white;
@@ -856,7 +998,7 @@ html {
 .consultation-form input[type="text"],
 .consultation-form input[type="tel"] {
     padding: 12px 15px;
-    margin-bottom: 15px; /* Added margin-bottom here */
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
@@ -917,9 +1059,7 @@ html {
 }
 
 
-/* Add this to your CSS file */
 /* Popup Modal Overlay */
-/* Popup Modal */
 .popup-modal {
     display: none;
     position: fixed;
@@ -1009,7 +1149,7 @@ html {
 }
 
 /* Security Message with Google Icon */
-.security-message {
+.privacy {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1018,13 +1158,13 @@ html {
     gap: 6px;
     margin-top: 5px;
 }
-.security-message img {
+.privacy img {
     width: 18px;
     height: 18px;
 }
 
 /* Submit Button */
-.book-btn {
+.submit-btn {
     background-color: #e91e63;
     color: white;
     border: none;
@@ -1034,7 +1174,7 @@ html {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-.book-btn:hover {
+.submit-btn:hover {
     background-color: #ff4081;
 }
 
@@ -1045,6 +1185,9 @@ html {
     padding: 10px 20px !important;
     border-radius: 25px;
     transition: all 0.3s ease;
+    flex-shrink: 1; /* Allow CTA button to shrink */
+    min-width: fit-content; /* Ensure it doesn't get too small */
+    margin-left: 20px; /* Add margin-left to separate it from the search bar */
 }
 .consultation-btn:hover {
     background-color: #ff4081;
@@ -1057,23 +1200,50 @@ html {
     to { opacity: 1; }
 }
 
-
-
-/* Update existing navbar styles for better alignment */
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-/* Responsive adjustments */
+/* Responsive adjustments for overall navbar and dropdowns */
 @media (max-width: 768px) {
     .consultation-btn {
         padding: 8px 15px !important;
         font-size: 14px;
+        margin-left: 0; /* Reset margin on mobile as it stacks */
     }
 
-    /* Responsive adjustments for dropdown */
+    /* Hide search on smaller screens or adjust layout */
+    .search-container {
+        display: none; /* Hide search input on small screens */
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px;
+    }
+
+    .logo {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .nav-links {
+        width: 100%;
+        flex-direction: column; /* Stack vertically on mobile */
+        align-items: flex-start;
+        gap: 10px;
+        justify-content: flex-start;
+        margin-left: 0;
+        flex-wrap: nowrap; /* No wrapping needed when already stacked vertically */
+    }
+
+    .nav-links li {
+        width: 100%; /* Ensure each list item takes full width */
+    }
+
+    .nav-links li a {
+        padding: 8px 0; /* Adjust padding for mobile links */
+        white-space: normal; /* Allow wrapping on mobile for clarity */
+    }
+
+    /* Dropdown and Submenu mobile adjustments */
     .dropdown-content {
         position: static; /* Stack dropdown items below the link */
         box-shadow: none;
@@ -1081,6 +1251,7 @@ html {
         background-color: transparent;
         padding: 0;
         margin-left: 20px; /* Indent dropdown items */
+        max-width: 100%; /* Allow it to take full width of parent */
     }
 
     .dropdown-content a {
@@ -1089,26 +1260,27 @@ html {
     }
 
     .dropdown:hover .dropdown-content {
-        display: none; /* Hide hover effect on small screens */
+        display: none; /* Hide hover effect on small screens, rely on JS for click */
     }
 
-    /* Submenu adjustments for mobile */
     .submenu-content {
         position: static;
         box-shadow: none;
         min-width: auto;
         background-color: transparent;
         padding: 0;
-        margin-left: 20px; /* Further indent submenu items */
+        margin-left: 40px; /* Further indent submenu items */
+        max-width: 100%; /* Allow it to take full width of parent */
     }
 
     .dropdown-submenu:hover .submenu-content {
-         display: none; /* Hide hover effect on small screens */
+        display: none; /* Hide hover effect on small screens, rely on JS for click */
     }
 
     /* You'll likely need JavaScript to toggle the dropdown and submenu on mobile click */
 }
 
+/* Social Links in Footer */
 .social-links {
     display: flex;
     gap: 3px;
@@ -1137,7 +1309,7 @@ html {
     box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
 }
 
-/* Platform-specific hover colors */
+/* Platform-specific hover colors for social icons */
 .fa-instagram:hover {
     background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
 }
@@ -1154,6 +1326,7 @@ html {
     background-color: #0a66c2;
 }
 
+/* WhatsApp Float Button */
 .whatsapp-float {
     position: fixed;
     width: 60px;
@@ -1211,7 +1384,7 @@ html {
 .gallery-section h2 {
     text-align: center;
     margin-bottom: 30px;
-    color: #e91e63; /* Changed the color to pink */
+    color: #e91e63;
 }
 
 .gallery-filters {
@@ -1260,7 +1433,7 @@ html {
 
 .video-thumbnail {
     position: relative;
-    padding-bottom: 56.25%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
     height: 0;
 }
 
@@ -1302,5 +1475,3 @@ html {
         flex-wrap: wrap;
     }
 }
-
-  
