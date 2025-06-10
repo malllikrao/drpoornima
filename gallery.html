@@ -94,6 +94,23 @@
             margin: 0;
             font-size: 0.9rem;
         }
+        .consultation-success-message {
+            display: none; /* Hidden by default */
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #d4edda; /* Light green background */
+            color: #155724; /* Dark green text */
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .consultation-success-message i {
+            color: #28a745; /* Green check icon */
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -217,16 +234,35 @@
                             <p>State-of-the-art treatment rooms</p>
                         </div>
                     </div>
-                    <!--
                     <div class="gallery-item photos">
-                        <img src="assets/images/photo2.jpg" alt="Description of photo 2">
+                        <img src="assets/images/whyerrors.JPG" alt="Clinic Exterior">
                         <div class="gallery-overlay">
-                            <h3>Photo Title 2</h3>
-                            <p>Short description of photo 2</p>
+                            <h3>Clinic Exterior</h3>
+                            <p>Our welcoming clinic entrance</p>
                         </div>
                     </div>
-                    -->
+                    <div class="gallery-item photos">
+                        <img src="assets/images/whichone.JPG" alt="Waiting Area">
+                        <div class="gallery-overlay">
+                            <h3>Comfortable Waiting Area</h3>
+                            <p>Relaxing space for our patients</p>
+                        </div>
                     </div>
+                    <div class="gallery-item photos">
+                        <img src="assets/images/thisone.JPG" alt="Consultation Room">
+                        <div class="gallery-overlay">
+                            <h3>Consultation Room</h3>
+                            <p>Private and comfortable consultation space</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item photos">
+                        <img src="assets/images/failedones.JPG" alt="Laboratory">
+                        <div class="gallery-overlay">
+                            <h3>Advanced Laboratory</h3>
+                            <p>Equipped for precise diagnostics</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="gallery-category">
@@ -234,7 +270,7 @@
                 <div class="gallery-grid">
                     <div class="gallery-item videos">
                         <div class="video-thumbnail">
-                            <iframe src="https://www.youtube.com/embed/GK2RLSzARRI" frameborder="0" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
                         </div>
                         <div class="gallery-overlay">
                             <h3>Patient Testimonials</h3>
@@ -243,25 +279,23 @@
                     </div>
                     <div class="gallery-item videos">
                         <div class="video-thumbnail">
-                            <iframe src="https://www.youtube.com/embed/nY2vcUD6e9M" frameborder="0" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
                         </div>
                         <div class="gallery-overlay">
                             <h3>Understanding IVF</h3>
                             <p>An informative video about the IVF process</p>
                         </div>
                     </div>
-                    <!--
                     <div class="gallery-item videos">
                         <div class="video-thumbnail">
-                            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allowfullscreen></iframe>
                         </div>
                         <div class="gallery-overlay">
-                            <h3>Video Title 2</h3>
-                            <p>Short description of video 2</p>
+                            <h3>Clinic Tour</h3>
+                            <p>A virtual tour of our facility</p>
                         </div>
                     </div>
-                    -->
-                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -278,7 +312,7 @@
                     <a href="https://facebook.com/your-profile" target="_blank" class="social-icon">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://youtube.com/your-channel" target="_blank" class="social-icon">
+                    <a href="https://www.youtube.com/channel/your-channel-id" target="_blank" class="social-icon">
                         <i class="fab fa-youtube"></i>
                     </a>
                     <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-icon">
@@ -294,12 +328,13 @@
                     <li><a href="index.html#about">About Us</a></li>
                     <li><a href="index.html#services">Services</a></li>
                     <li><a href="index.html#doctors">Doctors</a></li>
-                    <li><a href="gallery.html">Gallery</a></li> <li><a href="index.html#book">Contact Us</a></li>
+                    <li><a href="gallery.html">Gallery</a></li> 
+                    <li><a href="index.html#book">Contact Us</a></li>
                 </ul>
             </div>
 
-            <div class="contact-details">
-                <h3>Contact Details</h3>
+            <div class="contact-us">
+                <h3>Contact Us</h3>
                 <div class="address">
                     <p>House No 3-3-139, Doctor's Street</p>
                     <p>Civil Hospital Road, Near Raja Theater</p>
@@ -319,22 +354,36 @@
     <div id="consultation-popup" class="popup-modal">
         <div class="popup-content">
             <span class="close-btn">×</span>
-            <h2>Are you suffering from <span class="highlight">infertility</span> and <span class="highlight">pregnancy</span> related issues?</h2>
-            <h3>Upto 50% Off on Fertility Treatments</h3>
-            <div class="popup-buttons">
-                <button class="popup-btn">Free Consultation</button>
-                <button class="popup-btn">Free USG Scan</button>
-                <button class="popup-btn">Zero cost EMI</button>
-            </div>
-            <form class="popup-form">
-                <input type="text" placeholder="Full Name" required />
-                <input type="tel" placeholder="Mobile Number" required />
-                <div class="security-message">
-                    <img src="assets/images/google.png" alt="Security Icon" />
-                    <span>No need to worry, your data is 100% safe with us!</span>
+            <h2>
+                Struggling with <span class="highlight">fertility</span> or
+                <span class="highlight">pregnancy</span> concerns?
+            </h2>
+            <p><strong>Exclusive Offers</strong> – Save up to 50% on Treatments</p>
+
+            <div id="consultation-form-section">
+                <div class="popup-buttons">
+                    <button class="popup-btn">👩‍⚕️ Expert Advice</button>
+                    <button class="popup-btn">🧪 Free Scan</button>
+                    <button class="popup-btn">💳 Flexible EMI</button>
                 </div>
-                <button type="submit" class="book-btn">Book Now</button>
-            </form>
+
+                <form class="popup-form">
+                    <input type="text" name="fullName" placeholder="Your Full Name" required>
+                    <input type="tel" name="mobileNumber" placeholder="Your Mobile Number" required>
+
+                    <div class="privacy">
+                        <img src="assets/images/google.png" alt="Google Logo">
+                        <span>We respect your privacy – your data is secure with us.</span>
+                    </div>
+
+                    <button type="submit" class="popup-btn submit-btn">Book Free Consultation</button>
+                </form>
+            </div>
+
+            <div id="consultation-success-message" class="consultation-success-message">
+                
+                <p>Thank you for reaching out! We've received your request and will get back to you within 24 hours.</p>
+            </div>
         </div>
     </div>
 
@@ -348,29 +397,63 @@
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close-btn")[0];
 
-        // When the user clicks the button, open the modal
-        if(btn) { // Add null check
+        // Get the form and success message elements
+        var consultationForm = document.querySelector("#consultation-popup .popup-form");
+        var formSection = document.getElementById("consultation-form-section"); // Now targeting the div that contains the form
+        var successMessage = document.getElementById("consultation-success-message");
+
+        // Function to reset the popup state (show form, hide success message)
+        function resetPopup() {
+            if (formSection) formSection.style.display = 'block';
+            if (successMessage) successMessage.style.display = 'none';
+            if (consultationForm) consultationForm.reset(); // Clear form fields
+        }
+
+        // When the user clicks the button, open the modal and reset its state
+        if(btn) {
             btn.onclick = function() {
-              modal.style.display = "block";
+                modal.style.display = "block";
+                resetPopup(); // Reset popup every time it opens
             }
         }
 
         // When the user clicks on <span> (x), close the modal
-        if(span) { // Add null check
+        if(span) {
             span.onclick = function() {
-              modal.style.display = "none";
+                modal.style.display = "none";
+                resetPopup(); // Reset popup when closed via 'x'
             }
         }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
+            if (event.target == modal) {
+                modal.style.display = "none";
+                resetPopup(); // Reset popup when closed by clicking outside
+            }
+        }
+
+        // Handle form submission
+        if (consultationForm) {
+            consultationForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Simulate an asynchronous submission (e.g., an AJAX call)
+                // In a real application, you would send data to a server here.
+                // For demonstration, we'll just use a setTimeout to simulate delay.
+                console.log("Form submitted. Simulating data send...");
+
+                // Simulate success after a short delay
+                setTimeout(function() {
+                    if (formSection) formSection.style.display = 'none'; // Hide form content
+                    if (successMessage) successMessage.style.display = 'block'; // Show success message
+                    console.log("Consultation booked successfully!");
+                }, 1000); // Simulate 1 second delay
+            });
         }
     </script>
 
-    <a href="https://wa.me/yourwhatsappnumber" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/+911234567890" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 

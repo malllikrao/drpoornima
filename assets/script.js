@@ -1,30 +1,45 @@
 document.addEventListener('DOMContentLoaded', function () {
     // === Popup Modal Logic ===
-    // Check if popup has been shown before or if 24 hours have passed since last show
-    if (!localStorage.getItem('popupShown')) {
+    const consultationPopup = document.getElementById('consultation-popup');
+    const closeBtn = document.querySelector('.close-btn');
+
+    const popupShownKey = 'popupShown';
+    const popupTimestampKey = 'popupTimestamp';
+    const twentyFourHours = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+    // Check and reset 'popupShown' after 24 hours if timestamp exists
+    const lastPopupTimestamp = localStorage.getItem(popupTimestampKey);
+    if (lastPopupTimestamp) {
+        if ((Date.now() - parseInt(lastPopupTimestamp)) > twentyFourHours) {
+            localStorage.removeItem(popupShownKey);
+            localStorage.removeItem(popupTimestampKey); // Clear both to ensure a fresh start
+        }
+    }
+
+    // Show popup only if it hasn't been shown (or was reset after 24 hours)
+    // Added a check for consultationPopup existence before attempting to show
+    if (consultationPopup && !localStorage.getItem(popupShownKey)) {
         setTimeout(function () {
-            document.getElementById('consultation-popup').style.display = 'block';
-            localStorage.setItem('popupShown', 'true');
-            localStorage.setItem('popupTimestamp', Date.now().toString());
+            // Re-check for popup existence just before showing in case DOM changed
+            if (consultationPopup) {
+                consultationPopup.style.display = 'block';
+                // Set for the first time or after 24 hours reset
+                localStorage.setItem(popupShownKey, 'true');
+                localStorage.setItem(popupTimestampKey, Date.now().toString());
+            }
         }, 3000); // Show popup after 3 seconds
     }
 
-    // Reset 'popupShown' after 24 hours to show it again
-    const lastPopupTime = localStorage.getItem('popupTimestamp');
-    if (lastPopupTime && (Date.now() - parseInt(lastPopupTime)) > 24 * 60 * 60 * 1000) {
-        localStorage.removeItem('popupShown');
-    }
-
     // Close popup when 'x' button is clicked
-    const closeBtn = document.querySelector('.close-btn');
     if (closeBtn) {
         closeBtn.addEventListener('click', function () {
-            document.getElementById('consultation-popup').style.display = 'none';
+            if (consultationPopup) { // Ensure element exists
+                consultationPopup.style.display = 'none';
+            }
         });
     }
 
     // Close popup when clicking outside the modal content
-    const consultationPopup = document.getElementById('consultation-popup');
     if (consultationPopup) {
         window.addEventListener('click', function (event) {
             if (event.target === consultationPopup) {
@@ -49,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(() => {
                 messageDiv.textContent = '';
                 messageDiv.style.display = 'none';
-            }, 5000);
+            }, 5000); // Message visible for 5 seconds
         }
     }
 
@@ -59,49 +74,60 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Handle form submission for the popup form
     const popupForm = document.querySelector('.popup-form');
+    // consultationPopup is already defined at the top
+
     if (popupForm) {
         popupForm.addEventListener('submit', async function (e) {
             e.preventDefault(); // Prevent default form submission
 
             const formData = new FormData(popupForm);
-            // Add a source identifier for Apps Script
             formData.append('source', 'Popup Form'); // This will be `formData.source` in Apps Script
 
             try {
-                const response = await fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // <--- CRITICAL: Allows request to bypass strict CORS on response
-                    body: formData,
-                });
-
                 // IMPORTANT: With 'no-cors', the browser hides the actual response from the server.
                 // You CANNOT reliably read 'response.ok' or parse 'response.json()'.
                 // The frontend message will just indicate the request was SENT.
                 // You must rely on the Apps Script 'Executions' log and your Google Sheet
                 // to confirm if the data was successfully processed.
+                await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // <--- CRITICAL: Allows request to bypass strict CORS on response
+                    body: formData,
+                });
+
+                // Display the success message first
                 showFormMessage(popupForm, 'Your booking request has been sent. We will contact you shortly!', true);
                 popupForm.reset(); // Clear the form fields
-                document.getElementById('consultation-popup').style.display = 'none'; // Hide the popup
+
+                // --- CRUCIAL CHANGE FOR POPUP ---
+                // Delay hiding the popup so the user can see the success message.
+                // The message itself is visible for 5000ms (5 seconds).
+                // We'll hide the popup slightly after that to ensure message cleanup.
+                setTimeout(() => {
+                    if (consultationPopup) { // Ensure popup element still exists
+                        consultationPopup.style.display = 'none'; // Hide the popup
+                    }
+                }, 5500); // Hide popup after 5.5 seconds (gives message 0.5s buffer to clear)
 
             } catch (error) {
                 console.error('Error submitting form (client-side):', error);
                 showFormMessage(popupForm, 'There was a problem sending your request. Please try again.', false);
+                // If there's an error, keep the popup visible for the user to see the error.
             }
         });
     }
 
-    // Handle form submission for the main consultation form
+    // Handle form submission for the main consultation form (no change needed here)
     const mainConsultationForm = document.querySelector('.consultation-form');
     if (mainConsultationForm) {
         mainConsultationForm.addEventListener('submit', async function (e) {
             e.preventDefault(); // Prevent default form submission
 
             const formData = new FormData(mainConsultationForm);
-            // Add a source identifier
             formData.append('source', 'Main Consultation Form'); // This will be `formData.source` in Apps Script
 
             try {
-                const response = await fetch(WEB_APP_URL, {
+                await fetch(WEB_APP_URL, {
                     method: 'POST',
                     mode: 'no-cors', // <--- CRITICAL: Allows request to bypass strict CORS on response
                     body: formData,
@@ -122,6 +148,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // === Testimonial Slider ===
     let currentTestimonial = 0;
     const testimonials = document.querySelectorAll('.testimonial-card');
+    const nextButton = document.querySelector('.next-testimonial');
+    const prevButton = document.querySelector('.prev-testimonial');
 
     function showTestimonial(index) {
         if (testimonials.length === 0) return; // Prevent error if no testimonials
@@ -134,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function () {
         showTestimonial(currentTestimonial);
     }
 
-    const nextButton = document.querySelector('.next-testimonial');
     if (nextButton) {
         nextButton.addEventListener('click', function () {
             currentTestimonial = (currentTestimonial + 1) % testimonials.length;
@@ -142,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    const prevButton = document.querySelector('.prev-testimonial');
     if (prevButton) {
         prevButton.addEventListener('click', function () {
             currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
@@ -302,10 +328,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function performSearch() {
         const query = searchInput.value.toLowerCase().trim();
-        searchResultsContent.innerHTML = ''; // Clear previous results
+        if (searchResultsContent) { // Null check for safety
+            searchResultsContent.innerHTML = ''; // Clear previous results
+        }
 
         if (query === "") {
-            searchResultsOverlay.style.display = 'none'; // Hide if search is empty
+            if (searchResultsOverlay) { // Null check for safety
+                searchResultsOverlay.style.display = 'none'; // Hide if search is empty
+                searchResultsOverlay.removeAttribute('aria-live'); // Remove aria-live when hidden
+            }
             return;
         }
 
@@ -314,7 +345,10 @@ document.addEventListener('DOMContentLoaded', function () {
         );
 
         if (filteredResults.length > 0) {
-            searchResultsOverlay.style.display = 'block'; // Show results overlay
+            if (searchResultsOverlay) { // Null check for safety
+                searchResultsOverlay.style.display = 'block'; // Show results overlay
+                searchResultsOverlay.setAttribute('aria-live', 'polite'); // For accessibility
+            }
             filteredResults.forEach(result => {
                 const resultItem = document.createElement('div');
                 resultItem.classList.add('search-result-item');
@@ -327,11 +361,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     <p>${result.description}</p>
                     <a href="${result.url}" class="learn-more-link" ${isCurrentPageAnchor ? 'data-internal-link="true"' : 'target="_self"'}>Learn More</a>
                 `;
-                searchResultsContent.appendChild(resultItem);
+                if (searchResultsContent) { // Null check for safety
+                    searchResultsContent.appendChild(resultItem);
+                }
             });
         } else {
-            searchResultsOverlay.style.display = 'block'; // Show overlay even for no match
-            searchResultsContent.innerHTML = '<p class="no-match-found">No matching treatments found. Please try a different keyword.</p>';
+            if (searchResultsOverlay) { // Null check for safety
+                searchResultsOverlay.style.display = 'block'; // Show overlay even for no match
+                searchResultsOverlay.setAttribute('aria-live', 'polite'); // For accessibility
+            }
+            if (searchResultsContent) { // Null check for safety
+                searchResultsContent.innerHTML = '<p class="no-match-found">No matching treatments found. Please try a different keyword.</p>';
+            }
         }
     }
 
@@ -361,6 +402,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!isClickInsideSearch && searchResultsOverlay) {
             searchResultsOverlay.style.display = 'none';
+            searchResultsOverlay.removeAttribute('aria-live'); // Remove aria-live when hidden
         }
     });
 
@@ -369,8 +411,9 @@ document.addEventListener('DOMContentLoaded', function () {
         searchResultsContent.addEventListener('click', function (event) {
             const targetLink = event.target.closest('a[data-internal-link="true"]');
             if (targetLink) {
-                if (searchResultsOverlay) {
+                if (searchResultsOverlay) { // Null check for safety
                     searchResultsOverlay.style.display = 'none'; // Hide results
+                    searchResultsOverlay.removeAttribute('aria-live'); // Remove aria-live when hidden
                 }
                 // If it's an internal anchor on the current page, scroll to it
                 if (targetLink.getAttribute('href').startsWith('#')) {
@@ -379,6 +422,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (targetElement) {
                         event.preventDefault(); // Prevent default link behavior if scrolling manually
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        // Optional: Update URL hash for direct linking/bookmarking
+                        window.location.hash = targetId;
                     }
                 }
                 // For external pages (like .html files), the default link behavior will handle navigation
@@ -386,15 +431,18 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Close search results with Escape key
     document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape' && searchResultsOverlay) {
             searchResultsOverlay.style.display = 'none';
+            searchResultsOverlay.removeAttribute('aria-live'); // Remove aria-live when hidden
         }
     });
 
     // Ensure initial state of search results is hidden if script loads after page content
-    if (searchResultsOverlay) {
+    if (searchResultsOverlay) { // Null check for safety
         searchResultsOverlay.style.display = 'none';
+        searchResultsOverlay.removeAttribute('aria-live'); // Ensure it's not live when hidden initially
     }
 
-}); // This is the final closing for document.addEventListener('DOMContentLoaded', function () {
+}); // Final closing tag for document.addEventListener('DOMContentLoaded')

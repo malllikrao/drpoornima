@@ -506,35 +506,106 @@
 </footer>
 
 <div id="consultation-popup" class="popup-modal">
-  <div class="popup-content">
-    <span class="close-btn">×</span>
-    <h2>
-      Struggling with <span class="highlight">fertility</span> or
-      <span class="highlight">pregnancy</span> concerns?
-    </h2>
-    <p><strong>Exclusive Offers</strong> – Save up to 50% on Treatments</p>
+        <div class="popup-content">
+            <span class="close-btn">×</span>
+            <h2>
+                Struggling with <span class="highlight">fertility</span> or
+                <span class="highlight">pregnancy</span> concerns?
+            </h2>
+            <p><strong>Exclusive Offers</strong> – Save up to 50% on Treatments</p>
 
-    <div class="popup-buttons">
-      <button class="popup-btn">👩‍⚕️ Expert Advice</button>
-      <button class="popup-btn">🧪 Free Scan</button>
-      <button class="popup-btn">💳 Flexible EMI</button>
+            <div id="consultation-form-section">
+                <div class="popup-buttons">
+                    <button class="popup-btn">👩‍⚕️ Expert Advice</button>
+                    <button class="popup-btn">🧪 Free Scan</button>
+                    <button class="popup-btn">💳 Flexible EMI</button>
+                </div>
+
+                <form class="popup-form">
+                    <input type="text" name="fullName" placeholder="Your Full Name" required>
+                    <input type="tel" name="mobileNumber" placeholder="Your Mobile Number" required>
+
+                    <div class="privacy">
+                        <img src="assets/images/google.png" alt="Google Logo">
+                        <span>We respect your privacy – your data is secure with us.</span>
+                    </div>
+
+                    <button type="submit" class="popup-btn submit-btn">Book Free Consultation</button>
+                </form>
+            </div>
+
+            <div id="consultation-success-message" class="consultation-success-message">
+                
+                <p>Thank you for reaching out! We've received your request and will get back to you within 24 hours.</p>
+            </div>
+        </div>
     </div>
 
-    <form class="popup-form">
-      <input type="text" placeholder="Your Full Name" name="fullName" required>
-      <input type="tel" placeholder="Your Mobile Number" name="mobileNumber" required>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("consultation-popup");
 
-      <div class="form-message"></div>
+        // Get the button that opens the modal
+        var btn = document.querySelector(".consultation-btn");
 
-      <div class="privacy">
-        <img src="assets/images/google.png" alt="Google Logo">
-        <span>We respect your privacy – your data is secure with us.</span>
-      </div>
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close-btn")[0];
 
-      <button type="submit" class="popup-btn submit-btn">Book Free Consultation</button>
-    </form>
-  </div>
-</div>
+        // Get the form and success message elements
+        var consultationForm = document.querySelector("#consultation-popup .popup-form");
+        var formSection = document.getElementById("consultation-form-section"); // Now targeting the div that contains the form
+        var successMessage = document.getElementById("consultation-success-message");
+
+        // Function to reset the popup state (show form, hide success message)
+        function resetPopup() {
+            if (formSection) formSection.style.display = 'block';
+            if (successMessage) successMessage.style.display = 'none';
+            if (consultationForm) consultationForm.reset(); // Clear form fields
+        }
+
+        // When the user clicks the button, open the modal and reset its state
+        if(btn) {
+            btn.onclick = function() {
+                modal.style.display = "block";
+                resetPopup(); // Reset popup every time it opens
+            }
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        if(span) {
+            span.onclick = function() {
+                modal.style.display = "none";
+                resetPopup(); // Reset popup when closed via 'x'
+            }
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                resetPopup(); // Reset popup when closed by clicking outside
+            }
+        }
+
+        // Handle form submission
+        if (consultationForm) {
+            consultationForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Simulate an asynchronous submission (e.g., an AJAX call)
+                // In a real application, you would send data to a server here.
+                // For demonstration, we'll just use a setTimeout to simulate delay.
+                console.log("Form submitted. Simulating data send...");
+
+                // Simulate success after a short delay
+                setTimeout(function() {
+                    if (formSection) formSection.style.display = 'none'; // Hide form content
+                    if (successMessage) successMessage.style.display = 'block'; // Show success message
+                    console.log("Consultation booked successfully!");
+                }, 1000); // Simulate 1 second delay
+            });
+        }
+    </script>
 
 
 

@@ -1475,3 +1475,21 @@ html {
         flex-wrap: wrap;
     }
 }
+/* Styles for the success message in the popup */
+.consultation-success-message {
+    display: none; /* Hidden by default */
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.consultation-success-message i {
+    color: #28a745; /* Green check icon */
+    margin-right: 10px;
+}
