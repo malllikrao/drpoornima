@@ -1493,3 +1493,87 @@ html {
     color: #28a745; /* Green check icon */
     margin-right: 10px;
 }
+
+
+/* New styles for the top bar */
+.top-bar {
+    background-color: #e91e63; /* Clinic's primary pink color (reverted to original) */
+    color: #fff; /* White text for better contrast on dark pink */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap; /* Ensures items stay in a single line on larger screens */
+    font-size: 0.9em;
+    /* This top bar is not sticky and will scroll out of view */
+    z-index: 999; /* Slightly lower z-index than navbar to stay behind it on scroll */
+}
+
+.top-bar-info {
+    display: flex;
+    align-items: center;
+    margin: 5px 15px;
+}
+
+.top-bar-info i {
+    margin-right: 8px;
+    color: #fff; /* White icons for better contrast on dark pink */
+}
+
+.top-bar-social {
+    display: flex;
+    align-items: center;
+    margin: 5px 15px;
+}
+
+.top-bar-social .social-icon {
+    color: #fff; /* White social icons for better contrast on dark pink */
+    font-size: 1.2em;
+    margin: 0 8px;
+    transition: color 0.3s ease;
+}
+
+.top-bar-social .social-icon:hover {
+    color: #f0f0f0; /* Slightly lighter white on hover */
+}
+
+.top-bar-appointment-btn {
+    background-color: #fff; /* White background for button */
+    color: #e91e63; /* Clinic's primary pink text for button */
+    padding: 8px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none; /* For anchor tag styling */
+    display: inline-block; /* For padding to work on anchor */
+    margin: 5px 0; /* Add margin for spacing */
+}
+
+.top-bar-appointment-btn:hover {
+    background-color: #f0f0f0; /* Lighter grey on hover */
+    color: #c2185b; /* Darker pink on hover */
+}
+
+/* Responsive adjustments for top bar */
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 10px;
+        top: auto; /* Remove fixed top positioning on mobile if navbar is not sticky or changes */
+        position: relative; /* Allow it to flow naturally on smaller screens */
+        flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    }
+
+    .top-bar-info, .top-bar-social {
+        margin: 5px 0;
+    }
+
+    .top-bar-appointment-btn {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+}

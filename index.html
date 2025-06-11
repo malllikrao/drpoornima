@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Poornima Fertility Center</Center></title>
+    <title>Dr. Poornima Fertility Center</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* This style block should ideally be in assets/style.css */
+        html {
+            scroll-padding-top: 150px; /* Adjusted to account for sticky navbar + top bar height */
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
-            <img src="assets/images/logo.png" alt="Logo" />
+            <img src="assets/images/logo.png" onerror="this.onerror=null; this.src='https://placehold.co/80x80/cccccc/000000?text=Logo';" alt="Logo" />
             <span>Dr. Poornima Fertility Centre</span>
         </div>
         <ul class="nav-links">
@@ -114,10 +120,34 @@
         </ul>
     </nav>
 
+    <!-- Top Bar is now below the Navbar -->
+    <div class="top-bar">
+        <div class="top-bar-info">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Mukarampura, Karimnagar, Telangana 505001</span>
+        </div>
+        <div class="top-bar-info">
+            <i class="fas fa-envelope"></i>
+            <span>drpoornima@gmail.com</span>
+        </div>
+        <div class="top-bar-info">
+            <i class="fas fa-phone"></i>
+            <span>+91-9490704277</span>
+        </div>
+        <div class="top-bar-social">
+            <a href="https://facebook.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/your-channel" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+            <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <a href="#" class="top-bar-appointment-btn" onclick="document.getElementById('consultation-popup').style.display='flex'; return false;">Appointment</a>
+    </div>
+
     <section class="hero" id="home">
         <div class="slider">
             <div class="slide active">
-                <img src="assets/images/hero5.jpg" alt="Hero 1" />
+                <img src="assets/images/hero5.jpg" onerror="this.onerror=null; this.src='https://placehold.co/1920x600/cccccc/000000?text=Hero+Image+1';" alt="Hero 1" />
                 <div class="content">
                     <h1>Compassionate Fertility Care</h1>
                     <p>We walk with you every step of the way on your journey to parenthood.</p>
@@ -125,7 +155,7 @@
                 </div>
             </div>
             <div class="slide">
-                <img src="assets/images/hero.jpg" alt="Hero 2" />
+                <img src="assets/images/hero.jpg" onerror="this.onerror=null; this.src='https://placehold.co/1920x600/cccccc/000000?text=Hero+Image+2';" alt="Hero 2" />
                 <div class="content">
                     <h1>Expertise You Can Trust</h1>
                     <p>Advanced treatments from one of the best fertility specialists in the region.</p>
@@ -133,7 +163,7 @@
                 </div>
             </div>
             <div class="slide">
-                <img src="assets/images/hero3.jpg" alt="Hero 3" />
+                <img src="assets/images/hero3.jpg" onerror="this.onerror=null; this.src='https://placehold.co/1920x600/cccccc/000000?text=Hero+Image+3';" alt="Hero 3" />
                 <div class="content">
                     <h1>Hope Begins Here</h1>
                     <p>We’re dedicated to making your dreams of parenthood a reality.</p>
@@ -157,7 +187,7 @@
 
     <section class="about-section" id="about">
         <div class="about-image">
-            <img src="assets/images/IMG_9150.JPG" alt="About Dr. Poornima">
+            <img src="assets/images/IMG_9150.JPG" onerror="this.onerror=null; this.src='https://placehold.co/400x300/cccccc/000000?text=About+Dr.+Poornima';" alt="About Dr. Poornima">
         </div>
         <div class="about-content">
             <h2>About Dr. Poornima Fertility Centre</h2>
@@ -173,31 +203,31 @@
     <h2>Our Services</h2>
     <div class="services-grid">
         <div class="service-card">
-            <a href="infertility-services.html"> <img src="assets/images/infertility.png" alt="Infertility Services">
+            <a href="infertility-services.html"> <img src="assets/images/infertility.png" onerror="this.onerror=null; this.src='https://placehold.co/80x80/cccccc/000000?text=Service';" alt="Infertility Services">
                 <p>Infertility Services</p>
             </a> </div>
         <div class="service-card">
-            <a href="ivf-services.html"> <img src="assets/images/ivf.png" alt="IVF Services">
+            <a href="ivf-services.html"> <img src="assets/images/ivf.png" onerror="this.onerror=null; this.src='https://placehold.co/80x80/cccccc/000000?text=Service';" alt="IVF Services">
                 <p>IVF Services</p>
             </a> </div>
         <div class="service-card">
-            <a href="male-infertility-services.html"> <img src="assets/images/infertility (1).png" alt="Male Infertility">
+            <a href="male-infertility-services.html"> <img src="assets/images/infertility (1).png" onerror="this.onerror=null; this.src='https://placehold.co/80x80/cccccc/000000?text=Service';" alt="Male Infertility">
                 <p>Male Infertility Services</p>
             </a> </div>
         <div class="service-card">
-            <a href="advanced-ivf-services.html"> <img src="assets/images/ivf (1).png" alt="Advanced IVF Services">
+            <a href="advanced-ivf-services.html"> <img src="assets/images/ivf (1).png" onerror="this.onerror=null; this.src='https://placehold.co/80x80/cccccc/000000?text=Service';" alt="Advanced IVF Services">
                 <p>Advanced IVF Services</p>
             </a> </div>
         <div class="service-card">
-            <a href="fertility-preservation-services.html"> <img src="assets/images/cryopreservation.png" alt="Fertility Preservation">
+            <a href="fertility-preservation-services.html"> <img src="assets/images/cryopreservation.png" onerror="this.onerror=null; this.src='https://placehold.co/80x80/cccccc/000000?text=Service';" alt="Fertility Preservation">
                 <p>Fertility Preservation</p>
             </a> </div>
         <div class="service-card">
-            <a href="third-party-reproduction-services.html"> <img src="assets/images/womb.png" alt="Third Party Reproduction">
+            <a href="third-party-reproduction-services.html"> <img src="assets/images/womb.png" onerror="this.onerror=null; this.src='https://placehold.co/80x80/cccccc/000000?text=Service';" alt="Third Party Reproduction">
                 <p>Third Party Reproduction</p>
             </a> </div>
         <div class="service-card">
-            <a href="endoscopy-services.html"> <img src="assets/images/endoscopy.png" alt="Endoscopy">
+            <a href="endoscopy-services.html"> <img src="assets/images/endoscopy.png" onerror="this.onerror=null; this.src='https://placehold.co/80x80/cccccc/000000?text=Service';" alt="Endoscopy">
                 <p>Endoscopy</p>
             </a> </div>
     </div>
@@ -212,23 +242,23 @@
     <h2>Our Commitment to You</h2>
     <div class="commitment-boxes">
         <div class="commitment">
-            <img src="assets/images/wellness.png" alt="Wellness">
+            <img src="assets/images/wellness.png" onerror="this.onerror=null; this.src='https://placehold.co/60x60/cccccc/000000?text=Icon';" alt="Wellness">
             <p>Emotional & Mental Wellness</p>
         </div>
         <div class="commitment">
-            <img src="assets/images/consultation.png" alt="Consultation">
+            <img src="assets/images/consultation.png" onerror="this.onerror=null; this.src='https://placehold.co/60x60/cccccc/000000?text=Icon';" alt="Consultation">
             <p>Free Initial Consultation</p>
         </div>
         <div class="commitment">
-            <img src="assets/images/clockwise.png" alt="Waiting Time">
+            <img src="assets/images/clockwise.png" onerror="this.onerror=null; this.src='https://placehold.co/60x60/cccccc/000000?text=Icon';" alt="Waiting Time">
             <p>Minimal Waiting Time</p>
         </div>
         <div class="commitment">
-            <img src="assets/images/meal.png" alt="Guidance">
+            <img src="assets/images/meal.png" onerror="this.onerror=null; this.src='https://placehold.co/60x60/cccccc/000000?text=Icon';" alt="Guidance">
             <p>Lifestyle & Nutrition Guidance</p>
         </div>
         <div class="commitment">
-            <img src="assets/images/support.png" alt="Support">
+            <img src="assets/images/support.png" onerror="this.onerror=null; this.src='https://placehold.co/60x60/cccccc/000000?text=Icon';" alt="Support">
             <p>24/7 Support & Follow-ups</p>
         </div>
     </div>
@@ -243,27 +273,27 @@
     <p>We are committed to compassionate care, cutting-edge technology, and a personalized approach to fertility treatment.</p>
     <div class="features">
         <div class="feature-box">
-            <img src="assets/images/healthcare.png" alt="Care">
+            <img src="assets/images/healthcare.png" onerror="this.onerror=null; this.src='https://placehold.co/70x70/cccccc/000000?text=Icon';" alt="Care">
             <p>Compassionate Personalized Care</p>
         </div>
         <div class="feature-box">
-            <img src="assets/images/lab.png" alt="Diagnostics">
+            <img src="assets/images/lab.png" onerror="this.onerror=null; this.src='https://placehold.co/70x70/cccccc/000000?text=Icon';" alt="Diagnostics">
             <p>Advanced Fertility Diagnostics</p>
         </div>
         <div class="feature-box">
-            <img src="assets/images/ivf (1).png" alt="Success Rate">
+            <img src="assets/images/ivf (1).png" onerror="this.onerror=null; this.src='https://placehold.co/70x70/cccccc/000000?text=Icon';" alt="Success Rate">
             <p>High IVF Success Rate</p>
         </div>
         <div class="feature-box">
-            <img src="assets/images/woman.png" alt="Female Doctors">
+            <img src="assets/images/woman.png" onerror="this.onerror=null; this.src='https://placehold.co/70x70/cccccc/000000?text=Icon';" alt="Female Doctors">
             <p>Experienced Female Doctors</p>
         </div>
         <div class="feature-box">
-            <img src="assets/images/affordable.png" alt="Pricing">
+            <img src="assets/images/affordable.png" onerror="this.onerror=null; this.src='https://placehold.co/70x70/cccccc/000000?text=Icon';" alt="Pricing">
             <p>Affordable & Transparent Pricing</p>
         </div>
         <div class="feature-box">
-            <img src="assets/images/support.png" alt="Privacy">
+            <img src="assets/images/support.png" onerror="this.onerror=null; this.src='https://placehold.co/70x70/cccccc/000000?text=Icon';" alt="Privacy">
             <p>Complete Privacy & Support</p>
         </div>
     </div>
@@ -280,14 +310,14 @@
                 <input type="tel" placeholder="Mobile Number" name="mobileNumber" required />
                 <div class="form-message"></div>
                 <div class="security-message">
-                    <img src="assets/images/google.png" alt="Security Icon" />
+                    <img src="assets/images/google.png" onerror="this.onerror=null; this.src='https://placehold.co/20x20/cccccc/000000?text=G';" alt="Security Icon" />
                     <span>Your data is safe with us</span>
                 </div>
                 <button type="submit" class="book-btn">Book Now</button>
             </form>
         </div>
         <div class="booking-image">
-            <img src="assets/images/womencarrying.jpg" alt="Smiling baby" />
+            <img src="assets/images/womencarrying.jpg" onerror="this.onerror=null; this.src='https://placehold.co/500x500/cccccc/000000?text=Happy+Family';" alt="Smiling baby" />
         </div>
     </div>
 </section>
@@ -343,7 +373,7 @@
     <div class="testimonials-container">
         <div class="testimonial-card active">
             <div class="patient-info">
-                <img src="assets/images/google.png" alt="Google Review" class="review-source">
+                <img src="assets/images/google.png" onerror="this.onerror=null; this.src='https://placehold.co/40x40/cccccc/000000?text=G';" alt="Google Review" class="review-source">
                 <div class="rating">
                     ★★★★★
                 </div>
@@ -355,7 +385,7 @@
 
         <div class="testimonial-card">
             <div class="patient-info">
-                <img src="assets/images/google.png" alt="Google Review" class="review-source">
+                <img src="assets/images/google.png" onerror="this.onerror=null; this.src='https://placehold.co/40x40/cccccc/000000?text=G';" alt="Google Review" class="review-source">
                 <div class="rating">
                     ★★★★★
                 </div>
@@ -367,7 +397,7 @@
 
         <div class="testimonial-card">
             <div class="patient-info">
-                <img src="assets/images/google.png" alt="Google Review" class="review-source">
+                <img src="assets/images/google.png" onerror="this.onerror=null; this.src='https://placehold.co/40x40/cccccc/000000?text=G';" alt="Google Review" class="review-source">
                 <div class="rating">
                     ★★★★★
                 </div>
@@ -392,7 +422,7 @@
     </div>
     <div class="gallery-grid">
         <div class="gallery-item photos">
-            <img src="assets/images/clinic1.jpg" alt="Clinic Interior">
+            <img src="assets/images/IMG-20250602-WA0092.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Clinic+Interior';" alt="Clinic Interior">
             <div class="gallery-overlay">
                 <h3>Modern Facilities</h3>
                 <p>State-of-the-art treatment rooms</p>
@@ -400,7 +430,7 @@
         </div>
         <div class="gallery-item videos">
             <div class="video-thumbnail">
-                <iframe src="https://www.youtube.com/embed/GK2RLSzARRI" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/GK2RLSzARRI" frameborder="0" allowfullscreen class="gallery-video-iframe"></iframe>
             </div>
             <div class="gallery-overlay">
                 <h3>Patient Testimonials</h3>
@@ -409,11 +439,20 @@
         </div>
         <div class="gallery-item videos">
             <div class="video-thumbnail">
-                <iframe src="https://www.youtube.com/embed/nY2vcUD6e9M" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/nY2vcUD6e9M" frameborder="0" allowfullscreen class="gallery-video-iframe"></iframe>
             </div>
             <div class="gallery-overlay">
                 <h3>Understanding IVF</h3>
                 <p>An informative video about the IVF process</p>
+            </div>
+        </div>
+        <div class="gallery-item videos">
+            <div class="video-thumbnail">
+                <iframe src="https://www.youtube.com/embed/a-Z24t_b6fI" frameborder="0" allowfullscreen class="gallery-video-iframe"></iframe>
+            </div>
+            <div class="gallery-overlay">
+                <h3>Clinic Tour</h3>
+                <p>A virtual tour of our facility</p>
             </div>
         </div>
         </div>
@@ -445,7 +484,7 @@
 <footer class="footer-section">
   <div class="footer-container">
     <div class="footer-logo">
-      <img src="assets/images/logo.png" alt="Dr Poornima Fertility Centre Logo">
+      <img src="assets/images/logo.png" onerror="this.onerror=null; this.src='https://placehold.co/60x60/cccccc/000000?text=Logo';" alt="Dr Poornima Fertility Centre Logo">
       <p>Dr Poornima Fertility Centre is the Best Fertility Centre in Karimnagar offering advanced fertility treatments with personalized care, state-of-the-art technology, and a compassionate, patient-centered approach to success.</p>
       <div class="social-links">
           <a href="https://instagram.com/your-profile" target="_blank" class="social-icon">
@@ -526,7 +565,7 @@
                     <input type="tel" name="mobileNumber" placeholder="Your Mobile Number" required>
 
                     <div class="privacy">
-                        <img src="assets/images/google.png" alt="Google Logo">
+                        <img src="assets/images/google.png" onerror="this.onerror=null; this.src='https://placehold.co/20x20/cccccc/000000?text=G';" alt="Google Logo">
                         <span>We respect your privacy – your data is secure with us.</span>
                     </div>
 
@@ -566,7 +605,7 @@
         // When the user clicks the button, open the modal and reset its state
         if(btn) {
             btn.onclick = function() {
-                modal.style.display = "block";
+                modal.style.display = "flex"; /* Changed to flex for centering */
                 resetPopup(); // Reset popup every time it opens
             }
         }
@@ -602,6 +641,14 @@
                     if (formSection) formSection.style.display = 'none'; // Hide form content
                     if (successMessage) successMessage.style.display = 'block'; // Show success message
                     console.log("Consultation booked successfully!");
+
+                    // Optional: Hide success message and close modal after 5 seconds
+                    setTimeout(() => {
+                        if (successMessage) successMessage.style.display = 'none';
+                        if (modal) modal.style.display = 'none';
+                        resetPopup();
+                    }, 5000);
+
                 }, 1000); // Simulate 1 second delay
             });
         }

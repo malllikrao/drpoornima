@@ -48,6 +48,11 @@
             overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer; /* Add cursor pointer to indicate clickability for images */
+        }
+
+        .gallery-item.videos {
+            cursor: default; /* No pointer for videos as they play in-place */
         }
 
         .gallery-item img {
@@ -58,16 +63,30 @@
             transition: transform 0.3s ease;
         }
 
-        .gallery-item iframe {
-            width: 100%;
-            height: 200px; /* Adjust as needed */
-            display: block;
-        }
-
         .gallery-item:hover img {
             transform: scale(1.05);
         }
 
+        /* Video thumbnail styling - specific for the embedded iframe */
+        .gallery-item .video-thumbnail {
+            width: 100%;
+            height: 200px; /* Maintain consistent height */
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 8px; /* Match parent */
+        }
+
+        .gallery-video-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Removed gallery-overlay styles that hid it for image items */
         .gallery-overlay {
             position: absolute;
             bottom: 0;
@@ -94,6 +113,7 @@
             margin: 0;
             font-size: 0.9rem;
         }
+
         .consultation-success-message {
             display: none; /* Hidden by default */
             text-align: center;
@@ -111,13 +131,88 @@
             color: #28a745; /* Green check icon */
             margin-right: 10px;
         }
+
+        /* Styles for the Lightbox Modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            padding-top: 50px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* To allow caption below content */
+        }
+
+        .modal-content {
+            margin: auto; /* Centered with flex */
+            display: block;
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain; /* Ensures the image fits within the modal without cropping */
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            animation-name: zoom;
+            animation-duration: 0.6s;
+            background-color: transparent; /* For video iframe, though video iframe won't use this */
+        }
+
+        /* Specific style for video iframe in modal - this is only for videos opened in modal, which will now be only images */
+        .modal-video-iframe {
+            width: 80vw; /* Adjust width as needed */
+            height: 45vw; /* Maintain 16:9 aspect ratio (9/16 = 0.5625, so 0.5625 * 80 = 45) */
+            max-width: 800px; /* Max width for larger screens */
+            max-height: 450px; /* Max height for larger screens */
+            border: none;
+        }
+
+
+        #caption {
+            margin-top: 15px;
+            display: block;
+            width: 80%;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            font-size: 18px;
+            max-width: 700px; /* Optional: limit caption width */
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 1001; /* Above the image/video */
+        }
+
+        .modal-close-btn:hover,
+        .modal-close-btn:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0.1)}
+            to {transform:scale(1)}
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="logo">
-            <img src="assets/images/logo.png" alt="Logo" />
+            <img src="assets/images/logo.png" onerror="this.onerror=null; this.src='https://placehold.co/50x50/cccccc/000000?text=Logo';" alt="Logo" />
             <span>Dr. Poornima Fertility Centre</span>
         </div>
         <ul class="nav-links">
@@ -133,7 +228,7 @@
                             <li><a href="infertility-services.html#ovulation-induction">OI (Ovulation Induction)</a></li>
                             <li><a href="infertility-services.html#iui">IUI (Intrauterine Insemination)</a></li>
                             <li><a href="infertility-services.html#unexplained-fertility">Treatment For Unexplained InFertility</a></li>
-                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li> 
+                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li>
                             <li><a href="infertility-services.html#psychological-counselling">Psychological Counselling</a></li>
                             <li><a href="infertility-services.html#fertility-evaluation">Fertility Evaluation</a></li>
                         </ul>
@@ -158,7 +253,7 @@
                             <li><a href="endoscopy-services.html#diagnostic-hysteroscopy">Diagnostic Hysteroscopy</a></li>
                             <li><a href="endoscopy-services.html#diagnostic-laparoscopy">Diagnostic Laparoscopy </a></li>
                             <li><a href="endoscopy-services.html#theraputic-hysterolaparoscopy">Theraputic Hysterolaparoscopy</a></li>
-                            <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids,Pid,Herine Septum,Post Tubaltmic Cases,Endometriosis,Ovarian Cysts)</a></li> 
+                            <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids,Pid,Herine Septum,Post Tubaltmic Cases,Endometriosis,Ovarian Cysts)</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
@@ -202,7 +297,7 @@
                         <ul class="submenu-content">
                             <li><a href="third-party-reproduction-services.html#donor-egg">Donor Egg</a></li>
                             <li><a href="third-party-reproduction-services.html#donor-sperm">Donor Sperm</a></li>
-                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li> 
+                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -228,39 +323,79 @@
                 <h3>Photos</h3>
                 <div class="gallery-grid">
                     <div class="gallery-item photos">
-                        <img src="assets/images/clinic1.jpg" alt="Clinic Interior">
-                        <div class="gallery-overlay">
-                            <h3>Modern Facilities</h3>
-                            <p>State-of-the-art treatment rooms</p>
-                        </div>
+                        <img src="assets/images/IMG-20240529-WA0158.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Clinic+Interior';" alt="Clinic Interior">
                     </div>
                     <div class="gallery-item photos">
-                        <img src="assets/images/whyerrors.JPG" alt="Clinic Exterior">
-                        <div class="gallery-overlay">
-                            <h3>Clinic Exterior</h3>
-                            <p>Our welcoming clinic entrance</p>
-                        </div>
+                        <img src="assets/images/IMG-20240529-WA0173.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Clinic+Exterior';" alt="Clinic Exterior">
                     </div>
                     <div class="gallery-item photos">
-                        <img src="assets/images/whichone.JPG" alt="Waiting Area">
-                        <div class="gallery-overlay">
-                            <h3>Comfortable Waiting Area</h3>
-                            <p>Relaxing space for our patients</p>
-                        </div>
+                        <img src="assets/images/IMG-20240529-WA0175.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Waiting+Area';" alt="Waiting Area">
                     </div>
                     <div class="gallery-item photos">
-                        <img src="assets/images/thisone.JPG" alt="Consultation Room">
-                        <div class="gallery-overlay">
-                            <h3>Consultation Room</h3>
-                            <p>Private and comfortable consultation space</p>
-                        </div>
+                        <img src="assets/images/IMG-20240529-WA0181.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Consultation+Room';" alt="Consultation Room">
                     </div>
                     <div class="gallery-item photos">
-                        <img src="assets/images/failedones.JPG" alt="Laboratory">
-                        <div class="gallery-overlay">
-                            <h3>Advanced Laboratory</h3>
-                            <p>Equipped for precise diagnostics</p>
-                        </div>
+                        <img src="assets/images/IMG-20240529-WA0182.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Laboratory';" alt="Laboratory">
+                    </div>
+                    <div class="gallery-item photos">
+                        <img src="assets/images/IMG-20240529-WA0188.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+1';" alt="Gallery Image 1">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/IMG-20250602-WA0075.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+2';" alt="Gallery Image 2">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/IMG-20250602-WA0092.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+3';" alt="Gallery Image 3">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/IMG20250528170130.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+4';" alt="Gallery Image 4">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/IMG20250529141749.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+5';" alt="Gallery Image 5">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/IMG20250529141826.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+6';" alt="Gallery Image 6">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/IMG20250529141833.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+7';" alt="Gallery Image 7">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/image8.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+8';" alt="Gallery Image 8">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/image9.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+9';" alt="Gallery Image 9">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/image10.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+10';" alt="Gallery Image 10">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/image11.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+11';" alt="Gallery Image 11">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/image12.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+12';" alt="Gallery Image 12">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/image13.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+13';" alt="Gallery Image 13">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/image14.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+14';" alt="Gallery Image 14">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/image15.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+15';" alt="Gallery Image 15">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/image16.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+16';" alt="Gallery Image 16">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/image17.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+17';" alt="Gallery Image 17">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/image18.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+18';" alt="Gallery Image 18">
+                    </div>
+                     <div class="gallery-item photos">
+                        <img src="assets/images/image19.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+19';" alt="Gallery Image 19">
+                    </div>
+                    <div class="gallery-item photos">
+                        <img src="assets/images/image20.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+20';" alt="Gallery Image 20">
                     </div>
                 </div>
             </div>
@@ -270,32 +405,22 @@
                 <div class="gallery-grid">
                     <div class="gallery-item videos">
                         <div class="video-thumbnail">
-                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/GK2RLSzARRI" frameborder="0" allowfullscreen></iframe>
                         </div>
-                        <div class="gallery-overlay">
-                            <h3>Patient Testimonials</h3>
-                            <p>Hear success stories from our patients</p>
-                        </div>
+                        
                     </div>
                     <div class="gallery-item videos">
                         <div class="video-thumbnail">
-                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/nY2vcUD6e9M" frameborder="0" allowfullscreen></iframe>
                         </div>
-                        <div class="gallery-overlay">
-                            <h3>Understanding IVF</h3>
-                            <p>An informative video about the IVF process</p>
-                        </div>
+            
                     </div>
                     <div class="gallery-item videos">
                         <div class="video-thumbnail">
-                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Clinic Tour</h3>
-                            <p>A virtual tour of our facility</p>
-                        </div>
+                            <iframe src="https://www.youtube.com/embed/a-Z24t_b6fI" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen class="gallery-video-iframe"></iframe>
+                        </div>   
                     </div>
-                </div>
+                    </div>
             </div>
         </div>
     </section>
@@ -303,7 +428,7 @@
     <footer class="footer-section">
         <div class="footer-container">
             <div class="footer-logo">
-                <img src="assets/images/logo.png" alt="Dr Poornima Fertility Centre Logo">
+                <img src="assets/images/logo.png" onerror="this.onerror=null; this.src='https://placehold.co/50x50/cccccc/000000?text=Logo';" alt="Dr Poornima Fertility Centre Logo">
                 <p>Dr Poornima Fertility Centre is the Best Fertility Centre in Karimnagar offering advanced fertility treatments with personalized care, state-of-the-art technology, and a compassionate, patient-centered approach to success.</p>
                 <div class="social-links">
                     <a href="https://instagram.com/your-profile" target="_blank" class="social-icon">
@@ -328,7 +453,7 @@
                     <li><a href="index.html#about">About Us</a></li>
                     <li><a href="index.html#services">Services</a></li>
                     <li><a href="index.html#doctors">Doctors</a></li>
-                    <li><a href="gallery.html">Gallery</a></li> 
+                    <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="index.html#book">Contact Us</a></li>
                 </ul>
             </div>
@@ -372,7 +497,7 @@
                     <input type="tel" name="mobileNumber" placeholder="Your Mobile Number" required>
 
                     <div class="privacy">
-                        <img src="assets/images/google.png" alt="Google Logo">
+                        <img src="assets/images/google.png" onerror="this.onerror=null; this.src='https://placehold.co/20x20/cccccc/000000?text=G';" alt="Google Logo">
                         <span>We respect your privacy – your data is secure with us.</span>
                     </div>
 
@@ -381,82 +506,119 @@
             </div>
 
             <div id="consultation-success-message" class="consultation-success-message">
-                
                 <p>Thank you for reaching out! We've received your request and will get back to you within 24 hours.</p>
             </div>
         </div>
     </div>
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById("consultation-popup");
-
-        // Get the button that opens the modal
-        var btn = document.querySelector(".consultation-btn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close-btn")[0];
-
-        // Get the form and success message elements
-        var consultationForm = document.querySelector("#consultation-popup .popup-form");
-        var formSection = document.getElementById("consultation-form-section"); // Now targeting the div that contains the form
-        var successMessage = document.getElementById("consultation-success-message");
-
-        // Function to reset the popup state (show form, hide success message)
-        function resetPopup() {
-            if (formSection) formSection.style.display = 'block';
-            if (successMessage) successMessage.style.display = 'none';
-            if (consultationForm) consultationForm.reset(); // Clear form fields
-        }
-
-        // When the user clicks the button, open the modal and reset its state
-        if(btn) {
-            btn.onclick = function() {
-                modal.style.display = "block";
-                resetPopup(); // Reset popup every time it opens
-            }
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        if(span) {
-            span.onclick = function() {
-                modal.style.display = "none";
-                resetPopup(); // Reset popup when closed via 'x'
-            }
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-                resetPopup(); // Reset popup when closed by clicking outside
-            }
-        }
-
-        // Handle form submission
-        if (consultationForm) {
-            consultationForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent default form submission
-
-                // Simulate an asynchronous submission (e.g., an AJAX call)
-                // In a real application, you would send data to a server here.
-                // For demonstration, we'll just use a setTimeout to simulate delay.
-                console.log("Form submitted. Simulating data send...");
-
-                // Simulate success after a short delay
-                setTimeout(function() {
-                    if (formSection) formSection.style.display = 'none'; // Hide form content
-                    if (successMessage) successMessage.style.display = 'block'; // Show success message
-                    console.log("Consultation booked successfully!");
-                }, 1000); // Simulate 1 second delay
-            });
-        }
-    </script>
+    <div id="mediaModal" class="modal">
+        <span class="modal-close-btn">×</span>
+        <img class="modal-content" id="modalImage" style="display: none;">
+        <iframe id="modalVideo" class="modal-video-iframe" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="display: none;"></iframe>
+        <div id="caption"></div>
+    </div>
 
     <a href="https://wa.me/+911234567890" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script src="assets/script.js"></script>
+    <script>
+        // Get the consultation modal elements
+        var consultationModal = document.getElementById("consultation-popup");
+        var consultationBtn = document.querySelector(".consultation-btn");
+        var consultationCloseSpan = document.getElementsByClassName("close-btn")[0];
+        var consultationForm = document.querySelector("#consultation-popup .popup-form");
+        var formSection = document.getElementById("consultation-form-section");
+        var successMessage = document.getElementById("consultation-success-message");
+
+        /**
+         * Resets the consultation popup to its initial state, hiding the success message
+         * and showing the form, and clearing any form fields.
+         */
+        function resetConsultationPopup() {
+            formSection.style.display = 'block'; // Show the form section
+            successMessage.style.display = 'none'; // Hide the success message
+            consultationForm.reset(); // Clear form fields
+        }
+
+        // When the user clicks the consultation button, open the modal
+        consultationBtn.onclick = function() {
+            consultationModal.style.display = "flex"; // Use flex to center the modal content
+            resetConsultationPopup(); // Reset the state when opening
+        }
+
+        // When the user clicks on <span> (x) in the consultation modal, close the modal
+        consultationCloseSpan.onclick = function() {
+            consultationModal.style.display = "none";
+            resetConsultationPopup(); // Reset the state when closing
+        }
+
+        // When the user clicks anywhere outside of the consultation modal content, close it
+        window.onclick = function(event) {
+            if (event.target == consultationModal) {
+                consultationModal.style.display = "none";
+                resetConsultationPopup(); // Reset the state when closing
+            }
+        }
+
+        // Handle form submission for consultation
+        consultationForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Hide the form section and show the success message
+            formSection.style.display = 'none';
+            successMessage.style.display = 'block';
+
+            // Optional: Hide the success message and close the modal after a few seconds
+            setTimeout(function() {
+                successMessage.style.display = 'none';
+                consultationModal.style.display = 'none';
+                resetConsultationPopup(); // Reset the state after closing
+            }, 5000); // 5 seconds
+        });
+
+
+        // Get the lightbox modal elements
+        var mediaModal = document.getElementById("mediaModal");
+        var modalImage = document.getElementById("modalImage");
+        var modalVideo = document.getElementById("modalVideo"); // This will now only be used for the video embedded in the modal (which is now for images)
+        var captionText = document.getElementById("caption");
+        var modalCloseBtn = document.getElementsByClassName("modal-close-btn")[0];
+
+        // Get all gallery items
+        var galleryItems = document.querySelectorAll(".gallery-item");
+
+        // Add click event listener to each gallery item
+        galleryItems.forEach(function(item) {
+            if (item.classList.contains("photos")) {
+                item.addEventListener("click", function() {
+                    mediaModal.style.display = "flex"; // Show the modal using flexbox for centering
+
+                    modalVideo.style.display = "none"; // Hide video player if it was shown
+                    modalVideo.src = ""; // Stop any playing video
+
+                    modalImage.style.display = "block"; // Show image element
+                    modalImage.src = item.querySelector("img").src; // Set image source
+                    modalImage.alt = item.querySelector("img").alt; // Set image alt text
+                    captionText.textContent = item.querySelector("img").alt; // Set caption from alt text
+                });
+            }
+            // For videos, no click event listener is added, as they are embedded and playable directly
+        });
+
+        // When the user clicks on <span> (x) in the media modal, close the modal
+        modalCloseBtn.onclick = function() {
+            mediaModal.style.display = "none";
+            modalVideo.src = ""; // Ensure any modal video is stopped if it were ever used
+        }
+
+        // When the user clicks anywhere outside of the media modal content, close it
+        window.addEventListener('click', function(event) {
+            if (event.target == mediaModal) {
+                mediaModal.style.display = "none";
+                modalVideo.src = ""; // Ensure any modal video is stopped if it were ever used
+            }
+        });
+    </script>
 </body>
 </html>
