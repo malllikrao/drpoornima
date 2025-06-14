@@ -32,18 +32,14 @@ html {
     align-items: center;
     margin-right: 15px;
     flex-shrink: 0; /* Prevent logo from shrinking */
+    /* You might need to adjust width/height for the div or img below */
 }
 
 .logo img {
-    height: 80px;
-}
-
-.logo span {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #e91e63;
-    margin-left: 10px;
-    white-space: nowrap; /* Keep logo text on one line */
+    /* Set a max-height or height to control the overall size of the combined logo image */
+    height: 100px; /* Adjust this value as needed to fit your design */
+    width: auto; /* Maintain aspect ratio */
+    display: block; /* Ensures no extra space below the image */
 }
 
 .nav-links {
@@ -889,15 +885,31 @@ html {
     padding: 0 20px;
 }
 
+.footer-logo {
+    /* Add this to left-align all content within the logo column */
+    text-align: left;
+}
+
 .footer-logo img {
-    max-width: 300px; /* Increased the max-width further */
+    max-width: 250px;
     margin-bottom: 25px;
+    /* Ensure the image is a block element and starts from the far left of its container */
+    display: block;
+    margin-left: 0;
 }
 
 .footer-logo p {
     font-size: 16px;
     line-height: 1.6;
+    /* Ensure paragraph text is also left-aligned */
+    text-align: left;
 }
+
+/* Add this to left-align your social icons if they appear centered */
+.social-links {
+    text-align: left;
+}
+
 
 .footer-section h3 {
     font-size: 18px;
@@ -952,7 +964,6 @@ html {
         grid-template-columns: 1fr;
     }
 }
-
 /* Consultation Booking Section */
 .consultation-booking {
     padding: 60px 20px;

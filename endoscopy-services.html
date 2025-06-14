@@ -115,8 +115,6 @@
         }
 
         /* Styles for the success message in the popup */
-         /* Styles for the success message in the popup */
-        /* Styles for the success message in the popup */
         .consultation-success-message {
             display: none; /* Hidden by default */
             text-align: center;
@@ -140,8 +138,9 @@
 
     <nav class="navbar">
         <div class="logo">
-            <img src="assets/images/logo.png" alt="Logo" />
-            <span>Dr. Poornima Fertility Centre</span>
+            <!-- Updated header logo to the new combined image -->
+            <img src="assets/images/poornima logo (2).png" alt="Dr. Poornima Fertility Centre Logo" />
+            <!-- Removed the span as the text is now part of the image -->
         </div>
         <ul class="nav-links">
             <li><a href="index.html#home">Home</a></li>
@@ -232,7 +231,7 @@
             </li>
             <li><a href="index.html#gallery">Gallery</a></li>
             <li><a href="index.html#book">Contact</a></li>
-            <li><a href="#" class="consultation-btn">Book Free Consultation</a></li>
+            <li><a href="#" class="consultation-btn" onclick="document.getElementById('consultation-popup').style.display='block'">Book Free Consultation</a></li>
             <li class="search-container">
                 <input type="text" id="searchInput" placeholder="Search treatments...">
                 <button id="searchButton"><i class="fas fa-search"></i></button>
@@ -247,7 +246,7 @@
         <h2>Endoscopy Services</h2>
 
         <div class="service-item" id="diagnostic-hysteroscopy">
-            <img src="assets/images/diagnostic-hysteroscopy.jpg" alt="Diagnostic Hysteroscopy">
+            <img src="assets/images/diagnostichysteroscopy.png" alt="Diagnostic Hysteroscopy">
             <div class="service-content">
                 <h3>Diagnostic Hysteroscopy</h3>
                 <p>This minimally invasive procedure involves inserting a thin, lighted telescope (hysteroscope) into the uterus through the cervix. It allows for direct visualization of the uterine cavity, helping to diagnose conditions such as polyps, fibroids, adhesions (scar tissue), or congenital abnormalities that may affect fertility or cause abnormal uterine bleeding.</p>
@@ -255,7 +254,7 @@
         </div>
 
         <div class="service-item" id="diagnostic-laparoscopy">
-            <img src="assets/images/diagnostic-laparoscopy.jpg" alt="Diagnostic Laparoscopy">
+            <img src="assets/images/diagnosticlaproscopyandtubal.png" alt="Diagnostic Laparoscopy">
             <div class="service-content">
                 <h3>Diagnostic Laparoscopy & Tubal Testing</h3>
                 <p>A minimally invasive surgical procedure where a small incision is made near the navel to insert a thin camera (laparoscope) into the abdomen. This allows for direct examination of the pelvic organs, including the uterus, ovaries, and fallopian tubes. It's often used to diagnose conditions like endometriosis, pelvic adhesions, blocked fallopian tubes, or ovarian cysts that can impact fertility.</p>
@@ -263,7 +262,7 @@
         </div>
 
         <div class="service-item" id="theraputic-hysterolaparoscopy">
-            <img src="assets/images/therapeutic-hysterolaparoscopy.jpg" alt="Therapeutic Hysterolaparoscopy">
+            <img src="assets/images/theratapichysterolaproscopy.png" alt="Therapeutic Hysterolaparoscopy">
             <div class="service-content">
                 <h3>Therapeutic Hysterolaparoscopy</h3>
                 <p>This procedure combines both diagnostic and corrective capabilities. If an issue is identified during the diagnostic phase (e.g., polyps during hysteroscopy or endometriosis during laparoscopy), the surgeon can often perform the necessary treatment immediately during the same procedure. This eliminates the need for a separate surgery, offering a more efficient and less invasive approach to fertility-enhancing treatments.</p>
@@ -271,7 +270,7 @@
         </div>
 
         <div class="service-item" id="fibriods">
-            <img src="assets/images/fibroids-treatment.jpg" alt="Laparoscopic Treatment of Fibroids, Endometriosis & Ovarian Cysts">
+            <img src="assets/images/fibristiclaproscopy.png" alt="Laparoscopic Treatment of Fibroids, Endometriosis & Ovarian Cysts">
             <div class="service-content">
                 <h3>Laparoscopic Treatment of Fibroids, Endometriosis & Ovarian Cysts</h3>
                 <p>We offer advanced laparoscopic surgery for conditions like uterine fibroids, endometriosis, ovarian cysts, pelvic inflammatory disease (PID), uterine septum, and issues from previous tubal ligation. These minimally invasive procedures allow for precise removal or correction of these conditions through small incisions, promoting faster recovery and significantly improving reproductive health and fertility prospects.</p>
@@ -283,7 +282,8 @@
     <footer class="footer-section">
       <div class="footer-container">
         <div class="footer-logo">
-          <img src="assets/images/logo.png" alt="Dr Poornima Fertility Centre Logo">
+          <!-- Updated footer logo to the new combined image -->
+          <img src="assets/images/poornima logo (2).png" alt="Dr Poornima Fertility Centre Logo">
           <p>Dr Poornima Fertility Centre is the Best Fertility Centre in Karimnagar offering advanced fertility treatments with personalized care, state-of-the-art technology, and a compassionate, patient-centered approach to success.</p>
           <div class="social-links">
               <a href="https://instagram.com/your-profile" target="_blank" class="social-icon">
@@ -363,6 +363,7 @@
                 <form class="popup-form">
                     <input type="text" name="fullName" placeholder="Your Full Name" required>
                     <input type="tel" name="mobileNumber" placeholder="Your Mobile Number" required>
+                    <input type="hidden" name="source" value="endoscopy Services Popup">
 
                     <div class="privacy">
                         <img src="assets/images/google.png" alt="Google Logo">
@@ -379,10 +380,6 @@
             </div>
         </div>
     </div>
-
-    <a href="https://wa.me/+919959583735" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
 
     <script>
         // Get the modal
@@ -436,8 +433,6 @@
                 event.preventDefault(); // Prevent default form submission
 
                 // Simulate an asynchronous submission (e.g., an AJAX call)
-                // In a real application, you would send data to a server here.
-                // For demonstration, we'll just use a setTimeout to simulate delay.
                 console.log("Form submitted. Simulating data send...");
 
                 // Simulate success after a short delay
@@ -449,6 +444,10 @@
             });
         }
     </script>
+
+    <a href="https://wa.me/yourwhatsappnumber" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script src="assets/script.js"></script>
 </body>

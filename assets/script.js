@@ -17,13 +17,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Show popup only if it hasn't been shown (or was reset after 24 hours)
-    // Added a check for consultationPopup existence before attempting to show
     if (consultationPopup && !localStorage.getItem(popupShownKey)) {
         setTimeout(function () {
-            // Re-check for popup existence just before showing in case DOM changed
             if (consultationPopup) {
                 consultationPopup.style.display = 'block';
-                // Set for the first time or after 24 hours reset
                 localStorage.setItem(popupShownKey, 'true');
                 localStorage.setItem(popupTimestampKey, Date.now().toString());
             }
@@ -33,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Close popup when 'x' button is clicked
     if (closeBtn) {
         closeBtn.addEventListener('click', function () {
-            if (consultationPopup) { // Ensure element exists
+            if (consultationPopup) {
                 consultationPopup.style.display = 'none';
             }
         });
@@ -55,95 +52,103 @@ document.addEventListener('DOMContentLoaded', function () {
         if (messageDiv) {
             messageDiv.textContent = message;
             messageDiv.style.color = isSuccess ? 'green' : 'red';
-            messageDiv.style.display = 'block'; // Ensure it's visible
+            messageDiv.style.display = 'block';
             messageDiv.style.fontWeight = 'bold';
             messageDiv.style.marginTop = '10px';
-            messageDiv.style.marginBottom = '10px'; // Add some spacing
+            messageDiv.style.marginBottom = '10px';
 
-            // Clear the message after a few seconds
             setTimeout(() => {
                 messageDiv.textContent = '';
                 messageDiv.style.display = 'none';
-            }, 5000); // Message visible for 5 seconds
+            }, 5000);
         }
     }
 
-    // Google Apps Script Web App URL (THIS HAS BEEN UPDATED WITH YOUR URL FROM 'thisone.JPG')
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxoqPw-9pHgJSqO9YWpZlHa0ohHGnqPtjH0lblVZDkoxDu0_uYU29hBMRyMRKddWpU/exec';
+    // Google Apps Script Web App URL (This is YOUR Confirmed, Working URL)
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxrUjW7Lqr1yz_5Fq1Jtks6uFU9WGtPqr3vYQ4PJ4kB565yY4Ljl3qqHQgzKvTsLVhW/exec';
 
+    // --- UPDATED FORM SUBMISSION LOGIC USING URLSearchParams ---
+    // This function now handles both forms by extracting data manually
+    // and sending it as 'application/x-www-form-urlencoded'
+    async function submitForm(formElement) {
+        const fullNameInput = formElement.querySelector('[name="fullName"]');
+        const mobileNumberInput = formElement.querySelector('[name="mobileNumber"]');
+        const sourceInput = formElement.querySelector('[name="source"]'); // The hidden input
 
-    // Handle form submission for the popup form
-    const popupForm = document.querySelector('.popup-form');
-    // consultationPopup is already defined at the top
+        // Get values and trim whitespace
+        const fullName = fullNameInput ? fullNameInput.value.trim() : '';
+        const mobileNumber = mobileNumberInput ? mobileNumberInput.value.trim() : '';
+        const source = sourceInput ? sourceInput.value.trim() : 'Unknown'; // Default if source not found
 
-    if (popupForm) {
-        popupForm.addEventListener('submit', async function (e) {
-            e.preventDefault(); // Prevent default form submission
+        // Basic client-side validation (optional, but good practice)
+        if (!fullName || !mobileNumber) {
+            showFormMessage(formElement, 'Please fill in your Full Name and Mobile Number.', false);
+            return; // Stop if validation fails
+        }
 
-            const formData = new FormData(popupForm);
-            formData.append('source', 'Popup Form'); // This will be `formData.source` in Apps Script
+        // Create URLSearchParams object from the form fields
+        // This is the key change to ensure data is correctly interpreted by Apps Script
+        const params = new URLSearchParams();
+        params.append('fullName', fullName);
+        params.append('mobileNumber', mobileNumber);
+        params.append('source', source);
 
-            try {
-                // IMPORTANT: With 'no-cors', the browser hides the actual response from the server.
-                // You CANNOT reliably read 'response.ok' or parse 'response.json()'.
-                // The frontend message will just indicate the request was SENT.
-                // You must rely on the Apps Script 'Executions' log and your Google Sheet
-                // to confirm if the data was successfully processed.
-                await fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // <--- CRITICAL: Allows request to bypass strict CORS on response
-                    body: formData,
-                });
+        try {
+            await fetch(WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Essential for cross-origin Apps Script deployments
+                headers: {
+                    // CRITICAL: Explicitly set the content type for URL-encoded data
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params.toString() // Send the URL-encoded string as the body
+            });
 
-                // Display the success message first
-                showFormMessage(popupForm, 'Your booking request has been sent. We will contact you shortly!', true);
-                popupForm.reset(); // Clear the form fields
+            // Handle success message and form reset based on which form was submitted
+            if (formElement.classList.contains('popup-form')) {
+                const popupFormSection = document.getElementById('consultation-form-section');
+                const popupSuccessMessage = document.getElementById('consultation-success-message');
 
-                // --- CRUCIAL CHANGE FOR POPUP ---
-                // Delay hiding the popup so the user can see the success message.
-                // The message itself is visible for 5000ms (5 seconds).
-                // We'll hide the popup slightly after that to ensure message cleanup.
+                // Hide the form and show the success message within the popup
+                if (popupFormSection) popupFormSection.style.display = 'none';
+                if (popupSuccessMessage) popupSuccessMessage.style.display = 'block';
+
+                formElement.reset(); // Clear the form fields
+
+                // Optional: Hide success message and close modal after a short delay
                 setTimeout(() => {
-                    if (consultationPopup) { // Ensure popup element still exists
-                        consultationPopup.style.display = 'none'; // Hide the popup
-                    }
-                }, 5500); // Hide popup after 5.5 seconds (gives message 0.5s buffer to clear)
-
-            } catch (error) {
-                console.error('Error submitting form (client-side):', error);
-                showFormMessage(popupForm, 'There was a problem sending your request. Please try again.', false);
-                // If there's an error, keep the popup visible for the user to see the error.
+                    if (popupSuccessMessage) popupSuccessMessage.style.display = 'none';
+                    if (consultationPopup) consultationPopup.style.display = 'none';
+                    if (popupFormSection) popupFormSection.style.display = 'block'; // Reset form section for next open
+                }, 5000); // Message visible for 5 seconds, then popup hides
+            } else { // This handles the main consultation form
+                showFormMessage(formElement, 'Your booking request has been sent. We will contact you shortly!', true);
+                formElement.reset(); // Clear the form fields
             }
+
+        } catch (error) {
+            console.error('Error submitting form (client-side fetch):', error);
+            showFormMessage(formElement, 'There was a problem sending your request. Please try again later.', false);
+        }
+    }
+
+    // Attach submit listener for the Popup Form
+    const popupForm = document.querySelector('.popup-form');
+    if (popupForm) {
+        popupForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent default browser form submission
+            submitForm(popupForm); // Call our universal submit function
         });
     }
 
-    // Handle form submission for the main consultation form (no change needed here)
+    // Attach submit listener for the Main Consultation Form
     const mainConsultationForm = document.querySelector('.consultation-form');
     if (mainConsultationForm) {
-        mainConsultationForm.addEventListener('submit', async function (e) {
-            e.preventDefault(); // Prevent default form submission
-
-            const formData = new FormData(mainConsultationForm);
-            formData.append('source', 'Main Consultation Form'); // This will be `formData.source` in Apps Script
-
-            try {
-                await fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // <--- CRITICAL: Allows request to bypass strict CORS on response
-                    body: formData,
-                });
-
-                // IMPORTANT: Same as above for 'no-cors' mode.
-                showFormMessage(mainConsultationForm, 'Your booking request has been sent. We will contact you shortly!', true);
-                mainConsultationForm.reset(); // Clear the form fields
-
-            } catch (error) {
-                console.error('Error submitting form (client-side):', error);
-                showFormMessage(mainConsultationForm, 'There was a problem sending your request. Please try again.', false);
-            }
+        mainConsultationForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent default browser form submission
+            submitForm(mainConsultationForm); // Call our universal submit function
         });
     }
-
 
     // === Testimonial Slider ===
     let currentTestimonial = 0;
@@ -152,47 +157,40 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevButton = document.querySelector('.prev-testimonial');
 
     function showTestimonial(index) {
-        if (testimonials.length === 0) return; // Prevent error if no testimonials
+        if (testimonials.length === 0) return;
         testimonials.forEach(t => t.classList.remove('active'));
         testimonials[index].classList.add('active');
     }
 
-    // Initialize the first testimonial
     if (testimonials.length > 0) {
         showTestimonial(currentTestimonial);
     }
-
     if (nextButton) {
         nextButton.addEventListener('click', function () {
             currentTestimonial = (currentTestimonial + 1) % testimonials.length;
             showTestimonial(currentTestimonial);
         });
     }
-
     if (prevButton) {
         prevButton.addEventListener('click', function () {
             currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
             showTestimonial(currentTestimonial);
         });
     }
-
-    // Automatic slide change for testimonials
-    if (testimonials.length > 1) { // Only auto-slide if there's more than one testimonial
+    if (testimonials.length > 1) {
         setInterval(function () {
             currentTestimonial = (currentTestimonial + 1) % testimonials.length;
             showTestimonial(currentTestimonial);
-        }, 5000); // Change every 5 seconds
+        }, 5000);
     }
 
     // === Gallery Filtering ===
     const filterButtons = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
-
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-
             const filterValue = button.getAttribute('data-filter');
             galleryItems.forEach(item => {
                 item.style.display = (filterValue === 'all' || item.classList.contains(filterValue)) ? 'block' : 'none';
@@ -207,46 +205,34 @@ document.addEventListener('DOMContentLoaded', function () {
     const rightArrow = document.querySelector(".arrow.right");
 
     function showSlide(index) {
-        if (slides.length === 0) return; // Prevent error if no slides
+        if (slides.length === 0) return;
         slides.forEach((slide, i) => {
             slide.classList.toggle("active", i === index);
         });
     }
-
     function changeSlide(direction) {
         currentSlide = (currentSlide + direction + slides.length) % slides.length;
         showSlide(currentSlide);
     }
-
-    // Initialize the first slide
     if (slides.length > 0) {
         showSlide(currentSlide);
     }
-
-    // Bind changeSlide(-1/1) to prev/next buttons
     if (leftArrow) {
         leftArrow.addEventListener('click', () => changeSlide(-1));
     }
-
     if (rightArrow) {
         rightArrow.addEventListener('click', () => changeSlide(1));
     }
-
-    // Automatic slide change for hero section
-    if (slides.length > 1) { // Only auto-slide if there's more than one slide
-        setInterval(() => changeSlide(1), 10000); // Change every 10 seconds
+    if (slides.length > 1) {
+        setInterval(() => changeSlide(1), 10000);
     }
-
 
     // === Search Functionality ===
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
     const searchResultsOverlay = document.getElementById('searchResults');
     const searchResultsContent = document.getElementById('searchResultsContent');
-
-    // Define your searchable treatments and their corresponding links/sections
     const treatmentKeywords = [
-        // Infertility Services
         { keyword: "infertility services", url: "infertility-services.html", description: "Comprehensive services for infertility diagnosis and treatment." },
         { keyword: "pre-marital assessment", url: "infertility-services.html#pre-martial-assesment", description: "Pre-marital fertility assessment and counselling for both partners." },
         { keyword: "ovulation induction", url: "infertility-services.html#ovulation-induction", description: "OI (Ovulation Induction) for enhancing egg release." },
@@ -256,7 +242,6 @@ document.addEventListener('DOMContentLoaded', function () {
         { keyword: "pre-conception counselling", url: "infertility-services.html#pre-conception-counselling", description: "Pre-conception counselling for future parents." },
         { keyword: "psychological counselling", url: "infertility-services.html#psychological-counselling", description: "Supportive psychological counselling services." },
         { keyword: "fertility evaluation", url: "infertility-services.html#fertility-evaluation", description: "Comprehensive fertility evaluation for individuals and couples." },
-        // IVF & Assisted Reproductive Technologies
         { keyword: "ivf", url: "ivf-services.html#ivf", description: "In Vitro Fertilization (IVF) and advanced ART." },
         { keyword: "in vitro fertilization", url: "ivf-services.html#ivf", description: "In Vitro Fertilization (IVF) and advanced ART." },
         { keyword: "icsi", url: "ivf-services.html#icsi", description: "Intracytoplasmic Sperm Injection (ICSI) for male factor infertility." },
@@ -444,5 +429,15 @@ document.addEventListener('DOMContentLoaded', function () {
         searchResultsOverlay.style.display = 'none';
         searchResultsOverlay.removeAttribute('aria-live'); // Ensure it's not live when hidden initially
     }
+
+    // === FAQ Accordion Logic (Moved from index.html) ===
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            question.classList.toggle('active');
+            answer.classList.toggle('active');
+        });
+    });
 
 }); // Final closing tag for document.addEventListener('DOMContentLoaded')
