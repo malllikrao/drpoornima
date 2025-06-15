@@ -8,24 +8,59 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* This style block should ideally be in assets/style.css */
+        /* Adjusted to account for sticky navbar + top bar height */
+        /* This will be managed dynamically by JS for mobile for scroll-padding-top if a mobile menu is open */
         html {
-            scroll-padding-top: 150px; /* Adjusted to account for sticky navbar + top bar height */
+            scroll-padding-top: 150px;
         }
     </style>
 </head>
 <body>
+    <!-- Top Bar: Now placed ABOVE the Navbar for better visual hierarchy and mobile stacking -->
+    <div class="top-bar">
+        <div class="top-bar-info-group">
+            <div class="top-bar-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Govt hospital Road, Karimnagar, Telangana 505001</span>
+            </div>
+            <div class="top-bar-info">
+                <i class="fas fa-envelope"></i>
+                <span>poornimafertility@gmail.com</span>
+            </div>
+            <div class="top-bar-info">
+                <i class="fas fa-phone"></i>
+                <span>+91-9490704277</span>
+            </div>
+        </div>
+        <div class="top-bar-right-group">
+            <div class="top-bar-social">
+                <a href="https://facebook.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/your-channel" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <a href="#" class="top-bar-appointment-btn" onclick="document.getElementById('consultation-popup').style.display='flex'; return false;">Appointment</a>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="logo">
             <img src="assets/images/poornima logo (2).png" onerror="this.onerror=null; this.src='https://placehold.co/100x50/cccccc/000000?text=Logo';" alt="Poornima Fertility Centre Logo" />
         </div>
+        <!-- Hamburger menu icon for mobile -->
+        <div class="hamburger-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="about-dr.html">About</a></li>
             <li class="dropdown">
-                <a href="#services">Services <i class="fas fa-caret-down"></i></a>
+                <a href="#services">Services <i class="fas fa-caret-down dropdown-arrow"></i></a>
                 <ul class="dropdown-content">
                     <li class="dropdown-submenu">
-                        <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right"></i></a>
+                        <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="infertility-services.html#pre-martial-assesment">Pre Martial Fertility Assesment And Counselling For Both Partners</a></li>
                             <li><a href="infertility-services.html#ovulation-induction">OI (Ovulation Induction)</a></li>
@@ -37,7 +72,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right"></i></a>
+                        <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="ivf-services.html#ivf">In Vitro Fertilization (IVF)</a></li>
                             <li><a href="ivf-services.html#intraplasmatic sperm injection">Intracytoplasmic Sperm Injection (ICSI)</a></li>
@@ -51,7 +86,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right"></i></a>
+                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="endoscopy-services.html#Diagnostic Hysteroscopy">Diagnostic Hysteroscopy</a></li>
                             <li><a href="endoscopy-services.html#Diagnostic Laparoscopy">Diagnostic Laparoscopy </a></li>
@@ -59,8 +94,8 @@
                             <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids,Pid,Herine Septum,Post Tubaltmic Cases,Endometriosis,Ovarian Cysts)</a></li>
                         </ul>
                     </li>
-                     <li class="dropdown-submenu">
-                        <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right"></i></a>
+                    <li class="dropdown-submenu">
+                        <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="male-infertility-services.html#semen-analysis">Semen Analysis</a></li>
                             <li><a href="male-infertility-services.html#dfi">DNA Fragmentation Index (DFI)</a></li>
@@ -74,7 +109,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right"></i></a>
+                        <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="advanced-ivf-services.html#blastocyst-culture">Blastocyst Culture</a></li>
                             <li><a href="advanced-ivf-services.html#era">Endometrial Receptivity Array (ERA)</a></li>
@@ -85,8 +120,8 @@
                             <li><a href="advanced-ivf-services.html#prp-stem-cell">Stem Cell Therapy</a></li>
                         </ul>
                     </li>
-                     <li class="dropdown-submenu">
-                        <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right"></i></a>
+                    <li class="dropdown-submenu">
+                        <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="fertility-preservation-services.html#cancer-patients">Preservation for Cancer Patients</a></li>
                             <li><a href="fertility-preservation-services.html#Rheumatology">Rhuematology And SLE(Lupus) Patients</a></li>
@@ -95,8 +130,8 @@
                             <li><a href="fertility-preservation-services.html#Genetic conditions">Genetic Conditions</a></li>
                         </ul>
                     </li>
-                     <li class="dropdown-submenu">
-                        <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right"></i></a>
+                    <li class="dropdown-submenu">
+                        <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="third-party-reproduction-services.html#donor-egg">Donor Egg</a></li>
                             <li><a href="third-party-reproduction-services.html#donor-sperm">Donor Sperm</a></li>
@@ -118,30 +153,6 @@
             </li>
         </ul>
     </nav>
-
-    <!-- Top Bar is now below the Navbar -->
-    <div class="top-bar">
-        <div class="top-bar-info">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Govt hospital Road,Karimnagar, Telangana 505001</span>
-        </div>
-        <div class="top-bar-info">
-            <i class="fas fa-envelope"></i>
-            <span>poornimafertility@gmail.com</span>
-        </div>
-        <div class="top-bar-info">
-            <i class="fas fa-phone"></i>
-            <span>+91-9490704277</span>
-        </div>
-        <div class="top-bar-social">
-            <a href="https://facebook.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="https://youtube.com/your-channel" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
-            <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-        <a href="#" class="top-bar-appointment-btn" onclick="document.getElementById('consultation-popup').style.display='flex'; return false;">Appointment</a>
-    </div>
 
     <section class="hero" id="home">
         <div class="slider">
@@ -537,20 +548,22 @@
                     <img src="assets/images/google.png" onerror="this.onerror=null; this.src='https://placehold.co/20x20/cccccc/000000?text=G';" alt="Google Logo">
                     <span>We respect your privacy – your data is secure with us.</span>
                 </div>
-                <button type="submit" class="popup-btn submit-btn">Book Free Consultation</button>
+                <button type="submit" class="submit-btn">Get Free Consultation</button>
             </form>
-        </div>
-
-        <div id="consultation-success-message" class="consultation-success-message" style="display: none;">
-            <p>Thank you for reaching out! We've received your request and will get back to you within 24 hours.</p>
+            <div class="consultation-success-message" style="display: none;">
+                <i class="fas fa-check-circle"></i> Thank you! Your consultation request has been received.
+            </div>
         </div>
     </div>
 </div>
 
-<a href="https://wa.me/+919959583735" class="whatsapp-float" target="_blank">
+<!-- WhatsApp Float Button -->
+<a href="https://wa.me/919490704277" class="whatsapp-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
 
+<!-- Link to your JavaScript file -->
 <script src="assets/script.js"></script>
+
 </body>
 </html>

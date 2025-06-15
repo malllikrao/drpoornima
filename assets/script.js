@@ -1,4 +1,105 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // === Hamburger Menu and Mobile Navigation Logic ===
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+    const html = document.documentElement; // For scroll-padding-top
+
+    if (hamburgerMenu && navLinks) {
+        hamburgerMenu.addEventListener('click', function () {
+            navLinks.classList.toggle('active');
+            hamburgerMenu.querySelector('i').classList.toggle('fa-bars');
+            hamburgerMenu.querySelector('i').classList.toggle('fa-times'); // Change icon to 'X'
+
+            // Prevent body scrolling when mobile menu is open
+            if (navLinks.classList.contains('active')) {
+                body.style.overflowY = 'hidden';
+                // Dynamically adjust scroll-padding-top for the fixed header
+                // Calculate total height of top-bar and navbar for scroll-padding-top
+                const topBarHeight = document.querySelector('.top-bar')?.offsetHeight || 0;
+                const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+                html.style.scrollPaddingTop = `${topBarHeight + navbarHeight}px`;
+
+            } else {
+                body.style.overflowY = ''; // Restore scrolling
+                html.style.scrollPaddingTop = '150px'; // Revert to default for desktop (or adjust as needed)
+            }
+        });
+    }
+
+    // === Mobile Dropdown/Submenu Toggle Logic ===
+    // This makes the dropdowns and submenus toggle on click/tap on mobile, instead of hover
+    const dropdowns = document.querySelectorAll('.nav-links .dropdown > a');
+    const submenuDropdowns = document.querySelectorAll('.nav-links .dropdown-submenu > a');
+
+    dropdowns.forEach(dropdownLink => {
+        dropdownLink.addEventListener('click', function (event) {
+            // Only activate this logic on smaller screens where the mobile menu is active
+            // and the display property of .nav-links is not 'flex' (for desktop)
+            const navLinksComputedStyle = window.getComputedStyle(navLinks);
+            if (navLinksComputedStyle.display === 'flex' && window.innerWidth > 992) {
+                // If navLinks is displayed as flex AND it's a large screen, let CSS hover handle it.
+                // Do nothing here, allow default behavior (if it has an href)
+                return;
+            }
+
+            const parentLi = this.closest('li.dropdown');
+            if (parentLi) {
+                event.preventDefault(); // Prevent default link navigation for the main dropdown
+                // Toggle 'active' class on the parent <li> to show/hide its content
+                parentLi.classList.toggle('active');
+
+                // Close other open dropdowns at the same level
+                document.querySelectorAll('.nav-links .dropdown.active').forEach(openDropdown => {
+                    if (openDropdown !== parentLi) {
+                        openDropdown.classList.remove('active');
+                        // Also close any active submenus within this closed dropdown
+                        openDropdown.querySelectorAll('.submenu-content.active').forEach(activeSub => {
+                            activeSub.classList.remove('active');
+                            activeSub.closest('.dropdown-submenu')?.classList.remove('active');
+                        });
+                    }
+                });
+
+                // For the dropdown arrow: find the arrow element inside this dropdownLink and toggle its rotation
+                const arrow = this.querySelector('.dropdown-arrow');
+                if (arrow) {
+                    arrow.style.transform = parentLi.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                }
+            }
+        });
+    });
+
+    submenuDropdowns.forEach(submenuLink => {
+        submenuLink.addEventListener('click', function (event) {
+            // Similar check for mobile vs desktop behavior
+            const navLinksComputedStyle = window.getComputedStyle(navLinks);
+            if (navLinksComputedStyle.display === 'flex' && window.innerWidth > 992) {
+                return;
+            }
+
+            const parentLi = this.closest('li.dropdown-submenu');
+            if (parentLi) {
+                event.preventDefault(); // Prevent default link navigation for the submenu link
+                parentLi.classList.toggle('active');
+
+                // Close other open submenus at the same level within this parent dropdown
+                parentLi.closest('.dropdown-content').querySelectorAll('.dropdown-submenu.active').forEach(openSubmenu => {
+                    if (openSubmenu !== parentLi) {
+                        openSubmenu.classList.remove('active');
+                    }
+                });
+
+                // For the submenu arrow: find the arrow element inside this submenuLink and toggle its rotation
+                const arrow = this.querySelector('.submenu-arrow');
+                if (arrow) {
+                    arrow.style.transform = parentLi.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+                }
+            }
+        });
+    });
+
+
     // === Popup Modal Logic ===
     const consultationPopup = document.getElementById('consultation-popup');
     const closeBtn = document.querySelector('.close-btn');
@@ -20,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (consultationPopup && !localStorage.getItem(popupShownKey)) {
         setTimeout(function () {
             if (consultationPopup) {
-                consultationPopup.style.display = 'block';
+                consultationPopup.style.display = 'flex'; // Use flex to center with updated CSS
                 localStorage.setItem(popupShownKey, 'true');
                 localStorage.setItem(popupTimestampKey, Date.now().toString());
             }
@@ -32,6 +133,11 @@ document.addEventListener('DOMContentLoaded', function () {
         closeBtn.addEventListener('click', function () {
             if (consultationPopup) {
                 consultationPopup.style.display = 'none';
+                // Ensure form section is visible if it was hidden by success message
+                const popupFormSection = document.getElementById('consultation-form-section');
+                if (popupFormSection) popupFormSection.style.display = 'block';
+                const popupSuccessMessage = document.getElementById('consultation-success-message');
+                if (popupSuccessMessage) popupSuccessMessage.style.display = 'none';
             }
         });
     }
@@ -39,8 +145,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // Close popup when clicking outside the modal content
     if (consultationPopup) {
         window.addEventListener('click', function (event) {
+            // Check if the click target is the overlay itself, not its children
             if (event.target === consultationPopup) {
                 consultationPopup.style.display = 'none';
+                // Ensure form section is visible if it was hidden by success message
+                const popupFormSection = document.getElementById('consultation-form-section');
+                if (popupFormSection) popupFormSection.style.display = 'block';
+                const popupSuccessMessage = document.getElementById('consultation-success-message');
+                if (popupSuccessMessage) popupSuccessMessage.style.display = 'none';
             }
         });
     }
@@ -49,7 +161,38 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to display messages within the form
     function showFormMessage(formElement, message, isSuccess) {
         const messageDiv = formElement.querySelector('.form-message');
-        if (messageDiv) {
+        // For popup form, use the specific success message div
+        const popupSuccessDiv = document.getElementById('consultation-success-message');
+
+        if (formElement.classList.contains('popup-form') && popupSuccessDiv) {
+            // If it's the popup form and successful, show the dedicated success message
+            if (isSuccess) {
+                const popupFormSection = document.getElementById('consultation-form-section');
+                if (popupFormSection) popupFormSection.style.display = 'none';
+                popupSuccessDiv.style.display = 'block';
+                popupSuccessDiv.textContent = message; // Update message content
+
+                setTimeout(() => {
+                    popupSuccessDiv.style.display = 'none';
+                    if (consultationPopup) consultationPopup.style.display = 'none';
+                    if (popupFormSection) popupFormSection.style.display = 'block'; // Reset form section for next open
+                }, 5000);
+            } else if (messageDiv) {
+                // If it's the popup form but an error, use the general messageDiv for error
+                messageDiv.textContent = message;
+                messageDiv.style.color = 'red';
+                messageDiv.style.display = 'block';
+                messageDiv.style.fontWeight = 'bold';
+                messageDiv.style.marginTop = '10px';
+                messageDiv.style.marginBottom = '10px';
+
+                setTimeout(() => {
+                    messageDiv.textContent = '';
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }
+        } else if (messageDiv) {
+            // For other forms (like the main consultation form)
             messageDiv.textContent = message;
             messageDiv.style.color = isSuccess ? 'green' : 'red';
             messageDiv.style.display = 'block';
@@ -106,25 +249,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Handle success message and form reset based on which form was submitted
             if (formElement.classList.contains('popup-form')) {
-                const popupFormSection = document.getElementById('consultation-form-section');
-                const popupSuccessMessage = document.getElementById('consultation-success-message');
-
-                // Hide the form and show the success message within the popup
-                if (popupFormSection) popupFormSection.style.display = 'none';
-                if (popupSuccessMessage) popupSuccessMessage.style.display = 'block';
-
-                formElement.reset(); // Clear the form fields
-
-                // Optional: Hide success message and close modal after a short delay
-                setTimeout(() => {
-                    if (popupSuccessMessage) popupSuccessMessage.style.display = 'none';
-                    if (consultationPopup) consultationPopup.style.display = 'none';
-                    if (popupFormSection) popupFormSection.style.display = 'block'; // Reset form section for next open
-                }, 5000); // Message visible for 5 seconds, then popup hides
+                // Now handled by showFormMessage function
+                showFormMessage(formElement, 'Thank you! Your consultation request has been received.', true);
             } else { // This handles the main consultation form
                 showFormMessage(formElement, 'Your booking request has been sent. We will contact you shortly!', true);
-                formElement.reset(); // Clear the form fields
             }
+            formElement.reset(); // Clear the form fields for both cases
 
         } catch (error) {
             console.error('Error submitting form (client-side fetch):', error);
@@ -193,6 +323,7 @@ document.addEventListener('DOMContentLoaded', function () {
             button.classList.add('active');
             const filterValue = button.getAttribute('data-filter');
             galleryItems.forEach(item => {
+                // Using flex for gallery grid, so toggle display based on filter
                 item.style.display = (filterValue === 'all' || item.classList.contains(filterValue)) ? 'block' : 'none';
             });
         });
@@ -239,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { keyword: "iui", url: "infertility-services.html#iui", description: "Intrauterine Insemination (IUI) procedures." },
         { keyword: "intrauterine insemination", url: "infertility-services.html#iui", description: "Intrauterine Insemination (IUI) procedures." },
         { keyword: "unexplained infertility", url: "infertility-services.html#unexplained-fertility", description: "Treatment for unexplained infertility." },
-        { keyword: "pre-conception counselling", url: "infertility-services.html#pre-conception-counselling", description: "Pre-conception counselling for future parents." },
+        { keyword: "pre-conception counselling", url: "infertility-services.html#pre-conception-counselling", description: "Pre-conception Counselling for future parents." },
         { keyword: "psychological counselling", url: "infertility-services.html#psychological-counselling", description: "Supportive psychological counselling services." },
         { keyword: "fertility evaluation", url: "infertility-services.html#fertility-evaluation", description: "Comprehensive fertility evaluation for individuals and couples." },
         { keyword: "ivf", url: "ivf-services.html#ivf", description: "In Vitro Fertilization (IVF) and advanced ART." },
@@ -255,9 +386,9 @@ document.addEventListener('DOMContentLoaded', function () {
         { keyword: "single embryo transfer", url: "ivf-services.html#single-embryo-transfer", description: "Single Embryo Transfer for reduced multiple pregnancy risks." },
         // Endoscopy Services
         { keyword: "endoscopy services", url: "endoscopy-services.html", description: "Advanced endoscopic procedures for fertility." },
-        { keyword: "diagnostic hysteroscopy", url: "endoscopy-services.html#diagnostic-hysteroscopy", description: "Diagnostic Hysteroscopy for uterine conditions." },
-        { keyword: "diagnostic laparoscopy", url: "endoscopy-services.html#diagnostic-laparoscopy", description: "Diagnostic Laparoscopy for pelvic conditions." },
-        { keyword: "theraputic hysterolaparoscopy", url: "endoscopy-services.html#theraputic-hysterolaparoscopy", description: "Therapeutic Hysterolaparoscopy for surgical interventions." },
+        { keyword: "diagnostic hysteroscopy", url: "endoscopy-services.html#Diagnostic Hysteroscopy", description: "Diagnostic Hysteroscopy for uterine conditions." },
+        { keyword: "diagnostic laparoscopy", url: "endoscopy-services.html#Diagnostic Laparoscopy", description: "Diagnostic Laparoscopy for pelvic conditions." },
+        { keyword: "theraputic hysterolaparoscopy", url: "endoscopy-services.html#Theratapic Hysterolaprososcopy", description: "Therapeutic Hysterolaparoscopy for surgical interventions." },
         { keyword: "fibroids treatment", url: "endoscopy-services.html#fibriods", description: "Treatment for uterine fibroids." },
         { keyword: "pid treatment", url: "endoscopy-services.html#fibriods", description: "Treatment for Pelvic Inflammatory Disease (PID)." },
         { keyword: "hernia septum treatment", url: "endoscopy-services.html#fibriods", description: "Treatment for uterine septum." },
@@ -270,7 +401,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { keyword: "dna fragmentation index", url: "male-infertility-services.html#dfi", description: "DNA Fragmentation Index (DFI) testing." },
         { keyword: "low sperm", url: "male-infertility-services.html#low-sperm", description: "Treatment for low sperm count." },
         { keyword: "low sperm motility", url: "male-infertility-services.html#low-sperm-evaluation", description: "Evaluation and treatment for low sperm motility and morphology." },
-        { keyword: "azoospermia evaluation", url: "male-infertility-services.html#azoospermia-evaluation", description: "Evaluation for azoospermia (absence of sperm)." },
+        { keyword: "azoospermia evaluation", url: "male-infertility-services.html#Azoospermia evaluation", description: "Evaluation for azoospermia (absence of sperm)." },
         { keyword: "macs", url: "male-infertility-services.html#macs", description: "Microfluidics and Magnetic Activated Cell Sorting (MACS) for sperm selection." },
         { keyword: "microfluidics activated cell sorting", url: "male-infertility-services.html#macs", description: "Microfluidics and Magnetic Activated Cell Sorting (MACS) for sperm selection." },
         { keyword: "tesa", url: "male-infertility-services.html#tesa", description: "Testicular Sperm Aspiration (TESA)." },
@@ -293,12 +424,12 @@ document.addEventListener('DOMContentLoaded', function () {
         // Fertility Preservation
         { keyword: "fertility preservation", url: "fertility-preservation-services.html", description: "Options to preserve fertility for the future." },
         { keyword: "cancer patients", url: "fertility-preservation-services.html#cancer-patients", description: "Fertility preservation for cancer patients." },
-        { keyword: "rheumatology patients", url: "fertility-preservation-services.html#rheumatology", description: "Fertility preservation for Rheumatology and SLE (Lupus) patients." },
-        { keyword: "sle patients", url: "fertility-preservation-services.html#rheumatology", description: "Fertility preservation for SLE (Lupus) patients." },
-        { keyword: "industrial workers", url: "fertility-preservation-services.html#industrial", description: "Fertility preservation for industrial and coal mine workers." },
-        { keyword: "coal mine workers", url: "fertility-preservation-services.html#industrial", description: "Fertility preservation for industrial and coal mine workers." },
+        { keyword: "rheumatology patients", url: "fertility-preservation-services.html#Rheumatology", description: "Fertility preservation for Rheumatology and SLE (Lupus) patients." },
+        { keyword: "sle patients", url: "fertility-preservation-services.html#Rheumatology", description: "Fertility preservation for SLE (Lupus) patients." },
+        { keyword: "industrial workers", url: "fertility-preservation-services.html#Industrial", description: "Fertility preservation for industrial and coal mine workers." },
+        { keyword: "coal mine workers", url: "fertility-preservation-services.html#Industrial", description: "Fertility preservation for industrial and coal mine workers." },
         { keyword: "delayed child bearing", url: "fertility-preservation-services.html#personal-reasons", description: "Fertility preservation for personal reasons (delayed childbearing)." },
-        { keyword: "genetic conditions preservation", url: "fertility-preservation-services.html#genetic-conditions", description: "Fertility preservation for individuals with genetic conditions." },
+        { keyword: "genetic conditions preservation", url: "fertility-preservation-services.html#Genetic conditions", description: "Fertility preservation for individuals with genetic conditions." },
         // Third-Party Reproduction
         { keyword: "third-party reproduction", url: "third-party-reproduction-services.html", description: "Options involving third-party reproduction." },
         { keyword: "donor egg", url: "third-party-reproduction-services.html#donor-egg", description: "Donor egg programs." },

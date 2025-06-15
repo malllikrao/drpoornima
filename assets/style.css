@@ -8,56 +8,144 @@
 body {
     font-family: "Segoe UI", sans-serif;
     scroll-behavior: smooth;
+    /* Prevent horizontal scroll on mobile due to overflow */
+    overflow-x: hidden;
 }
 
 html {
-    scroll-padding-top: 80px; /* Adjust this value based on your fixed header's height */
+    /* Adjusted to account for sticky navbar and top bar. This might be dynamically changed by JS for mobile menu. */
+    scroll-padding-top: 150px;
+}
+
+/* Top Bar Styles - Adjusted for Mobile Responsiveness */
+.top-bar {
+    background-color: #e91e63;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Allow items to wrap on smaller screens */
+    flex-wrap: wrap;
+    font-size: 0.9em;
+    z-index: 999;
+}
+
+/* Grouping info elements for better mobile stacking */
+.top-bar-info-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow info items to wrap */
+    justify-content: flex-start;
+    flex-grow: 1; /* Allow this group to take available space */
+}
+
+.top-bar-right-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap; /* Keep social and appointment button together on one line if possible */
+    flex-shrink: 0; /* Prevent this group from shrinking too much */
+}
+
+.top-bar-info {
+    display: flex;
+    align-items: center;
+    margin: 5px 15px;
+    white-space: nowrap; /* Prevent text in info items from wrapping */
+}
+
+.top-bar-info i {
+    margin-right: 8px;
+    color: #fff;
+}
+
+.top-bar-social {
+    display: flex;
+    align-items: center;
+    margin: 5px 15px;
+    flex-shrink: 0; /* Prevent social icons from shrinking */
+}
+
+.top-bar-social .social-icon {
+    color: #fff;
+    font-size: 1.2em;
+    margin: 0 8px;
+    transition: color 0.3s ease;
+}
+
+.top-bar-social .social-icon:hover {
+    color: #f0f0f0;
+}
+
+.top-bar-appointment-btn {
+    background-color: #2e7d32;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; /* Prevent button text from wrapping */
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.top-bar-appointment-btn:hover {
+    background-color: #1e5a21;
 }
 
 /* Navbar Styles */
 .navbar {
     display: flex;
-    justify-content: space-between; /* Distribute space between logo and the rest */
+    justify-content: space-between;
     align-items: center;
     background: #fff;
     padding: 15px 30px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
-    z-index: 1000; /* Base z-index for the entire navbar */
+    z-index: 1000;
 }
 
 .logo {
     display: flex;
     align-items: center;
     margin-right: 15px;
-    flex-shrink: 0; /* Prevent logo from shrinking */
-    /* You might need to adjust width/height for the div or img below */
+    flex-shrink: 0;
 }
 
 .logo img {
-    /* Set a max-height or height to control the overall size of the combined logo image */
-    height: 100px; /* Adjust this value as needed to fit your design */
-    width: auto; /* Maintain aspect ratio */
-    display: block; /* Ensures no extra space below the image */
+    height: 100px;
+    width: auto;
+    display: block;
+}
+
+/* Hamburger Menu Icon (Hidden on Desktop) */
+.hamburger-menu {
+    display: none; /* Hidden by default for desktop */
+    font-size: 1.8rem;
+    color: #e91e63;
+    cursor: pointer;
+    margin-left: auto; /* Push it to the right on mobile */
+    padding: 5px;
+    z-index: 1010; /* Ensure it's above other elements in navbar on mobile */
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 20px; /* Increased gap for better spacing between nav items */
+    gap: 20px;
     list-style: none;
     padding: 0;
     margin: 0;
-    flex-grow: 1; /* Allow nav links to take up available space */
-    justify-content: flex-end; /* Push nav links content to the right */
-    flex-wrap: nowrap; /* CRUCIAL: Force main nav items to stay on a single line */
-    flex-shrink: 1; /* Allow nav links container to shrink if needed */
-    min-width: 0; /* Allow the flex container to shrink below its content size */
+    flex-grow: 1;
+    justify-content: flex-end;
+    /* CRUCIAL: Allow main nav items to wrap on a new line on smaller screens if they don't fit */
+    flex-wrap: nowrap;
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 .nav-links li {
-    position: relative; /* Essential for positioning dropdowns and search results */
+    position: relative;
 }
 
 .nav-links a {
@@ -65,7 +153,7 @@ html {
     color: #333;
     font-weight: 500;
     transition: color 0.3s ease;
-    white-space: nowrap; /* CRUCIAL: Force text inside main nav links to stay on a single line */
+    white-space: nowrap; /* Keep text on one line for desktop */
 }
 
 .nav-links a:hover {
@@ -74,18 +162,18 @@ html {
 
 /* Search Field Styles */
 .search-container {
-    position: relative; /* Essential for positioning the results overlay */
+    position: relative;
     display: flex;
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 20px;
-    overflow: visible; /* Important: Ensures results overlay isn't clipped by search container */
+    overflow: visible;
     background-color: #f0f0f0;
-    z-index: 1070; /* HIGHER than dropdowns (1060), and the overall navbar (1000) */
-    flex-grow: 0; /* Let nav-links grow more */
-    flex-shrink: 1; /* Allow search bar to shrink more aggressively */
-    min-width: 100px; /* Further reduced min-width to allow more shrinking */
-    max-width: 200px; /* Slightly reduced max-width for better control */
+    z-index: 1070;
+    flex-grow: 0;
+    flex-shrink: 1;
+    min-width: 100px;
+    max-width: 200px;
 }
 
 #searchInput {
@@ -93,7 +181,7 @@ html {
     padding: 8px 15px;
     outline: none;
     font-size: 0.9rem;
-    width: 100%; /* Ensure input fills its container */
+    width: 100%;
     background-color: transparent;
 }
 
@@ -104,8 +192,8 @@ html {
     padding: 8px 12px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    border-radius: 0 20px 20px 0; /* Only right side rounded */
-    flex-shrink: 0; /* Prevent button part from shrinking */
+    border-radius: 0 20px 20px 0;
+    flex-shrink: 0;
 }
 
 #searchButton:hover {
@@ -114,20 +202,20 @@ html {
 
 /* Search Results Overlay Styles */
 .search-results-overlay {
-    display: none; /* Hidden by default */
-    position: absolute; /* Position relative to .search-container */
-    top: 100%; /* Position directly below the search input/button */
+    display: none;
+    position: absolute;
+    top: 100%;
     left: 0;
-    width: 100%; /* Match the width of the search container */
-    max-width: 400px; /* Adjust maximum width for results if needed */
+    width: 100%;
+    max-width: 400px;
     background-color: #fff;
     border: 1px solid #ffc0cb;
-    border-top: none; /* Remove top border as it's below the input */
-    border-radius: 0 0 8px 8px; /* Rounded corners only at the bottom */
+    border-top: none;
+    border-radius: 0 0 8px 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    z-index: 1080; /* HIGHER than search container itself to ensure it's always on top of the search bar boundary */
-    overflow-y: auto; /* Enable scrolling if results are too long */
-    max-height: 300px; /* Max height before scrolling */
+    z-index: 1080;
+    overflow-y: auto;
+    max-height: 300px;
 }
 
 .search-results-content {
@@ -136,7 +224,7 @@ html {
 }
 
 .search-results-overlay h2 {
-    display: none; /* Hide the "Search Results" title here, as it's an overlay */
+    display: none;
 }
 
 .search-result-item {
@@ -160,7 +248,7 @@ html {
 }
 
 .search-result-item h3 a {
-    color: #e91e63; /* Pink for link title */
+    color: #e91e63;
     text-decoration: none;
     font-weight: 600;
 }
@@ -175,9 +263,9 @@ html {
     margin-bottom: 8px;
 }
 
-.search-result-item .learn-more-link { /* A new class for "Learn More" */
+.search-result-item .learn-more-link {
     display: inline-block;
-    background-color: #2e7d32; /* Green color for the button */
+    background-color: #2e7d32;
     color: white;
     padding: 5px 10px;
     border-radius: 15px;
@@ -197,46 +285,57 @@ html {
     padding: 20px;
 }
 
-
 /* Dropdown styles */
-.dropdown .fas {
-    margin-left: 5px; /* Space between text and icon */
+.dropdown .dropdown-arrow,
+.dropdown-submenu .submenu-arrow {
+    margin-left: 5px;
     font-size: 0.8em;
+    transition: transform 0.3s ease; /* Add transition for smooth rotation */
+}
+
+/* Rotate dropdown arrow when dropdown is active/open */
+.dropdown.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Rotate submenu arrow when submenu is active/open */
+.dropdown-submenu.active .submenu-arrow {
+    transform: rotate(90deg);
 }
 
 .dropdown-content {
-    display: none; /* Hide dropdown by default */
+    display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 220px; /* Slightly increased min-width */
-    max-width: 320px; /* Increased max-width to give more room before wrapping */
+    min-width: 220px;
+    max-width: 320px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1060; /* Adjusted: Lower than search overlay, higher than default */
+    z-index: 1060;
     list-style: none;
     padding: 10px 0;
     margin: 0;
     border-radius: 5px;
-    top: 100%; /* Position below the parent link */
-    left: 0; /* Aligns to the left edge of the parent li */
-    right: auto; /* Ensures it doesn't push off the right if left is set */
+    top: 100%;
+    left: 0;
+    right: auto;
 }
 
 .dropdown-content li {
-    padding: 0; /* Remove padding from list items */
-    margin: 0; /* Remove margin from list items */
-    position: relative; /* Needed for submenu positioning */
+    padding: 0;
+    margin: 0;
+    position: relative;
 }
 
 .dropdown-content a {
     color: #333;
     padding: 12px 16px;
     text-decoration: none;
-    display: block; /* Make links block level for padding */
+    display: block;
     text-align: left;
     transition: background-color 0.3s ease;
-    white-space: normal; /* Allow text to wrap within the dropdown link */
-    word-wrap: break-word; /* Ensures long words break if needed */
-    overflow-wrap: break-word; /* Modern equivalent */
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .dropdown-content a:hover {
@@ -244,35 +343,30 @@ html {
     color: white;
 }
 
-/* Show the dropdown menu on hover */
+/* Show the dropdown menu on hover for desktop */
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
 /* Nested Dropdown (Submenu) styles */
-.dropdown-submenu .fas {
-    float: right; /* Align arrow to the right */
-    margin-top: 3px; /* Adjust vertical alignment */
-}
-
 .submenu-content {
-    display: none; /* Hide submenu by default */
+    display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 220px; /* Slightly increased min-width */
-    max-width: 320px; /* Increased max-width to give more room before wrapping */
+    min-width: 220px;
+    max-width: 320px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1065; /* Adjusted: Higher than parent dropdown, lower than search overlay */
+    z-index: 1065;
     list-style: none;
     padding: 10px 0;
     margin: 0;
     border-radius: 5px;
-    top: 0; /* Align top of submenu with parent item */
-    left: 100%; /* Opens to the right of the parent */
-    white-space: normal; /* Already there, but confirm it's applied */
-    max-height: 250px; /* Control height before scrollbar */
-    overflow-y: auto; /* Enable scrolling for many items */
-    -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+    top: 0;
+    left: 100%;
+    white-space: normal;
+    max-height: 250px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .submenu-content li {
@@ -287,9 +381,9 @@ html {
     display: block;
     text-align: left;
     transition: background-color 0.3s ease;
-    white-space: normal; /* Allow text to wrap within the submenu link */
-    word-wrap: break-word; /* Ensures long words break if needed */
-    overflow-wrap: break-word; /* Modern equivalent */
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .submenu-content a:hover {
@@ -297,7 +391,7 @@ html {
     color: white;
 }
 
-/* Show the submenu on hover */
+/* Show the submenu on hover for desktop */
 .dropdown-submenu:hover .submenu-content {
     display: block;
 }
@@ -400,13 +494,24 @@ html {
 
 /* Responsive Styles for Hero */
 @media (max-width: 768px) {
+    .content {
+        top: 25%; /* Adjust position for smaller screens */
+        left: 5%;
+        right: 5%;
+        max-width: 90%;
+        text-align: center; /* Center text on smaller screens */
+    }
     .content h1 {
         font-size: 2rem;
     }
     .content p {
         font-size: 1rem;
     }
+    .hero {
+        height: 60vh; /* Reduce hero height on mobile */
+    }
 }
+
 
 /* Doctor Info Section / About Section */
 .about-section {
@@ -469,17 +574,33 @@ html {
     .about-section {
         flex-direction: column;
         text-align: center;
+        padding: 40px 20px; /* Adjust padding for mobile */
     }
 
     .about-image {
         margin-right: 0;
         margin-bottom: 30px;
-        width: 80%;
-        max-width: none;
+        width: 80%; /* Make image smaller relative to screen */
+        max-width: 300px; /* Constrain max width for better appearance */
+        margin-left: auto;
+        margin-right: auto; /* Center image */
     }
 
     .about-content {
-        text-align: left;
+        text-align: center; /* Center content on mobile */
+    }
+
+    .about-content h2 {
+        font-size: 2rem; /* Reduce heading size */
+    }
+
+    .about-content p {
+        font-size: 1rem; /* Reduce paragraph size */
+    }
+
+    .more-info-btn {
+        font-size: 1rem; /* Adjust button font size */
+        padding: 12px 24px; /* Adjust button padding */
     }
 }
 
@@ -498,17 +619,21 @@ html {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 30px;
+    /* Allow at least one column on very small screens, and up to 4 on larger */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px; /* Reduced gap slightly for mobile compactness */
     justify-items: center;
+    max-width: 1200px; /* Constrain grid width on very large screens */
+    margin: 0 auto;
 }
 
 .service-card {
     background: #ffffff;
     border: 2px solid #ffc0cb;
     border-radius: 12px;
-    padding: 20px;
-    width: 180px;
+    padding: 15px; /* Reduced padding slightly */
+    width: 100%; /* Make card take full available width in its grid cell */
+    max-width: 180px; /* Keep max-width same */
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     transition: transform 0.3s;
 }
@@ -522,12 +647,12 @@ html {
     display: block;
     text-decoration: none;
     color: inherit;
-    padding: 20px;
+    padding: 10px; /* Adjusted padding within the card link */
 }
 
 .service-card img {
-    width: 70px;
-    height: 70px;
+    width: 60px; /* Slightly smaller icon size */
+    height: 60px;
     object-fit: contain;
     margin-bottom: 10px;
     filter: hue-rotate(140deg);
@@ -535,6 +660,7 @@ html {
 .service-card p {
     color: #444;
     font-weight: 500;
+    font-size: 0.95rem; /* Slightly smaller font for compactness */
 }
 
 .services-btn {
@@ -565,24 +691,26 @@ html {
 .why-choose-us h2 {
     color: #e91e63;
     font-size: 28px;
+    margin-bottom: 15px; /* Reduced margin */
 }
 
 .why-choose-us p {
     max-width: 700px;
     margin: 10px auto 30px;
     color: #444;
+    font-size: 0.95rem; /* Slightly smaller font */
 }
 
 .features {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 15px; /* Reduced gap for compactness */
 }
 
 .feature-box {
-    width: 180px;
-    padding: 20px;
+    width: 150px; /* Slightly smaller width for mobile */
+    padding: 15px; /* Reduced padding */
     background: #f9f9f9;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
@@ -595,12 +723,13 @@ html {
 }
 
 .feature-box img {
-    width: 60px;
-    margin-bottom: 10px;
+    width: 50px; /* Slightly smaller icon */
+    height: 50px;
+    margin-bottom: 8px; /* Reduced margin */
 }
 
 .feature-box p {
-    font-size: 14px;
+    font-size: 0.85rem; /* Slightly smaller font */
     color: #333;
 }
 
@@ -719,7 +848,7 @@ html {
 }
 
 .faq-answer.active {
-    max-height: 500px; /* Sufficient height to reveal answer */
+    max-height: 500px;
     padding-bottom: 10px;
 }
 
@@ -886,14 +1015,12 @@ html {
 }
 
 .footer-logo {
-    /* Add this to left-align all content within the logo column */
     text-align: left;
 }
 
 .footer-logo img {
     max-width: 250px;
     margin-bottom: 25px;
-    /* Ensure the image is a block element and starts from the far left of its container */
     display: block;
     margin-left: 0;
 }
@@ -901,15 +1028,15 @@ html {
 .footer-logo p {
     font-size: 16px;
     line-height: 1.6;
-    /* Ensure paragraph text is also left-aligned */
     text-align: left;
 }
 
-/* Add this to left-align your social icons if they appear centered */
 .social-links {
     text-align: left;
+    display: flex; /* Ensure social links are flex to align icons */
+    gap: 10px; /* Space out social icons */
+    margin-top: 20px;
 }
-
 
 .footer-section h3 {
     font-size: 18px;
@@ -963,7 +1090,17 @@ html {
     .footer-container {
         grid-template-columns: 1fr;
     }
+    .footer-logo,
+    .quick-links,
+    .our-services,
+    .contact-us {
+        text-align: center; /* Center content on very small screens */
+    }
+    .social-links {
+        justify-content: center; /* Center social icons */
+    }
 }
+
 /* Consultation Booking Section */
 .consultation-booking {
     padding: 60px 20px;
@@ -1060,12 +1197,16 @@ html {
 @media (max-width: 768px) {
     .booking-container {
         flex-direction: column;
+        padding: 0; /* Remove horizontal padding from container on small screens */
     }
     .booking-form {
-        padding: 20px;
+        padding: 20px; /* Adjust padding for form */
     }
     .booking-image {
         display: none; /* Hide image on smaller screens */
+    }
+    .consultation-booking {
+        padding: 40px 10px; /* Adjust section padding on mobile */
     }
 }
 
@@ -1074,14 +1215,16 @@ html {
 .popup-modal {
     display: none;
     position: fixed;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0; /* Changed to 0 to cover full screen */
+    left: 0; /* Changed to 0 to cover full screen */
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker overlay */
+    z-index: 10000; /* High z-index to be on top */
     animation: fadeIn 0.3s ease-in-out;
+    display: flex; /* Use flex to center content */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
 }
 
 /* Popup Content */
@@ -1089,13 +1232,13 @@ html {
     position: relative;
     background-color: white;
     max-width: 480px;
-    width: 90%;
-    margin: auto;
+    width: 90%; /* Ensure it's responsive */
+    margin: auto; /* Re-center if flex centering fails on some older browsers */
     padding: 25px 20px;
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Keep font if available, otherwise fallback */
 }
 
 /* Close Button */
@@ -1106,20 +1249,24 @@ html {
     font-size: 24px;
     cursor: pointer;
     color: #888;
+    transition: color 0.3s ease;
+}
+.close-btn:hover {
+    color: #e91e63;
 }
 
 /* Headings */
-.popup-heading {
-    font-size: 20px;
+.popup-modal h2 { /* Targeting h2 within popup-modal directly */
+    font-size: 24px; /* Adjusted from 20px for better impact */
     font-weight: 600;
     margin-bottom: 10px;
     color: #333;
 }
-.popup-heading .highlight {
+.popup-modal .highlight {
     color: #e91e63;
 }
-.sub-heading {
-    font-size: 16px;
+.popup-modal p { /* Targeting p within popup-modal */
+    font-size: 16px; /* Adjusted from 16px for consistency */
     color: #555;
     margin-bottom: 20px;
 }
@@ -1196,9 +1343,9 @@ html {
     padding: 10px 20px !important;
     border-radius: 25px;
     transition: all 0.3s ease;
-    flex-shrink: 1; /* Allow CTA button to shrink */
-    min-width: fit-content; /* Ensure it doesn't get too small */
-    margin-left: 20px; /* Add margin-left to separate it from the search bar */
+    flex-shrink: 1;
+    min-width: fit-content;
+    margin-left: 20px;
 }
 .consultation-btn:hover {
     background-color: #ff4081;
@@ -1212,97 +1359,136 @@ html {
 }
 
 /* Responsive adjustments for overall navbar and dropdowns */
-@media (max-width: 768px) {
-    .consultation-btn {
-        padding: 8px 15px !important;
-        font-size: 14px;
-        margin-left: 0; /* Reset margin on mobile as it stacks */
+@media (max-width: 992px) { /* Adjust breakpoint for tablet/larger mobiles */
+    .top-bar-info-group,
+    .top-bar-right-group {
+        width: 100%; /* Make them take full width */
+        justify-content: center; /* Center content horizontally */
+        margin-bottom: 5px;
     }
-
-    /* Hide search on smaller screens or adjust layout */
-    .search-container {
-        display: none; /* Hide search input on small screens */
+    .top-bar {
+        flex-direction: column; /* Stack top bar items */
+        align-items: center;
+        padding: 10px;
+    }
+    .top-bar-social {
+        margin-top: 10px; /* Add some space above social icons */
+    }
+    .top-bar-appointment-btn {
+        margin-top: 10px; /* Add space above button */
     }
 
     .navbar {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-wrap: wrap; /* Allow navbar items to wrap if needed */
         padding: 15px 20px;
     }
 
-    .logo {
-        margin-right: 0;
-        margin-bottom: 10px;
+    .hamburger-menu {
+        display: block; /* Show hamburger on mobile */
     }
 
     .nav-links {
-        width: 100%;
-        flex-direction: column; /* Stack vertically on mobile */
+        /* On mobile, initially hide and make it full width/column */
+        display: none;
+        flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
-        justify-content: flex-start;
-        margin-left: 0;
-        flex-wrap: nowrap; /* No wrapping needed when already stacked vertically */
+        width: 100%;
+        margin-top: 15px;
+        background-color: #fff; /* Ensure menu has a background when open */
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        position: absolute;
+        top: 100%; /* Position below the main navbar */
+        left: 0;
+        z-index: 990; /* Lower than navbar, higher than page content */
+        padding: 10px 0;
+        border-radius: 0 0 8px 8px;
+    }
+
+    .nav-links.active {
+        display: flex; /* Show when active */
     }
 
     .nav-links li {
-        width: 100%; /* Ensure each list item takes full width */
+        width: 100%;
+        text-align: left; /* Align text left */
+        border-bottom: 1px solid #eee; /* Separator for menu items */
     }
 
-    .nav-links li a {
-        padding: 8px 0; /* Adjust padding for mobile links */
-        white-space: normal; /* Allow wrapping on mobile for clarity */
+    .nav-links li:last-child {
+        border-bottom: none;
     }
 
-    /* Dropdown and Submenu mobile adjustments */
-    .dropdown-content {
-        position: static; /* Stack dropdown items below the link */
-        box-shadow: none;
-        min-width: auto;
-        background-color: transparent;
-        padding: 0;
-        margin-left: 20px; /* Indent dropdown items */
-        max-width: 100%; /* Allow it to take full width of parent */
+    .nav-links a {
+        padding: 12px 20px; /* Increase clickable area */
+        white-space: normal; /* Allow text to wrap */
     }
 
-    .dropdown-content a {
-        padding: 8px 16px;
-        color: #333; /* Adjust color for mobile if needed */
+    /* Hide search and consultation button from main nav on mobile, use a dedicated spot or remove */
+    .search-container,
+    .consultation-btn {
+        display: none; /* Hide these from the main mobile nav */
     }
 
-    .dropdown:hover .dropdown-content {
-        display: none; /* Hide hover effect on small screens, rely on JS for click */
-    }
-
+    /* Dropdown and Submenu mobile adjustments (will be toggled by JS) */
+    .dropdown-content,
     .submenu-content {
-        position: static;
+        position: static; /* Remove absolute positioning */
+        background-color: transparent; /* No distinct background */
         box-shadow: none;
-        min-width: auto;
-        background-color: transparent;
         padding: 0;
-        margin-left: 40px; /* Further indent submenu items */
-        max-width: 100%; /* Allow it to take full width of parent */
+        margin: 5px 0 5px 20px; /* Indent sub-items */
+        width: auto; /* Let content determine width */
+        max-width: 100%;
+        overflow-y: visible; /* Allow content to push height */
+        max-height: none; /* Remove max height constraint */
     }
 
+    .dropdown-content a,
+    .submenu-content a {
+        padding: 8px 10px; /* Adjust padding for nested items */
+        font-size: 0.9rem; /* Smaller font for nested items */
+        color: #555; /* Slightly less prominent color */
+    }
+
+    /* Override hover effects for touch devices, rely on JS for toggling */
+    .dropdown:hover .dropdown-content,
     .dropdown-submenu:hover .submenu-content {
-        display: none; /* Hide hover effect on small screens, rely on JS for click */
+        display: none; /* Ensure hover doesn't activate on touch */
     }
+}
 
-    /* You'll likely need JavaScript to toggle the dropdown and submenu on mobile click */
+@media (max-width: 768px) {
+    /* Further fine-tune general padding and font sizes for smaller mobiles */
+    section {
+        padding: 40px 15px;
+    }
+    h2 {
+        font-size: 1.8rem;
+    }
+    p {
+        font-size: 0.95rem;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    .logo img {
+        height: 80px; /* Smaller logo on very small screens */
+    }
 }
 
 /* Social Links in Footer */
 .social-links {
     display: flex;
-    gap: 3px;
+    gap: 10px; /* Increased gap for better touch targets */
     margin-top: 20px;
 }
 
 .social-icon {
     background-color: #e91e63;
     color: white;
-    width: 32px;
-    height: 32px;
+    width: 38px; /* Larger touch target */
+    height: 38px; /* Larger touch target */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1312,7 +1498,7 @@ html {
 }
 
 .social-icon i {
-    font-size: 16px;
+    font-size: 18px; /* Larger icon */
 }
 
 .social-icon:hover {
@@ -1346,11 +1532,11 @@ html {
     right: 40px;
     background-color: #25d366;
     color: #FFF;
-    border-radius: 50px;
+    border-radius: 50%; /* Changed to 50% for perfect circle */
     text-align: center;
     font-size: 30px;
     box-shadow: 2px 2px 3px #999;
-    z-index: 100;
+    z-index: 1000; /* Ensure it's above most content */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1403,6 +1589,7 @@ html {
     justify-content: center;
     gap: 15px;
     margin-bottom: 30px;
+    flex-wrap: wrap; /* Allow filters to wrap on smaller screens */
 }
 
 .filter-btn {
@@ -1413,6 +1600,7 @@ html {
     color: #333;
     cursor: pointer;
     transition: all 0.3s ease;
+    white-space: nowrap; /* Prevent button text from wrapping */
 }
 
 .filter-btn.active,
@@ -1423,9 +1611,12 @@ html {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* Use a smaller minmax for very small screens, allowing more columns if space permits */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
     padding: 20px;
+    max-width: 1200px; /* Add a max-width for consistency */
+    margin: 0 auto;
 }
 
 .gallery-item {
@@ -1478,12 +1669,12 @@ html {
 
 @media (max-width: 768px) {
     .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Even smaller min width for very small screens */
         gap: 15px;
     }
 
     .gallery-filters {
-        flex-wrap: wrap;
+        justify-content: center; /* Ensure filters are centered */
     }
 }
 /* Styles for the success message in the popup */
@@ -1503,88 +1694,4 @@ html {
 .consultation-success-message i {
     color: #28a745; /* Green check icon */
     margin-right: 10px;
-}
-
-
-/* New styles for the top bar */
-.top-bar {
-    background-color: #e91e63; /* Clinic's primary pink color (reverted to original) */
-    color: #fff; /* White text for better contrast on dark pink */
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap; /* Ensures items stay in a single line on larger screens */
-    font-size: 0.9em;
-    /* This top bar is not sticky and will scroll out of view */
-    z-index: 999; /* Slightly lower z-index than navbar to stay behind it on scroll */
-}
-
-.top-bar-info {
-    display: flex;
-    align-items: center;
-    margin: 5px 15px;
-}
-
-.top-bar-info i {
-    margin-right: 8px;
-    color: #fff; /* White icons for better contrast on dark pink */
-}
-
-.top-bar-social {
-    display: flex;
-    align-items: center;
-    margin: 5px 15px;
-}
-
-.top-bar-social .social-icon {
-    color: #fff; /* White social icons for better contrast on dark pink */
-    font-size: 1.2em;
-    margin: 0 8px;
-    transition: color 0.3s ease;
-}
-
-.top-bar-social .social-icon:hover {
-    color: #f0f0f0; /* Slightly lighter white on hover */
-}
-
-.top-bar-appointment-btn {
-    background-color: #fff; /* White background for button */
-    color: #e91e63; /* Clinic's primary pink text for button */
-    padding: 8px 20px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    text-decoration: none; /* For anchor tag styling */
-    display: inline-block; /* For padding to work on anchor */
-    margin: 5px 0; /* Add margin for spacing */
-}
-
-.top-bar-appointment-btn:hover {
-    background-color: #f0f0f0; /* Lighter grey on hover */
-    color: #c2185b; /* Darker pink on hover */
-}
-
-/* Responsive adjustments for top bar */
-@media (max-width: 768px) {
-    .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px 10px;
-        top: auto; /* Remove fixed top positioning on mobile if navbar is not sticky or changes */
-        position: relative; /* Allow it to flow naturally on smaller screens */
-        flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-    }
-
-    .top-bar-info, .top-bar-social {
-        margin: 5px 0;
-    }
-
-    .top-bar-appointment-btn {
-        width: 100%;
-        text-align: center;
-        margin-top: 10px;
-    }
 }
