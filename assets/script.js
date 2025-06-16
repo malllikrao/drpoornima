@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (navLinks.classList.contains('active')) {
                 body.style.overflowY = 'hidden';
                 // Dynamically adjust scroll-padding-top for the fixed header
-                // Calculate total height of top-bar and navbar for scroll-padding-top
                 const topBarHeight = document.querySelector('.top-bar')?.offsetHeight || 0;
                 const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
                 html.style.scrollPaddingTop = `${topBarHeight + navbarHeight}px`;
@@ -146,29 +145,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const consultationPopup = document.getElementById('consultation-popup');
     const closeBtn = document.querySelector('.close-btn');
 
-    const popupShownKey = 'popupShown';
-    const popupTimestampKey = 'popupTimestamp';
-    const twentyFourHours = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-
-    // Check and reset 'popupShown' after 24 hours if timestamp exists
-    const lastPopupTimestamp = localStorage.getItem(popupTimestampKey);
-    if (lastPopupTimestamp) {
-        if ((Date.now() - parseInt(lastPopupTimestamp)) > twentyFourHours) {
-            localStorage.removeItem(popupShownKey);
-            localStorage.removeItem(popupTimestampKey); // Clear both to ensure a fresh start
-        }
-    }
-
-    // Show popup only if it hasn't been shown (or was reset after 24 hours)
-    if (consultationPopup && !localStorage.getItem(popupShownKey)) {
-        setTimeout(function () {
-            if (consultationPopup) {
-                consultationPopup.style.display = 'flex'; // Use flex to center with updated CSS
-                localStorage.setItem(popupShownKey, 'true');
-                localStorage.setItem(popupTimestampKey, Date.now().toString());
-            }
-        }, 3000); // Show popup after 3 seconds
-    }
+    // ALL AUTOMATIC POPUP DISPLAY LOGIC HAS BEEN REMOVED FROM HERE.
+    // The popup will now ONLY open when explicitly triggered by a button click (via inline onclick in HTML).
 
     // Close popup when 'x' button is clicked
     if (closeBtn) {
@@ -206,19 +184,19 @@ document.addEventListener('DOMContentLoaded', function () {
         // For popup form, use the specific success message div
         const popupSuccessDiv = document.getElementById('consultation-success-message');
 
+        // IMPORTANT: This 'if' block specifically handles the popup form's success/error
         if (formElement.classList.contains('popup-form') && popupSuccessDiv) {
-            // If it's the popup form and successful, show the dedicated success message
             if (isSuccess) {
                 const popupFormSection = document.getElementById('consultation-form-section');
-                if (popupFormSection) popupFormSection.style.display = 'none';
-                popupSuccessDiv.style.display = 'block';
+                if (popupFormSection) popupFormSection.style.display = 'none'; // Hide the form part
+                popupSuccessDiv.style.display = 'block'; // Show the success message part
                 popupSuccessDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`; // Update message content with icon
 
                 setTimeout(() => {
                     popupSuccessDiv.style.display = 'none';
-                    if (consultationPopup) consultationPopup.style.display = 'none';
+                    if (consultationPopup) consultationPopup.style.display = 'none'; // Hide the entire popup
                     if (popupFormSection) popupFormSection.style.display = 'block'; // Reset form section for next open
-                }, 5000);
+                }, 5000); // Popup disappears after 5 seconds
             } else if (messageDiv) {
                 // If it's the popup form but an error, use the general messageDiv for error
                 messageDiv.textContent = message;
@@ -234,7 +212,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 5000);
             }
         } else if (messageDiv) {
-            // For other forms (like the main consultation form)
+            // This 'else if' block handles other forms (like a potential main consultation form)
+            // It assumes these other forms have a .form-message div for feedback.
             messageDiv.textContent = message;
             messageDiv.style.color = isSuccess ? 'green' : 'red';
             messageDiv.style.display = 'block';
@@ -290,10 +269,10 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             // Handle success message and form reset based on which form was submitted
+            // This now relies completely on the showFormMessage function
             if (formElement.classList.contains('popup-form')) {
-                // Now handled by showFormMessage function
                 showFormMessage(formElement, 'Thank you! Your consultation request has been received.', true);
-            } else { // This handles the main consultation form
+            } else { // This handles other forms, if any
                 showFormMessage(formElement, 'Your booking request has been sent. We will contact you shortly!', true);
             }
             formElement.reset(); // Clear the form fields for both cases
@@ -313,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Attach submit listener for the Main Consultation Form
+    // Attach submit listener for the Main Consultation Form (if it exists)
     const mainConsultationForm = document.querySelector('.consultation-form');
     if (mainConsultationForm) {
         mainConsultationForm.addEventListener('submit', function (e) {
@@ -430,7 +409,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-
     // === Search Functionality ===
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
@@ -459,9 +437,9 @@ document.addEventListener('DOMContentLoaded', function () {
         { keyword: "single embryo transfer", url: "ivf-services.html#single-embryo-transfer", description: "Single Embryo Transfer for reduced multiple pregnancy risks." },
         // Endoscopy Services
         { keyword: "endoscopy services", url: "endoscopy-services.html", description: "Advanced endoscopic procedures for fertility." },
-        { keyword: "diagnostic hysteroscopy", url: "endoscopy-services.html#Diagnostic Hysteroscopy", description: "Diagnostic Hysteroscopy for uterine conditions." },
-        { keyword: "diagnostic laparoscopy", url: "endoscopy-services.html#Diagnostic Laparoscopy", description: "Diagnostic Laparoscopy for pelvic conditions." },
-        { keyword: "theraputic hysterolaparoscopy", url: "endoscopy-services.html#Theratapic Hysterolaprososcopy", description: "Therapeutic Hysterolaparoscopy for surgical interventions." },
+        { keyword: "diagnostic hysteroscopy", url: "endoscopy-services.html#diagnostic-hysteroscopy", description: "Diagnostic Hysteroscopy for uterine conditions." },
+        { keyword: "diagnostic laparoscopy", url: "endoscopy-services.html#diagnostic-laparoscopy", description: "Diagnostic Laparoscopy for pelvic conditions." },
+        { keyword: "theraputic hysterolaparoscopy", url: "endoscopy-services.html#theraputic-hysterolaparoscopy", description: "Therapeutic Hysterolaparoscopy for surgical interventions." },
         { keyword: "fibroids treatment", url: "endoscopy-services.html#fibriods", description: "Treatment for uterine fibroids." },
         { keyword: "pid treatment", url: "endoscopy-services.html#fibriods", description: "Treatment for Pelvic Inflammatory Disease (PID)." },
         { keyword: "hernia septum treatment", url: "endoscopy-services.html#fibriods", description: "Treatment for uterine septum." },
@@ -474,7 +452,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { keyword: "dna fragmentation index", url: "male-infertility-services.html#dfi", description: "DNA Fragmentation Index (DFI) testing." },
         { keyword: "low sperm", url: "male-infertility-services.html#low-sperm", description: "Treatment for low sperm count." },
         { keyword: "low sperm motility", url: "male-infertility-services.html#low-sperm-evaluation", description: "Evaluation and treatment for low sperm motility and morphology." },
-        { keyword: "azoospermia evaluation", url: "male-infertility-services.html#Azoospermia evaluation", description: "Evaluation for azoospermia (absence of sperm)." },
+        { keyword: "azoospermia evaluation", url: "male-infertility-services.html#azoospermia-evaluation", description: "Evaluation for azoospermia (absence of sperm)." },
         { keyword: "macs", url: "male-infertility-services.html#macs", description: "Microfluidics and Magnetic Activated Cell Sorting (MACS) for sperm selection." },
         { keyword: "microfluidics activated cell sorting", url: "male-infertility-services.html#macs", description: "Microfluidics and Magnetic Activated Cell Sorting (MACS) for sperm selection." },
         { keyword: "tesa", url: "male-infertility-services.html#tesa", description: "Testicular Sperm Aspiration (TESA)." },
@@ -497,12 +475,12 @@ document.addEventListener('DOMContentLoaded', function () {
         // Fertility Preservation
         { keyword: "fertility preservation", url: "fertility-preservation-services.html", description: "Options to preserve fertility for the future." },
         { keyword: "cancer patients", url: "fertility-preservation-services.html#cancer-patients", description: "Fertility preservation for cancer patients." },
-        { keyword: "rheumatology patients", url: "fertility-preservation-services.html#Rheumatology", description: "Fertility preservation for Rheumatology and SLE (Lupus) patients." },
-        { keyword: "sle patients", url: "fertility-preservation-services.html#Rheumatology", description: "Fertility preservation for SLE (Lupus) patients." },
-        { keyword: "industrial workers", url: "fertility-preservation-services.html#Industrial", description: "Fertility preservation for industrial and coal mine workers." },
-        { keyword: "coal mine workers", url: "fertility-preservation-services.html#Industrial", description: "Fertility preservation for industrial and coal mine workers." },
+        { keyword: "rheumatology patients", url: "fertility-preservation-services.html#rheumatology", description: "Fertility preservation for Rheumatology and SLE (Lupus) patients." },
+        { keyword: "sle patients", url: "fertility-preservation-services.html#rheumatology", description: "Fertility preservation for SLE (Lupus) patients." },
+        { keyword: "industrial workers", url: "fertility-preservation-services.html#industrial", description: "Fertility preservation for industrial and coal mine workers." },
+        { keyword: "coal mine workers", url: "fertility-preservation-services.html#industrial", description: "Fertility preservation for industrial and coal mine workers." },
         { keyword: "delayed child bearing", url: "fertility-preservation-services.html#personal-reasons", description: "Fertility preservation for personal reasons (delayed childbearing)." },
-        { keyword: "genetic conditions preservation", url: "fertility-preservation-services.html#Genetic conditions", description: "Fertility preservation for individuals with genetic conditions." },
+        { keyword: "genetic conditions preservation", url: "fertility-preservation-services.html#genetic-conditions", description: "Fertility preservation for individuals with genetic conditions." },
         // Third-Party Reproduction
         { keyword: "third-party reproduction", url: "third-party-reproduction-services.html", description: "Options involving third-party reproduction." },
         { keyword: "donor egg", url: "third-party-reproduction-services.html#donor-egg", description: "Donor egg programs." },
