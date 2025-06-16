@@ -131,36 +131,72 @@
             color: #28a745; /* Green check icon */
             margin-right: 10px;
         }
+        /* Specific styling for anchor targets to prevent content hiding behind fixed header */
+        .anchor-target {
+            padding-top: 150px; /* Adjust this value to be equal to your fixed header height + top bar */
+            margin-top: -150px; /* Negative margin to pull content back up, while padding keeps it visible */
+            display: block; /* Ensures padding-top applies */
+        }
     </style>
 </head>
 <body>
+    <!-- Top Bar: Directly copied from your working infertility.html -->
+    <div class="top-bar">
+        <div class="top-bar-info-group">
+            <div class="top-bar-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Govt hospital Road, Karimnagar, Telangana 505001</span>
+            </div>
+            <div class="top-bar-info">
+                <i class="fas fa-envelope"></i>
+                <span>poornimafertility@gmail.com</span>
+            </div>
+            <div class="top-bar-info">
+                <i class="fas fa-phone"></i>
+                <span>+91-9490704277</span>
+            </div>
+        </div>
+        <div class="top-bar-right-group">
+            <div class="top-bar-social">
+                <a href="https://facebook.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/your-channel" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <a href="#" class="top-bar-appointment-btn" onclick="document.getElementById('consultation-popup').style.display='flex'; return false;">Appointment</a>
+        </div>
+    </div>
 
     <nav class="navbar">
         <div class="logo">
-            <!-- Updated header logo to the new combined image -->
-            <img src="assets/images/poornima logo (2).png" alt="Dr. Poornima Fertility Centre Logo" />
-            <!-- Removed the span as the text is now part of the image -->
+            <img src="assets/images/poornima logo (2).png" onerror="this.onerror=null; this.src='https://placehold.co/100x50/cccccc/000000?text=Logo';" alt="Poornima Fertility Centre Logo" />
         </div>
+        <!-- Hamburger menu icon for mobile: Directly copied from your working infertility.html -->
+        <div class="hamburger-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <ul class="nav-links">
             <li><a href="index.html#home">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
+            <li><a href="about-dr.html">About</a></li>
             <li class="dropdown">
-                <a href="index.html#services">Services <i class="fas fa-caret-down"></i></a>
+                <a href="index.html#services">Services <i class="fas fa-caret-down dropdown-arrow"></i></a>
                 <ul class="dropdown-content">
                     <li class="dropdown-submenu">
-                        <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right"></i></a>
+                        <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="infertility-services.html#pre-martial-assesment">Pre-Marital Fertility Assessment And Counselling For Both Partners</a></li>
                             <li><a href="infertility-services.html#ovulation-induction">OI (Ovulation Induction)</a></li>
                             <li><a href="infertility-services.html#iui">IUI (Intrauterine Insemination)</a></li>
                             <li><a href="infertility-services.html#unexplained-fertility">Treatment For Unexplained Infertility</a></li>
-                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li> 
+                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li>
                             <li><a href="infertility-services.html#psychological-counselling">Psychological Counselling</a></li>
                             <li><a href="infertility-services.html#fertility-evaluation">Fertility Evaluation</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right"></i></a>
+                        <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="ivf-services.html#ivf">In Vitro Fertilization (IVF)</a></li>
                             <li><a href="ivf-services.html#icsi">Intracytoplasmic Sperm Injection (ICSI)</a></li>
@@ -174,16 +210,16 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right"></i></a>
+                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="endoscopy-services.html#diagnostic-hysteroscopy">Diagnostic Hysteroscopy</a></li>
                             <li><a href="endoscopy-services.html#diagnostic-laparoscopy">Diagnostic Laparoscopy </a></li>
                             <li><a href="endoscopy-services.html#theraputic-hysterolaparoscopy">Theraputic Hysterolaparoscopy</a></li>
-                            <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids,PID,Herine Septum,Post Tubaltmic Cases,Endometriosis,Ovarian Cysts)</a></li> 
+                            <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids, PID, Hernia Septum, Post Tubal Ligation Cases, Endometriosis, Ovarian Cysts)</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right"></i></a>
+                        <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="male-infertility-services.html#semen-analysis">Semen Analysis</a></li>
                             <li><a href="male-infertility-services.html#dfi">DNA Fragmentation Index (DFI)</a></li>
@@ -197,7 +233,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right"></i></a>
+                        <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="advanced-ivf-services.html#blastocyst-culture">Blastocyst Culture</a></li>
                             <li><a href="advanced-ivf-services.html#era">Endometrial Receptivity Array (ERA)</a></li>
@@ -209,7 +245,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right"></i></a>
+                        <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="fertility-preservation-services.html#cancer-patients">Preservation for Cancer Patients</a></li>
                             <li><a href="fertility-preservation-services.html#rheumatology">Rhuematology And SLE(Lupus) Patients</a></li>
@@ -219,18 +255,18 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right"></i></a>
+                        <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="third-party-reproduction-services.html#donor-egg">Donor Egg</a></li>
                             <li><a href="third-party-reproduction-services.html#donor-sperm">Donor Sperm</a></li>
-                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li> 
+                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li>
                         </ul>
                     </li>
                 </ul>
             </li>
-            <li><a href="index.html#gallery">Gallery</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
             <li><a href="index.html#book">Contact</a></li>
-            <li><a href="#" class="consultation-btn" onclick="document.getElementById('consultation-popup').style.display='block'">Book Free Consultation</a></li>
+            <li><a href="#" class="consultation-btn" onclick="document.getElementById('consultation-popup').style.display='flex'">Book Free Consultation</a></li>
             <li class="search-container">
                 <input type="text" id="searchInput" placeholder="Search treatments...">
                 <button id="searchButton"><i class="fas fa-search"></i></button>
@@ -241,11 +277,12 @@
             </li>
         </ul>
     </nav>
+
     <section class="service-detail-section">
         <h2>IVF & Assisted Reproductive Technologies</h2>
 
         <div class="service-item" id="ivf">
-            <img src="assets/images/ivf (2).png" alt="In Vitro Fertilization (IVF)">
+            <img src="assets/images/ivf (2).png" onerror="this.onerror=null; this.src='https://placehold.co/250x250/cccccc/000000?text=IVF';" alt="In Vitro Fertilization (IVF)">
             <div class="service-content">
                 <h3>In Vitro Fertilization (IVF)</h3>
                 <p>IVF is a cornerstone of modern fertility treatment where fertilization occurs outside the body. Eggs are retrieved from the ovaries and combined with sperm in a laboratory dish. The resulting embryos are then carefully nurtured before one or more are transferred into the woman's uterus, offering hope for various infertility causes including blocked fallopian tubes, male factor infertility, or unexplained infertility.</p>
@@ -253,7 +290,7 @@
         </div>
 
         <div class="service-item" id="icsi">
-            <img src="assets/images/icsi.png" alt="Intracytoplasmic Sperm Injection (ICSI)">
+            <img src="assets/images/icsi.png" onerror="this.onerror=null; this.src='https://placehold.co/250x250/cccccc/000000?text=ICSI';" alt="Intracytoplasmic Sperm Injection (ICSI)">
             <div class="service-content">
                 <h3>Intracytoplasmic Sperm Injection (ICSI)</h3>
                 <p>ICSI is a specialized technique performed as part of an IVF cycle. A single, healthy sperm is precisely injected directly into each mature egg using a microscopic needle. This method is particularly effective for severe male factor infertility, cases with low sperm count or motility, or when previous IVF cycles have resulted in fertilization failure, significantly improving fertilization rates.</p>
@@ -261,7 +298,7 @@
         </div>
 
         <div class="service-item" id="embryo-freezing">
-            <img src="assets/images/embryofreezingnew.JPG" alt="Embryo Freezing">
+            <img src="assets/images/embryofreezingnew.JPG" onerror="this.onerror=null; this.src='https://placehold.co/250x250/cccccc/000000?text=Embryo+Freezing';" alt="Embryo Freezing">
             <div class="service-content">
                 <h3>Embryo Freezing (Cryopreservation)</h3>
                 <p>Embryo freezing involves cryopreserving (freezing) surplus high-quality embryos from an IVF cycle for future use. This allows couples to store embryos for subsequent attempts without undergoing another egg retrieval process, offering convenience, cost-effectiveness, and the flexibility to plan future pregnancies. It's also vital for fertility preservation before certain medical treatments.</p>
@@ -269,7 +306,7 @@
         </div>
 
         <div class="service-item" id="frozen-embryo-transfer">
-            <img src="assets/images/frozenemtransderone.jpeg" alt="Frozen Embryo Transfer (FET)">
+            <img src="assets/images/frozenemtransderone.jpeg" onerror="this.onerror=null; this.src='https://placehold.co/250x250/cccccc/000000?text=FET';" alt="Frozen Embryo Transfer (FET)">
             <div class="service-content">
                 <h3>Frozen Embryo Transfer (FET)</h3>
                 <p>FET involves thawing previously frozen embryos and transferring them into the woman's uterus during a prepared cycle. This method is often preferred as it allows for the uterus to be optimally prepared for implantation, reducing stress compared to a fresh cycle, and enabling preimplantation genetic testing (PGT) if desired. FET cycles often have comparable, or even higher, success rates than fresh transfers.</p>
@@ -277,7 +314,7 @@
         </div>
 
         <div class="service-item" id="fresh-embryo-transfer">
-            <img src="assets/images/freshones.webp" alt="Fresh Embryo Transfer">
+            <img src="assets/images/freshones.webp" onerror="this.onerror=null; this.src='https://placehold.co/250x250/cccccc/000000?text=Fresh+Embryo';" alt="Fresh Embryo Transfer">
             <div class="service-content">
                 <h3>Fresh Embryo Transfer</h3>
                 <p>A fresh embryo transfer involves placing embryos into the woman's uterus 3 to 5 days after egg retrieval and fertilization, all within the same treatment cycle. This is the traditional approach when conditions are favorable and there are no immediate concerns that would benefit from embryo freezing. It allows for a more immediate progression of the IVF process.</p>
@@ -285,7 +322,7 @@
         </div>
 
         <div class="service-item" id="sequential-embryo-transfer">
-            <img src="assets/images/sequential embryo transfer.png" alt="Sequential Embryo Transfer">
+            <img src="assets/images/sequential embryo transfer.png" onerror="this.onerror=null; this.src='https://placehold.co/250x250/cccccc/000000?text=Sequential+Transfer';" alt="Sequential Embryo Transfer">
             <div class="service-content">
                 <h3>Sequential Embryo Transfer</h3>
                 <p>Sequential embryo transfer is a strategy where embryos are transferred into the uterus at different stages of development within the same treatment cycle. For example, some embryos might be transferred on Day 2 or 3, while others are cultured to the blastocyst stage (Day 5 or 6) and then transferred. This approach aims to maximize the chances of implantation by providing embryos at different optimal windows for uterine receptivity.</p>
@@ -293,7 +330,7 @@
         </div>
 
         <div class="service-item" id="oocyte-freezing">
-            <img src="assets/images/oocytefreezing(egg freezing).png" alt="Oocyte Freezing (Egg Freezing)">
+            <img src="assets/images/oocytefreezing(egg freezing).png" onerror="this.onerror=null; this.src='https://placehold.co/250x250/cccccc/000000?text=Oocyte+Freezing';" alt="Oocyte Freezing (Egg Freezing)">
             <div class="service-content">
                 <h3>Oocyte Freezing (Egg Freezing)</h3>
                 <p>Oocyte freezing, or egg freezing, allows women to preserve their fertility for future use. Eggs are retrieved and cryopreserved (frozen) for various reasons, including delaying childbearing, before undergoing medical treatments that may affect fertility (like chemotherapy), or for women with conditions that lead to premature ovarian aging. It offers a valuable option for future family planning.</p>
@@ -301,7 +338,7 @@
         </div>
 
         <div class="service-item" id="sperm-freezing">
-            <img src="assets/images/spermfreezing.png" alt="Sperm Freezing">
+            <img src="assets/images/spermfreezing.png" onerror="this.onerror=null; this.src='https://placehold.co/250x250/cccccc/000000?text=Sperm+Freezing';" alt="Sperm Freezing">
             <div class="service-content">
                 <h3>Sperm Freezing</h3>
                 <p>Sperm freezing involves cryopreservation of a man's sperm samples for long-term storage. This service is crucial for fertility preservation before medical treatments (e.g., cancer therapy), for men with declining or unstable sperm quality, or as a backup for IVF/ICSI cycles if the male partner cannot provide a fresh sample on the day of egg retrieval. It ensures a viable sperm source when needed.</p>
@@ -309,7 +346,7 @@
         </div>
 
         <div class="service-item" id="single-embryo-transfer">
-            <img src="assets/images/singleembryotransfer.png" alt="Single Embryo Transfer (SET)">
+            <img src="assets/images/singleembryotransfer.png" onerror="this.onerror=null; this.src='https://placehold.co/250x250/cccccc/000000?text=Single+Embryo';" alt="Single Embryo Transfer (SET)">
             <div class="service-content">
                 <h3>Single Embryo Transfer (SET)</h3>
                 <p>Single Embryo Transfer (SET) is the practice of transferring only one embryo into the uterus during an IVF cycle. This approach is highly recommended to significantly reduce the risks associated with multiple pregnancies, such as premature birth and low birth weight, while maintaining high success rates, especially when a high-quality embryo is available. SET prioritizes the health and safety of both the mother and the baby.</p>
@@ -318,11 +355,11 @@
 
     </section>
 
+    <!-- Footer section: Directly copied from your working infertility.html -->
     <footer class="footer-section">
       <div class="footer-container">
         <div class="footer-logo">
-          <!-- Updated footer logo to the new combined image -->
-          <img src="assets/images/poornima logo (2).png" alt="Dr Poornima Fertility Centre Logo">
+          <img src="assets/images/poornima logo (2).png" onerror="this.onerror=null; this.src='https://placehold.co/60x60/cccccc/000000?text=Logo';" alt="Dr Poornima Fertility Centre Logo">
           <p>Dr Poornima Fertility Centre is the Best Fertility Centre in Karimnagar offering advanced fertility treatments with personalized care, state-of-the-art technology, and a compassionate, patient-centered approach to success.</p>
           <div class="social-links">
               <a href="https://instagram.com/your-profile" target="_blank" class="social-icon">
@@ -344,11 +381,10 @@
           <h3>Quick Links</h3>
           <ul>
             <li><a href="index.html#home">Home</a></li>
-            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="about-dr.html">About Us</a></li>
             <li><a href="index.html#services">Services</a></li>
-            <li><a href="index.html#doctors">Doctors</a></li>
-            <li><a href="index.html#gallery">Gallery</a></li>
-            <li><a href="index.html#contact">Contact Us</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="index.html#book">Contact Us</a></li>
           </ul>
         </div>
 
@@ -358,9 +394,9 @@
             <li><a href="infertility-services.html">Infertility Services</a></li>
             <li><a href="ivf-services.html">IVF Services</a></li>
             <li><a href="male-infertility-services.html">Male Infertility Services</a></li>
+            <li><a href="advanced-ivf-services.html">Advanced IVF Services</a></li>
             <li><a href="fertility-preservation-services.html">Fertility Preservation</a></li>
             <li><a href="third-party-reproduction-services.html">Third Party Reproduction</a></li>
-            <li><a href="advanced-ivf-services.html">Advanced IVF Services</a></li>
             <li><a href="endoscopy-services.html">Endoscopy Services</a></li>
           </ul>
         </div>
@@ -383,6 +419,7 @@
       </div>
     </footer>
 
+    <!-- Consultation Popup: Directly copied from your working infertility.html -->
     <div id="consultation-popup" class="popup-modal">
         <div class="popup-content">
             <span class="close-btn">×</span>
@@ -402,24 +439,32 @@
                 <form class="popup-form">
                     <input type="text" name="fullName" placeholder="Your Full Name" required>
                     <input type="tel" name="mobileNumber" placeholder="Your Mobile Number" required>
-                    <input type="hidden" name="source" value="Ivf Services Popup">
+                    <input type="hidden" name="source" value="Ivf Services Popup"> <!-- Updated source value -->
 
                     <div class="privacy">
-                        <img src="assets/images/google.png" alt="Google Logo">
+                        <img src="assets/images/google.png" onerror="this.onerror=null; this.src='https://placehold.co/20x20/cccccc/000000?text=G';" alt="Google Logo">
                         <span>We respect your privacy – your data is secure with us.</span>
                     </div>
 
-                    <button type="submit" class="popup-btn submit-btn">Book Free Consultation</button>
+                    <button type="submit" class="submit-btn">Get Free Consultation</button>
                 </form>
             </div>
 
             <div id="consultation-success-message" class="consultation-success-message">
-                
-                <p>Thank you for reaching out! We've received your request and will get back to you within 24 hours.</p>
+                <i class="fas fa-check-circle"></i><p>Thank you for reaching out! We've received your request and will get back to you within 24 hours.</p>
             </div>
         </div>
     </div>
 
+    <!-- WhatsApp Float Button: Directly copied from your working infertility.html -->
+    <a href="https://wa.me/919490704277" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Link to your main JavaScript file: Directly copied from your working infertility.html -->
+    <script src="assets/script.js"></script>
+
+    <!-- Inline script for popup functionality: Directly copied from your working infertility.html, adjusted display to 'flex' for consistency -->
     <script>
         // Get the modal
         var modal = document.getElementById("consultation-popup");
@@ -445,7 +490,7 @@
         // When the user clicks the button, open the modal and reset its state
         if(btn) {
             btn.onclick = function() {
-                modal.style.display = "block";
+                modal.style.display = "flex"; // Changed to flex to match CSS
                 resetPopup(); // Reset popup every time it opens
             }
         }
@@ -483,11 +528,5 @@
             });
         }
     </script>
-
-    <a href="https://wa.me/yourwhatsappnumber" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <script src="assets/script.js"></script>
 </body>
 </html>

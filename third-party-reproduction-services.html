@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Third-Party Reproduction Services - Dr. Poornima Fertility Centre</title>
+    <title>Infertility Services - Dr. Poornima Fertility Centre</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Specific styles for the Third-Party Reproduction services page content */
+        /* Specific styles for the infertility services page */
         .service-detail-section {
             padding: 80px 20px; /* Increased padding for more vertical space */
             background-color: #f9f9f9;
@@ -67,7 +67,6 @@
             font-size: 1.05rem; /* Slightly reduced body text size for conciseness */
         }
 
-        /* Media Queries for service content responsiveness */
         @media (max-width: 992px) { /* Adjust for medium screens */
             .service-item {
                 flex-direction: column;
@@ -131,36 +130,72 @@
             color: #28a745; /* Green check icon */
             margin-right: 10px;
         }
+        /* Specific styling for anchor targets to prevent content hiding behind fixed header */
+        .anchor-target {
+            padding-top: 150px; /* Adjust this value to be equal to your fixed header height + top bar */
+            margin-top: -150px; /* Negative margin to pull content back up, while padding keeps it visible */
+            display: block; /* Ensures padding-top applies */
+        }
     </style>
 </head>
 <body>
+    <!-- Top Bar: Now placed ABOVE the Navbar for better visual hierarchy and mobile stacking -->
+    <div class="top-bar">
+        <div class="top-bar-info-group">
+            <div class="top-bar-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Govt hospital Road, Karimnagar, Telangana 505001</span>
+            </div>
+            <div class="top-bar-info">
+                <i class="fas fa-envelope"></i>
+                <span>poornimafertility@gmail.com</span>
+            </div>
+            <div class="top-bar-info">
+                <i class="fas fa-phone"></i>
+                <span>+91-9490704277</span>
+            </div>
+        </div>
+        <div class="top-bar-right-group">
+            <div class="top-bar-social">
+                <a href="https://facebook.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/your-channel" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <a href="#" class="top-bar-appointment-btn" onclick="document.getElementById('consultation-popup').style.display='flex'; return false;">Appointment</a>
+        </div>
+    </div>
 
     <nav class="navbar">
         <div class="logo">
-            <!-- Updated header logo to the new combined image -->
-            <img src="assets/images/poornima logo (2).png" alt="Dr. Poornima Fertility Centre Logo" />
-            <!-- Removed the span as the text is now part of the image -->
+            <img src="assets/images/poornima logo (2).png" onerror="this.onerror=null; this.src='https://placehold.co/100x50/cccccc/000000?text=Logo';" alt="Poornima Fertility Centre Logo" />
         </div>
+        <!-- Hamburger menu icon for mobile -->
+        <div class="hamburger-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <ul class="nav-links">
             <li><a href="index.html#home">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
+            <li><a href="about-dr.html">About</a></li>
             <li class="dropdown">
-                <a href="index.html#services">Services <i class="fas fa-caret-down"></i></a>
+                <a href="index.html#services">Services <i class="fas fa-caret-down dropdown-arrow"></i></a>
                 <ul class="dropdown-content">
                     <li class="dropdown-submenu">
-                        <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right"></i></a>
+                        <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
-                            <li><a href="infertility-services.html#pre-martial-assesment">Pre Martial Fertility Assessment And Counselling For Both Partners</a></li>
+                            <li><a href="infertility-services.html#pre-martial-assesment">Pre-Marital Fertility Assessment And Counselling For Both Partners</a></li>
                             <li><a href="infertility-services.html#ovulation-induction">OI (Ovulation Induction)</a></li>
                             <li><a href="infertility-services.html#iui">IUI (Intrauterine Insemination)</a></li>
-                            <li><a href="infertility-services.html#unexplained-fertility">Treatment For Unexplained InFertility</a></li>
-                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li> 
+                            <li><a href="infertility-services.html#unexplained-fertility">Treatment For Unexplained Infertility</a></li>
+                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li>
                             <li><a href="infertility-services.html#psychological-counselling">Psychological Counselling</a></li>
                             <li><a href="infertility-services.html#fertility-evaluation">Fertility Evaluation</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right"></i></a>
+                        <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="ivf-services.html#ivf">In Vitro Fertilization (IVF)</a></li>
                             <li><a href="ivf-services.html#icsi">Intracytoplasmic Sperm Injection (ICSI)</a></li>
@@ -174,16 +209,16 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right"></i></a>
+                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="endoscopy-services.html#diagnostic-hysteroscopy">Diagnostic Hysteroscopy</a></li>
                             <li><a href="endoscopy-services.html#diagnostic-laparoscopy">Diagnostic Laparoscopy </a></li>
-                            <li><a href="endoscopy-services.html#theraputic-hysterolaparoscopy">Therapeutic Hysterolaparoscopy</a></li>
-                            <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids,Pid,Herine Septum,Post Tubaltmic Cases,Endometriosis,Ovarian Cysts)</a></li> 
+                            <li><a href="endoscopy-services.html#theraputic-hysterolaparoscopy">Theraputic Hysterolaparoscopy</a></li>
+                            <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids, PID, Hernia Septum, Post Tubal Ligation Cases, Endometriosis, Ovarian Cysts)</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right"></i></a>
+                        <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="male-infertility-services.html#semen-analysis">Semen Analysis</a></li>
                             <li><a href="male-infertility-services.html#dfi">DNA Fragmentation Index (DFI)</a></li>
@@ -197,7 +232,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right"></i></a>
+                        <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="advanced-ivf-services.html#blastocyst-culture">Blastocyst Culture</a></li>
                             <li><a href="advanced-ivf-services.html#era">Endometrial Receptivity Array (ERA)</a></li>
@@ -209,28 +244,28 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right"></i></a>
+                        <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="fertility-preservation-services.html#cancer-patients">Preservation for Cancer Patients</a></li>
-                            <li><a href="fertility-preservation-services.html#rheumatology">Rheumatology And SLE(Lupus) Patients</a></li>
+                            <li><a href="fertility-preservation-services.html#rheumatology">Rhuematology And SLE(Lupus) Patients</a></li>
                             <li><a href="fertility-preservation-services.html#industrial">Industrial And Coal Mine Workers</a></li>
                             <li><a href="fertility-preservation-services.html#personal-reasons">For Personal Reasons-(Wishing For Delayed Child Bearing)</a></li>
                             <li><a href="fertility-preservation-services.html#genetic-conditions">Genetic Conditions</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right"></i></a>
+                        <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="third-party-reproduction-services.html#donor-egg">Donor Egg</a></li>
                             <li><a href="third-party-reproduction-services.html#donor-sperm">Donor Sperm</a></li>
-                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li> 
+                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li>
                         </ul>
                     </li>
                 </ul>
             </li>
-            <li><a href="index.html#gallery">Gallery</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
             <li><a href="index.html#book">Contact</a></li>
-            <li><a href="#" class="consultation-btn" onclick="document.getElementById('consultation-popup').style.display='block'">Book Free Consultation</a></li>
+            <li><a href="#" class="consultation-btn" onclick="document.getElementById('consultation-popup').style.display='flex'">Book Free Consultation</a></li>
             <li class="search-container">
                 <input type="text" id="searchInput" placeholder="Search treatments...">
                 <button id="searchButton"><i class="fas fa-search"></i></button>

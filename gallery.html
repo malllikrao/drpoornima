@@ -171,7 +171,6 @@
             border: none;
         }
 
-
         #caption {
             margin-top: 15px;
             display: block;
@@ -206,37 +205,72 @@
             from {transform:scale(0.1)}
             to {transform:scale(1)}
         }
+        /* Specific styling for anchor targets to prevent content hiding behind fixed header */
+        .anchor-target {
+            padding-top: 150px; /* Adjust this value to be equal to your fixed header height + top bar */
+            margin-top: -150px; /* Negative margin to pull content back up, while padding keeps it visible */
+            display: block; /* Ensures padding-top applies */
+        }
     </style>
 </head>
 <body>
+    <!-- Top Bar: Directly copied from your working infertility.html -->
+    <div class="top-bar">
+        <div class="top-bar-info-group">
+            <div class="top-bar-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Govt hospital Road, Karimnagar, Telangana 505001</span>
+            </div>
+            <div class="top-bar-info">
+                <i class="fas fa-envelope"></i>
+                <span>poornimafertility@gmail.com</span>
+            </div>
+            <div class="top-bar-info">
+                <i class="fas fa-phone"></i>
+                <span>+91-9490704277</span>
+            </div>
+        </div>
+        <div class="top-bar-right-group">
+            <div class="top-bar-social">
+                <a href="https://facebook.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/your-channel" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <a href="#" class="top-bar-appointment-btn" onclick="document.getElementById('consultation-popup').style.display='flex'; return false;">Appointment</a>
+        </div>
+    </div>
 
     <nav class="navbar">
         <div class="logo">
-            <!-- Updated header logo to the new combined image -->
-            <img src="assets/images/poornima logo (2).png" alt="Dr. Poornima Fertility Centre Logo" />
-            <!-- Removed the span as the text is now part of the image -->
-            
+            <img src="assets/images/poornima logo (2).png" onerror="this.onerror=null; this.src='https://placehold.co/100x50/cccccc/000000?text=Logo';" alt="Poornima Fertility Centre Logo" />
         </div>
+        <!-- Hamburger menu icon for mobile: Directly copied from your working infertility.html -->
+        <div class="hamburger-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <ul class="nav-links">
             <li><a href="index.html#home">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
+            <li><a href="about-dr.html">About</a></li>
             <li class="dropdown">
-                <a href="index.html#services">Services <i class="fas fa-caret-down"></i></a>
+                <a href="index.html#services">Services <i class="fas fa-caret-down dropdown-arrow"></i></a>
                 <ul class="dropdown-content">
                     <li class="dropdown-submenu">
-                        <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right"></i></a>
+                        <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
-                            <li><a href="infertility-services.html#pre-martial-assesment">Pre Martial Fertility Assessment And Counselling For Both Partners</a></li>
+                            <li><a href="infertility-services.html#pre-martial-assesment">Pre-Marital Fertility Assessment And Counselling For Both Partners</a></li>
                             <li><a href="infertility-services.html#ovulation-induction">OI (Ovulation Induction)</a></li>
                             <li><a href="infertility-services.html#iui">IUI (Intrauterine Insemination)</a></li>
-                            <li><a href="infertility-services.html#unexplained-fertility">Treatment For Unexplained InFertility</a></li>
+                            <li><a href="infertility-services.html#unexplained-fertility">Treatment For Unexplained Infertility</a></li>
                             <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li>
                             <li><a href="infertility-services.html#psychological-counselling">Psychological Counselling</a></li>
                             <li><a href="infertility-services.html#fertility-evaluation">Fertility Evaluation</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right"></i></a>
+                        <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="ivf-services.html#ivf">In Vitro Fertilization (IVF)</a></li>
                             <li><a href="ivf-services.html#icsi">Intracytoplasmic Sperm Injection (ICSI)</a></li>
@@ -250,16 +284,16 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right"></i></a>
+                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="endoscopy-services.html#diagnostic-hysteroscopy">Diagnostic Hysteroscopy</a></li>
                             <li><a href="endoscopy-services.html#diagnostic-laparoscopy">Diagnostic Laparoscopy </a></li>
-                            <li><a href="endoscopy-services.html#theraputic-hysterolaparoscopy">Theraputic Hysterolaparoscopy</a></li>
-                            <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids,Pid,Herine Septum,Post Tubaltmic Cases,Endometriosis,Ovarian Cysts)</a></li>
+                            <li><a href="endoscopy-services.html#theraputic-hysterolaparoscopy">Therapeutic Hysterolaparoscopy</a></li>
+                            <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids, PID, Hernia Septum, Post Tubal Ligation Cases, Endometriosis, Ovarian Cysts)</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right"></i></a>
+                        <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="male-infertility-services.html#semen-analysis">Semen Analysis</a></li>
                             <li><a href="male-infertility-services.html#dfi">DNA Fragmentation Index (DFI)</a></li>
@@ -273,7 +307,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right"></i></a>
+                        <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="advanced-ivf-services.html#blastocyst-culture">Blastocyst Culture</a></li>
                             <li><a href="advanced-ivf-services.html#era">Endometrial Receptivity Array (ERA)</a></li>
@@ -285,7 +319,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right"></i></a>
+                        <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="fertility-preservation-services.html#cancer-patients">Preservation for Cancer Patients</a></li>
                             <li><a href="fertility-preservation-services.html#rheumatology">Rhuematology And SLE(Lupus) Patients</a></li>
@@ -295,7 +329,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right"></i></a>
+                        <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="third-party-reproduction-services.html#donor-egg">Donor Egg</a></li>
                             <li><a href="third-party-reproduction-services.html#donor-sperm">Donor Sperm</a></li>
@@ -304,9 +338,9 @@
                     </li>
                 </ul>
             </li>
-            <li><a href="index.html#gallery">Gallery</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
             <li><a href="index.html#book">Contact</a></li>
-            <li><a href="#" class="consultation-btn" onclick="document.getElementById('consultation-popup').style.display='block'">Book Free Consultation</a></li>
+            <li><a href="#" class="consultation-btn" onclick="document.getElementById('consultation-popup').style.display='flex'">Book Free Consultation</a></li>
             <li class="search-container">
                 <input type="text" id="searchInput" placeholder="Search treatments...">
                 <button id="searchButton"><i class="fas fa-search"></i></button>
@@ -342,58 +376,58 @@
                     <div class="gallery-item photos">
                         <img src="assets/images/IMG-20240529-WA0188.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+1';" alt="Gallery Image 1">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/IMG-20250602-WA0075.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+2';" alt="Gallery Image 2">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/IMG-20250602-WA0092.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+3';" alt="Gallery Image 3">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/IMG20250528170130.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+4';" alt="Gallery Image 4">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/IMG20250529141749.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+5';" alt="Gallery Image 5">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/IMG20250529141826.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+6';" alt="Gallery Image 6">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/IMG20250529141833.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+7';" alt="Gallery Image 7">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/IMG20250430130321.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+8';" alt="Gallery Image 8">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/image9.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+9';" alt="Gallery Image 9">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/image10.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+10';" alt="Gallery Image 10">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/image11.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+11';" alt="Gallery Image 11">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/image12.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+12';" alt="Gallery Image 12">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/image13.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+13';" alt="Gallery Image 13">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/image14.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+14';" alt="Gallery Image 14">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/image15.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+15';" alt="Gallery Image 15">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/image16.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+16';" alt="Gallery Image 16">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/image17.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+17';" alt="Gallery Image 17">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/image18.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+18';" alt="Gallery Image 18">
                     </div>
-                     <div class="gallery-item photos">
+                    <div class="gallery-item photos">
                         <img src="assets/images/image19.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Gallery+Image+19';" alt="Gallery Image 19">
                     </div>
                     <div class="gallery-item photos">
@@ -409,74 +443,84 @@
                         <div class="video-thumbnail">
                             <iframe src="https://www.youtube.com/embed/GK2RLSzARRI" frameborder="0" allowfullscreen></iframe>
                         </div>
-                        
                     </div>
                     <div class="gallery-item videos">
                         <div class="video-thumbnail">
                             <iframe src="https://www.youtube.com/embed/nY2vcUD6e9M" frameborder="0" allowfullscreen></iframe>
                         </div>
-            
                     </div>
                     <div class="gallery-item videos">
                         <div class="video-thumbnail">
                             <iframe src="https://www.youtube.com/embed/a-Z24t_b6fI" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen class="gallery-video-iframe"></iframe>
-                        </div>   
+                        </div>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer section: Directly copied from your working infertility.html -->
     <footer class="footer-section">
-        <div class="footer-container">
-            <div class="footer-logo">
-                <!-- Updated footer logo to the new combined image -->
-                <img src="assets/images/poornima logo (2).png" alt="Dr Poornima Fertility Centre Logo">
-                <p>Dr Poornima Fertility Centre is the Best Fertility Centre in Karimnagar offering advanced fertility treatments with personalized care, state-of-the-art technology, and a compassionate, patient-centered approach to success.</p>
-                <div class="social-links">
-                    <a href="https://instagram.com/your-profile" target="_blank" class="social-icon">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://facebook.com/your-profile" target="_blank" class="social-icon">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://www.youtube.com/channel/your-channel-id" target="_blank" class="social-icon">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-icon">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="quick-links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#about">About Us</a></li>
-                    <li><a href="index.html#services">Services</a></li>
-                    <li><a href="index.html#doctors">Doctors</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="index.html#book">Contact Us</a></li>
-                </ul>
-            </div>
-
-            <div class="contact-us">
-                <h3>Contact Us</h3>
-                <div class="address">
-                    <p>House No 3-3-139, Doctor's Street</p>
-                    <p>Civil Hospital Road, Near Raja Theater</p>
-                    <p>Karimnagar, Telangana - 505001</p>
-                </div>
-                <div class="contact-info">
-                    <p>Email: drpoornimafertility@gmail.com</p>
-                    <p>Phone: +91-1234567890</p>
-                </div>
-            </div>
+      <div class="footer-container">
+        <div class="footer-logo">
+          <img src="assets/images/poornima logo (2).png" onerror="this.onerror=null; this.src='https://placehold.co/60x60/cccccc/000000?text=Logo';" alt="Dr Poornima Fertility Centre Logo">
+          <p>Dr Poornima Fertility Centre is the Best Fertility Centre in Karimnagar offering advanced fertility treatments with personalized care, state-of-the-art technology, and a compassionate, patient-centered approach to success.</p>
+          <div class="social-links">
+              <a href="https://instagram.com/your-profile" target="_blank" class="social-icon">
+                  <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://facebook.com/your-profile" target="_blank" class="social-icon">
+                  <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://youtube.com/channel/your-channel-id" target="_blank" class="social-icon">
+                  <i class="fab fa-youtube"></i>
+              </a>
+              <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-icon">
+                  <i class="fab fa-linkedin-in"></i>
+              </a>
+          </div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2025 Dr Poornima Fertility Centre. All Rights Reserved.</p>
+
+        <div class="quick-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="about-dr.html">About Us</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="index.html#book">Contact Us</a></li>
+          </ul>
         </div>
+
+        <div class="our-services">
+          <h3>Our Services</h3>
+          <ul>
+            <li><a href="infertility-services.html">Infertility Services</a></li>
+            <li><a href="ivf-services.html">IVF Services</a></li>
+            <li><a href="male-infertility-services.html">Male Infertility Services</a></li>
+            <li><a href="advanced-ivf-services.html">Advanced IVF Services</a></li>
+            <li><a href="fertility-preservation-services.html">Fertility Preservation</a></li>
+            <li><a href="third-party-reproduction-services.html">Third Party Reproduction</a></li>
+            <li><a href="endoscopy-services.html">Endoscopy Services</a></li>
+          </ul>
+        </div>
+
+        <div class="contact-us">
+          <h3>Contact Us</h3>
+          <div class="address">
+            <p>House No 3-3-139, Doctor's Street</p>
+            <p>Civil Hospital Road, Near Raja Theater</p>
+            <p>Karimnagar, Telangana - 505001</p>
+          </div>
+          <div class="contact-info">
+            <p>Email: drpoornimafertility@gmail.com</p>
+            <p>Phone: +91-1234567890</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Dr Poornima Fertility Centre. All Rights Reserved.</p>
+      </div>
     </footer>
 
     <div id="consultation-popup" class="popup-modal">
@@ -498,7 +542,7 @@
                 <form class="popup-form">
                     <input type="text" name="fullName" placeholder="Your Full Name" required>
                     <input type="tel" name="mobileNumber" placeholder="Your Mobile Number" required>
-                    <input type="hidden" name="source" value="gallery Popup">
+                    <input type="hidden" name="source" value="Gallery Page Popup"> <!-- Updated source value -->
 
                     <div class="privacy">
                         <img src="assets/images/google.png" onerror="this.onerror=null; this.src='https://placehold.co/20x20/cccccc/000000?text=G';" alt="Google Logo">
@@ -522,10 +566,11 @@
         <div id="caption"></div>
     </div>
 
-    <a href="https://wa.me/+911234567890" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/+919490704277" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <script src="assets/script.js"></script>
     <script>
         // Get the consultation modal elements
         var consultationModal = document.getElementById("consultation-popup");
@@ -540,52 +585,58 @@
          * and showing the form, and clearing any form fields.
          */
         function resetConsultationPopup() {
-            formSection.style.display = 'block'; // Show the form section
-            successMessage.style.display = 'none'; // Hide the success message
-            consultationForm.reset(); // Clear form fields
+            if (formSection) formSection.style.display = 'block';
+            if (successMessage) successMessage.style.display = 'none';
+            if (consultationForm) consultationForm.reset(); // Clear form fields
         }
 
         // When the user clicks the consultation button, open the modal
-        consultationBtn.onclick = function() {
-            consultationModal.style.display = "flex"; // Use flex to center the modal content
-            resetConsultationPopup(); // Reset the state when opening
+        if (consultationBtn) {
+            consultationBtn.onclick = function() {
+                consultationModal.style.display = "flex"; // Use flex to center the modal content
+                resetConsultationPopup(); // Reset the state when opening
+            }
         }
 
         // When the user clicks on <span> (x) in the consultation modal, close the modal
-        consultationCloseSpan.onclick = function() {
-            consultationModal.style.display = "none";
-            resetConsultationPopup(); // Reset the state when closing
-        }
-
-        // When the user clicks anywhere outside of the consultation modal content, close it
-        window.onclick = function(event) {
-            if (event.target == consultationModal) {
+        if (consultationCloseSpan) {
+            consultationCloseSpan.onclick = function() {
                 consultationModal.style.display = "none";
                 resetConsultationPopup(); // Reset the state when closing
             }
         }
 
-        // Handle form submission for consultation
-        consultationForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Hide the form section and show the success message
-            formSection.style.display = 'none';
-            successMessage.style.display = 'block';
-
-            // Optional: Hide the success message and close the modal after a few seconds
-            setTimeout(function() {
-                successMessage.style.display = 'none';
-                consultationModal.style.display = 'none';
-                resetConsultationPopup(); // Reset the state after closing
-            }, 5000); // 5 seconds
+        // When the user clicks anywhere outside of the consultation modal content, close it
+        window.addEventListener('click', function(event) {
+            if (event.target == consultationModal) {
+                consultationModal.style.display = "none";
+                resetConsultationPopup(); // Reset the state when closing
+            }
         });
+
+        // Handle form submission for consultation
+        if (consultationForm) {
+            consultationForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Hide the form section and show the success message
+                if (formSection) formSection.style.display = 'none';
+                if (successMessage) successMessage.style.display = 'block';
+
+                // Optional: Hide the success message and close the modal after a few seconds
+                setTimeout(function() {
+                    if (successMessage) successMessage.style.display = 'none';
+                    if (consultationModal) consultationModal.style.display = 'none';
+                    resetConsultationPopup(); // Reset the state after closing
+                }, 5000); // 5 seconds
+            });
+        }
 
 
         // Get the lightbox modal elements
         var mediaModal = document.getElementById("mediaModal");
         var modalImage = document.getElementById("modalImage");
-        var modalVideo = document.getElementById("modalVideo"); // This will now only be used for the video embedded in the modal (which is now for images)
+        var modalVideo = document.getElementById("modalVideo");
         var captionText = document.getElementById("caption");
         var modalCloseBtn = document.getElementsByClassName("modal-close-btn")[0];
 
@@ -611,9 +662,11 @@
         });
 
         // When the user clicks on <span> (x) in the media modal, close the modal
-        modalCloseBtn.onclick = function() {
-            mediaModal.style.display = "none";
-            modalVideo.src = ""; // Ensure any modal video is stopped if it were ever used
+        if (modalCloseBtn) {
+            modalCloseBtn.onclick = function() {
+                mediaModal.style.display = "none";
+                modalVideo.src = ""; // Ensure any modal video is stopped if it were ever used
+            }
         }
 
         // When the user clicks anywhere outside of the media modal content, close it

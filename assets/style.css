@@ -8,8 +8,7 @@
 body {
     font-family: "Segoe UI", sans-serif;
     scroll-behavior: smooth;
-    /* Prevent horizontal scroll on mobile due to overflow */
-    overflow-x: hidden;
+    overflow-x: hidden; /* Prevent horizontal scroll on mobile due to overflow */
 }
 
 html {
@@ -25,8 +24,7 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Allow items to wrap on smaller screens */
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
     font-size: 0.9em;
     z-index: 999;
 }
@@ -138,8 +136,7 @@ html {
     margin: 0;
     flex-grow: 1;
     justify-content: flex-end;
-    /* CRUCIAL: Allow main nav items to wrap on a new line on smaller screens if they don't fit */
-    flex-wrap: nowrap;
+    flex-wrap: nowrap; /* Prevent main nav items from wrapping on desktop */
     flex-shrink: 1;
     min-width: 0;
 }
@@ -1377,6 +1374,9 @@ html {
     .top-bar-appointment-btn {
         margin-top: 10px; /* Add space above button */
     }
+    .top-bar-appointment-btn {
+        display: none; /* Hides the button in mobile view */
+    }
 
     .navbar {
         flex-wrap: wrap; /* Allow navbar items to wrap if needed */
@@ -1389,7 +1389,7 @@ html {
 
     .nav-links {
         /* On mobile, initially hide and make it full width/column */
-        display: none;
+        display: flex; /* Use flex to ensure proper stacking of children for column layout */
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
@@ -1402,10 +1402,20 @@ html {
         z-index: 990; /* Lower than navbar, higher than page content */
         padding: 10px 0;
         border-radius: 0 0 8px 8px;
+        /* Use max-height for smooth transition */
+        max-height: 0;
+        overflow-y: hidden; /* Crucial for max-height transition to work */
+        transition: max-height 0.5s ease-out, opacity 0.5s ease-out, visibility 0.5s ease-out;
+        opacity: 0;
+        visibility: hidden; /* Hidden for screen readers when collapsed */
     }
 
     .nav-links.active {
-        display: flex; /* Show when active */
+        max-height: 600px; /* Sufficient height for menu items + search/button */
+        opacity: 1;
+        visibility: visible;
+        overflow-y: auto; /* Allow scrolling if menu content is too long for screen */
+        -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
     }
 
     .nav-links li {
@@ -1423,10 +1433,31 @@ html {
         white-space: normal; /* Allow text to wrap */
     }
 
-    /* Hide search and consultation button from main nav on mobile, use a dedicated spot or remove */
+    /* Make search and consultation button visible within the mobile menu */
     .search-container,
     .consultation-btn {
-        display: none; /* Hide these from the main mobile nav */
+        display: flex; /* Changed from none to flex/block */
+        width: calc(100% - 40px); /* Adjust width to fit with padding */
+        margin: 10px 20px; /* Center with padding */
+        box-sizing: border-box; /* Include padding/border in width */
+    }
+
+    /* Adjust search input and button within the mobile menu */
+    .search-container {
+        border-radius: 25px; /* More rounded */
+    }
+    #searchInput {
+        padding: 10px 15px;
+        font-size: 1rem;
+    }
+    #searchButton {
+        padding: 10px 15px;
+        border-radius: 0 25px 25px 0;
+    }
+
+    .consultation-btn {
+        text-align: center;
+        margin-left: 20px; /* Consistent margin */
     }
 
     /* Dropdown and Submenu mobile adjustments (will be toggled by JS) */
@@ -1436,24 +1467,22 @@ html {
         background-color: transparent; /* No distinct background */
         box-shadow: none;
         padding: 0;
-        margin: 5px 0 5px 20px; /* Indent sub-items */
+        margin: 0 0 0 20px; /* Indent sub-items */
         width: auto; /* Let content determine width */
         max-width: 100%;
-        overflow-y: visible; /* Allow content to push height */
-        max-height: none; /* Remove max height constraint */
+        max-height: 0; /* Hidden by default for smooth transition */
+        overflow-y: hidden; /* Crucial for max-height transition */
+        transition: max-height 0.3s ease-in-out; /* Smooth transition */
+        display: none; /* Keep this to initially hide it */
     }
 
-    .dropdown-content a,
-    .submenu-content a {
-        padding: 8px 10px; /* Adjust padding for nested items */
-        font-size: 0.9rem; /* Smaller font for nested items */
-        color: #555; /* Slightly less prominent color */
-    }
-
-    /* Override hover effects for touch devices, rely on JS for toggling */
-    .dropdown:hover .dropdown-content,
-    .dropdown-submenu:hover .submenu-content {
-        display: none; /* Ensure hover doesn't activate on touch */
+    /* Show dropdown/submenu content when parent li has 'active' class on mobile */
+    .dropdown.active > .dropdown-content,
+    .dropdown-submenu.active > .submenu-content {
+        max-height: 500px; /* Sufficient height to reveal all items */
+        overflow-y: auto; /* Allow scrolling within the dropdown if many items */
+        -webkit-overflow-scrolling: touch;
+        display: block; /* <--- ADDED THIS IMPORTANT RULE */
     }
 }
 

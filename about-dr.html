@@ -142,33 +142,72 @@
             color: #28a745; /* Green check icon */
             margin-right: 10px;
         }
+        /* Specific styling for anchor targets to prevent content hiding behind fixed header */
+        .anchor-target {
+            padding-top: 150px; /* Adjust this value to be equal to your fixed header height + top bar */
+            margin-top: -150px; /* Negative margin to pull content back up, while padding keeps it visible */
+            display: block; /* Ensures padding-top applies */
+        }
     </style>
 </head>
 <body>
+    <!-- Top Bar: Directly copied from your working infertility.html/gallery.html -->
+    <div class="top-bar">
+        <div class="top-bar-info-group">
+            <div class="top-bar-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Govt hospital Road, Karimnagar, Telangana 505001</span>
+            </div>
+            <div class="top-bar-info">
+                <i class="fas fa-envelope"></i>
+                <span>poornimafertility@gmail.com</span>
+            </div>
+            <div class="top-bar-info">
+                <i class="fas fa-phone"></i>
+                <span>+91-9490704277</span>
+            </div>
+        </div>
+        <div class="top-bar-right-group">
+            <div class="top-bar-social">
+                <a href="https://facebook.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/your-profile" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/your-channel" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <a href="#" class="top-bar-appointment-btn" onclick="document.getElementById('consultation-popup').style.display='flex'; return false;">Appointment</a>
+        </div>
+    </div>
 
     <nav class="navbar">
         <div class="logo">
-            <img src="assets/images/poornima logo (2).png" alt="Dr. Poornima Fertility Centre Logo" />
-            </div>
+            <img src="assets/images/poornima logo (2).png" onerror="this.onerror=null; this.src='https://placehold.co/100x50/cccccc/000000?text=Logo';" alt="Poornima Fertility Centre Logo" />
+        </div>
+        <!-- Hamburger menu icon for mobile: Directly copied from your working infertility.html/gallery.html -->
+        <div class="hamburger-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <ul class="nav-links">
             <li><a href="index.html#home">Home</a></li>
-            <li><a href="about-dr.html">About</a></li> <li class="dropdown">
-                <a href="index.html#services">Services <i class="fas fa-caret-down"></i></a>
+            <li><a href="about-dr.html">About</a></li>
+            <li class="dropdown">
+                <a href="index.html#services">Services <i class="fas fa-caret-down dropdown-arrow"></i></a>
                 <ul class="dropdown-content">
                     <li class="dropdown-submenu">
-                        <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right"></i></a>
+                        <a href="infertility-services.html">Infertility Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
-                            <li><a href="infertility-services.html#pre-martial-assesment">Pre Martial Fertility Assessment And Counselling For Both Partners</a></li>
+                            <li><a href="infertility-services.html#pre-martial-assesment">Pre-Marital Fertility Assessment And Counselling For Both Partners</a></li>
                             <li><a href="infertility-services.html#ovulation-induction">OI (Ovulation Induction)</a></li>
                             <li><a href="infertility-services.html#iui">IUI (Intrauterine Insemination)</a></li>
-                            <li><a href="infertility-services.html#unexplained-fertility">Treatment For Unexplained InFertility</a></li>
-                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li> 
+                            <li><a href="infertility-services.html#unexplained-fertility">Treatment For Unexplained Infertility</a></li>
+                            <li><a href="infertility-services.html#pre-conception-counselling">Pre-conception Counselling</a></li>
                             <li><a href="infertility-services.html#psychological-counselling">Psychological Counselling</a></li>
                             <li><a href="infertility-services.html#fertility-evaluation">Fertility Evaluation</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right"></i></a>
+                        <a href="ivf-services.html">IVF & Assisted Reproductive Technologies <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="ivf-services.html#ivf">In Vitro Fertilization (IVF)</a></li>
                             <li><a href="ivf-services.html#icsi">Intracytoplasmic Sperm Injection (ICSI)</a></li>
@@ -182,16 +221,16 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right"></i></a>
+                        <a href="endoscopy-services.html">Endoscopy Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="endoscopy-services.html#diagnostic-hysteroscopy">Diagnostic Hysteroscopy</a></li>
                             <li><a href="endoscopy-services.html#diagnostic-laparoscopy">Diagnostic Laparoscopy </a></li>
-                            <li><a href="endoscopy-services.html#theraputic-hysterolaparoscopy">Theraputic Hysterolaparoscopy</a></li>
-                            <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids,Pid,Herine Septum,Post Tubaltmic Cases,Endometriosis,Ovarian Cysts)</a></li> 
+                            <li><a href="endoscopy-services.html#theraputic-hysterolaparoscopy">Therapeutic Hysterolaparoscopy</a></li>
+                            <li><a href="endoscopy-services.html#fibriods">Treatments For (Fibroids, PID, Hernia Septum, Post Tubal Ligation Cases, Endometriosis, Ovarian Cysts)</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right"></i></a>
+                        <a href="male-infertility-services.html">Male Infertility Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="male-infertility-services.html#semen-analysis">Semen Analysis</a></li>
                             <li><a href="male-infertility-services.html#dfi">DNA Fragmentation Index (DFI)</a></li>
@@ -205,7 +244,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right"></i></a>
+                        <a href="advanced-ivf-services.html">Advanced IVF Services <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="advanced-ivf-services.html#blastocyst-culture">Blastocyst Culture</a></li>
                             <li><a href="advanced-ivf-services.html#era">Endometrial Receptivity Array (ERA)</a></li>
@@ -217,7 +256,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right"></i></a>
+                        <a href="fertility-preservation-services.html">Fertility Preservation <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="fertility-preservation-services.html#cancer-patients">Preservation for Cancer Patients</a></li>
                             <li><a href="fertility-preservation-services.html#rheumatology">Rhuematology And SLE(Lupus) Patients</a></li>
@@ -227,18 +266,18 @@
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right"></i></a>
+                        <a href="third-party-reproduction-services.html">Third-Party Reproduction <i class="fas fa-caret-right submenu-arrow"></i></a>
                         <ul class="submenu-content">
                             <li><a href="third-party-reproduction-services.html#donor-egg">Donor Egg</a></li>
                             <li><a href="third-party-reproduction-services.html#donor-sperm">Donor Sperm</a></li>
-                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li> 
+                            <li><a href="third-party-reproduction-services.html#surrogacy">Surrogacy</a></li>
                         </ul>
                     </li>
                 </ul>
             </li>
-            <li><a href="index.html#gallery">Gallery</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
             <li><a href="index.html#book">Contact</a></li>
-            <li><a href="#" class="consultation-btn" onclick="document.getElementById('consultation-popup').style.display='block'">Book Free Consultation</a></li>
+            <li><a href="#" class="consultation-btn" onclick="document.getElementById('consultation-popup').style.display='flex'">Book Free Consultation</a></li>
             <li class="search-container">
                 <input type="text" id="searchInput" placeholder="Search treatments...">
                 <button id="searchButton"><i class="fas fa-search"></i></button>
@@ -253,11 +292,12 @@
     <section class="about-doctor-section">
         <div class="about-doctor-container">
             <div class="doctor-image">
-                <img src="assets/images/IMG_9150.JPG" alt="Dr. Poornima"> </div>
+                <img src="assets/images/IMG_9150.JPG" onerror="this.onerror=null; this.src='https://placehold.co/350x500/cccccc/000000?text=Dr.+Poornima';" alt="Dr. Poornima">
+            </div>
             <div class="doctor-details">
                 <h2>About Dr. Poornima</h2>
-                <h3>Dr. POORNIMA, MBBS, DGO, FRM</h3> 
-                <p>13+ Years Of Experience</p> 
+                <h3>Dr. POORNIMA, MBBS, DGO, FRM</h3>
+                <p>13+ Years Of Experience</p>
                 <h4>QUALIFICATIONS</h4>
                 <ul>
                     <li>MBBS</li>
@@ -272,9 +312,10 @@
                 <ul>
                     <li>She completed her MBBS from MNR Medical College in 2011, and her post-graduation (DGO) from KMC - Kakatiya Medical College in 2015.</li>
                     <li>Between 2015 and 2018, Dr. Poornima underwent advanced training in prenatal genetic evaluation, infertility, ultrasonography, and minimally invasive gynaecology & laparoscopy under the guidance of renowned doctors.</li>
+                    <li>Dr. Poornima further honed her skills by completing a Fertility Fellowship Program in Chennai under the esteemed Dr. Jayamkannan at GFC Centre, Kodambakkam, Chennai.</li>
+                    <li>Completed her fellowship in ultrasonography under the guidance of Dr.wani sir and team</li>
                     <li>In 2018, she established her own clinic in Karimnagar, where she has successfully treated over 300 fertility couples and conducted more than 500 successful deliveries.</li>
                     <li>From 2022 to 2025, she served as a Senior Consultant at Ferty9 Karimnagar. During this tenure, she performed over 300 IUIs, 450 OPUs, and 550 FETs, and specialized in managing challenging cases such as thin endometrium and recurrent IVF failures.</li>
-                    <li>Dr. Poornima further honed her skills by completing a Fertility Fellowship Program in Chennai under the esteemed Dr. Jayakannan at GFC Centre, Kodambakkam, Chennai.</li>
                     <li>She has also completed comprehensive Cosmetic Gynecology courses in both surgical and non-surgical fields, under the guidance of Dr. Ayman El Attar, MD, in association with the American Aesthetic Association.</li>
                 </ul>
 
@@ -303,10 +344,11 @@
         </div>
     </section>
 
+    <!-- Footer section: Directly copied from your working infertility.html -->
     <footer class="footer-section">
         <div class="footer-container">
             <div class="footer-logo">
-                <img src="assets/images/poornima logo (2).png" alt="Dr Poornima Fertility Centre Logo">
+                <img src="assets/images/poornima logo (2).png" onerror="this.onerror=null; this.src='https://placehold.co/60x60/cccccc/000000?text=Logo';" alt="Dr Poornima Fertility Centre Logo">
                 <p>Dr Poornima Fertility Centre is the Best Fertility Centre in Karimnagar offering advanced fertility treatments with personalized care, state-of-the-art technology, and a compassionate, patient-centered approach to success.</p>
                 <div class="social-links">
                     <a href="https://instagram.com/your-profile" target="_blank" class="social-icon">
@@ -328,21 +370,22 @@
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="index.html#home">Home</a></li>
-                    <li><a href="about-dr.html">About Us</a></li> <li><a href="index.html#services">Services</a></li>
-                    <li><a href="#doctors">Doctors</a></li> <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="about-dr.html">About Us</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="index.html#book">Contact Us</a></li>
                 </ul>
             </div>
 
-            <div class="our-services-footer">
+            <div class="our-services">
                 <h3>Our Services</h3>
                 <ul>
                     <li><a href="infertility-services.html">Infertility Services</a></li>
                     <li><a href="ivf-services.html">IVF Services</a></li>
                     <li><a href="male-infertility-services.html">Male Infertility Services</a></li>
+                    <li><a href="advanced-ivf-services.html">Advanced IVF Services</a></li>
                     <li><a href="fertility-preservation-services.html">Fertility Preservation</a></li>
                     <li><a href="third-party-reproduction-services.html">Third Party Reproduction</a></li>
-                    <li><a href="advanced-ivf-services.html">Advanced IVF Services</a></li>
                     <li><a href="endoscopy-services.html">Endoscopy Services</a></li>
                 </ul>
             </div>
@@ -384,10 +427,10 @@
                 <form class="popup-form">
                     <input type="text" name="fullName" placeholder="Your Full Name" required>
                     <input type="tel" name="mobileNumber" placeholder="Your Mobile Number" required>
-                    <input type="hidden" name="source" value="about dr Popup">
+                    <input type="hidden" name="source" value="About Dr. Page Popup"> <!-- Updated source value -->
 
                     <div class="privacy">
-                        <img src="assets/images/google.png" alt="Google Logo">
+                        <img src="assets/images/google.png" onerror="this.onerror=null; this.src='https://placehold.co/20x20/cccccc/000000?text=G';" alt="Google Logo">
                         <span>We respect your privacy – your data is secure with us.</span>
                     </div>
 
@@ -396,12 +439,16 @@
             </div>
 
             <div id="consultation-success-message" class="consultation-success-message">
-                
                 <p>Thank you for reaching out! We've received your request and will get back to you within 24 hours.</p>
             </div>
         </div>
     </div>
 
+    <a href="https://wa.me/919490704277" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="assets/script.js"></script>
     <script>
         // Get the modal
         var modal = document.getElementById("consultation-popup");
@@ -414,7 +461,7 @@
 
         // Get the form and success message elements
         var consultationForm = document.querySelector("#consultation-popup .popup-form");
-        var formSection = document.getElementById("consultation-form-section"); // Now targeting the div that contains the form
+        var formSection = document.getElementById("consultation-form-section");
         var successMessage = document.getElementById("consultation-success-message");
 
         // Function to reset the popup state (show form, hide success message)
@@ -427,7 +474,7 @@
         // When the user clicks the button, open the modal and reset its state
         if(btn) {
             btn.onclick = function() {
-                modal.style.display = "block";
+                modal.style.display = "flex"; // Changed to flex for consistent centering
                 resetPopup(); // Reset popup every time it opens
             }
         }
@@ -454,8 +501,6 @@
                 event.preventDefault(); // Prevent default form submission
 
                 // Simulate an asynchronous submission (e.g., an AJAX call)
-                // In a real application, you would send data to a server here.
-                // For demonstration, we'll just use a setTimeout to simulate delay.
                 console.log("Form submitted. Simulating data send...");
 
                 // Simulate success after a short delay
@@ -467,11 +512,5 @@
             });
         }
     </script>
-
-    <a href="https://wa.me/yourwhatsappnumber" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <script src="assets/script.js"></script>
 </body>
 </html>

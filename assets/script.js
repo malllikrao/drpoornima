@@ -23,82 +23,124 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 body.style.overflowY = ''; // Restore scrolling
                 html.style.scrollPaddingTop = '150px'; // Revert to default for desktop (or adjust as needed)
+
+                // When closing the main mobile menu, ensure all dropdowns/submenus are also closed
+                document.querySelectorAll('.dropdown.active, .dropdown-submenu.active').forEach(item => {
+                    item.classList.remove('active');
+                    const arrow = item.querySelector('.dropdown-arrow, .submenu-arrow');
+                    if (arrow) {
+                        // Reset rotation when menu closes
+                        arrow.style.transform = 'rotate(0deg)';
+                    }
+                });
             }
         });
     }
 
     // === Mobile Dropdown/Submenu Toggle Logic ===
     // This makes the dropdowns and submenus toggle on click/tap on mobile, instead of hover
-    const dropdowns = document.querySelectorAll('.nav-links .dropdown > a');
-    const submenuDropdowns = document.querySelectorAll('.nav-links .dropdown-submenu > a');
+    const dropdownLinks = document.querySelectorAll('.nav-links .dropdown > a');
+    const submenuLinks = document.querySelectorAll('.nav-links .dropdown-submenu > a');
 
-    dropdowns.forEach(dropdownLink => {
+    // Function to handle toggling any list item's 'active' class and its arrow
+    // This function only handles visual toggling, not event.preventDefault()
+    function toggleMenuItemVisuals(linkElement, parentSelector, arrowSelector) {
+        const parentLi = linkElement.closest(parentSelector);
+        if (!parentLi) return; // Safety check
+
+        // Toggle 'active' class on the parent <li>
+        parentLi.classList.toggle('active');
+
+        // Close other open dropdowns/submenus at the same level
+        const commonParent = parentLi.closest('.dropdown-content') || parentLi.closest('.nav-links');
+        commonParent.querySelectorAll(`${parentSelector}.active`).forEach(openItem => {
+            if (openItem !== parentLi) {
+                openItem.classList.remove('active');
+                openItem.querySelectorAll('.submenu-content.active').forEach(nestedSub => {
+                    nestedSub.classList.remove('active');
+                    nestedSub.closest('.dropdown-submenu')?.classList.remove('active');
+                });
+                const otherArrow = openItem.querySelector(arrowSelector);
+                if (otherArrow) {
+                    otherArrow.style.transform = 'rotate(0deg)';
+                }
+            }
+        });
+
+        // Rotate the arrow icon
+        const arrow = linkElement.querySelector(arrowSelector);
+        if (arrow) {
+            if (parentLi.classList.contains('active')) {
+                arrow.style.transform = arrowSelector.includes('dropdown-arrow') ? 'rotate(180deg)' : 'rotate(90deg)';
+            } else {
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+    }
+
+    // Attach click listeners for main dropdowns (e.g., "Services")
+    dropdownLinks.forEach(dropdownLink => {
         dropdownLink.addEventListener('click', function (event) {
-            // Only activate this logic on smaller screens where the mobile menu is active
-            // and the display property of .nav-links is not 'flex' (for desktop)
-            const navLinksComputedStyle = window.getComputedStyle(navLinks);
-            if (navLinksComputedStyle.display === 'flex' && window.innerWidth > 992) {
-                // If navLinks is displayed as flex AND it's a large screen, let CSS hover handle it.
-                // Do nothing here, allow default behavior (if it has an href)
-                return;
+            // Only activate this logic on smaller screens where the mobile menu CSS applies
+            if (window.matchMedia('(min-width: 992px)').matches) {
+                return; // Let CSS hover handle it on desktop
             }
 
             const parentLi = this.closest('li.dropdown');
-            if (parentLi) {
-                event.preventDefault(); // Prevent default link navigation for the main dropdown
-                // Toggle 'active' class on the parent <li> to show/hide its content
-                parentLi.classList.toggle('active');
+            const clickedElement = event.target; // What was actually clicked
 
-                // Close other open dropdowns at the same level
-                document.querySelectorAll('.nav-links .dropdown.active').forEach(openDropdown => {
-                    if (openDropdown !== parentLi) {
-                        openDropdown.classList.remove('active');
-                        // Also close any active submenus within this closed dropdown
-                        openDropdown.querySelectorAll('.submenu-content.active').forEach(activeSub => {
-                            activeSub.classList.remove('active');
-                            activeSub.closest('.dropdown-submenu')?.classList.remove('active');
-                        });
-                    }
-                });
-
-                // For the dropdown arrow: find the arrow element inside this dropdownLink and toggle its rotation
-                const arrow = this.querySelector('.dropdown-arrow');
-                if (arrow) {
-                    arrow.style.transform = parentLi.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
-                }
+            // If the link has an href="#" (pure toggler) OR if it's a dropdown and not yet active (first tap to expand)
+            // prevent default and just toggle the menu.
+            if (this.getAttribute('href') === '#' || (parentLi && parentLi.classList.contains('dropdown') && !parentLi.classList.contains('active'))) {
+                event.preventDefault(); // Prevent default navigation
+                toggleMenuItemVisuals(this, 'li.dropdown', '.dropdown-arrow');
+            } else if (parentLi && parentLi.classList.contains('dropdown') && parentLi.classList.contains('active')) {
+                // If it's a dropdown and it's already active (second tap on the same link), allow navigation.
+                // Or if it's not a dropdown (e.g., 'Home', 'About'), allow navigation naturally.
+                // No preventDefault here, let the browser handle the navigation.
+            }
+            // If the click was on the arrow specifically, always just toggle (prevent default)
+            const arrow = this.querySelector('.dropdown-arrow');
+            if (arrow && arrow.contains(clickedElement)) {
+                event.preventDefault();
+                toggleMenuItemVisuals(this, 'li.dropdown', '.dropdown-arrow');
             }
         });
     });
 
-    submenuDropdowns.forEach(submenuLink => {
+    // Attach click listeners for submenus (e.g., "Infertility Services")
+    submenuLinks.forEach(submenuLink => {
         submenuLink.addEventListener('click', function (event) {
-            // Similar check for mobile vs desktop behavior
-            const navLinksComputedStyle = window.getComputedStyle(navLinks);
-            if (navLinksComputedStyle.display === 'flex' && window.innerWidth > 992) {
-                return;
+            // Only activate this logic on smaller screens where the mobile menu CSS applies
+            if (window.matchMedia('(min-width: 992px)').matches) {
+                return; // Let CSS hover handle it on desktop
             }
 
             const parentLi = this.closest('li.dropdown-submenu');
-            if (parentLi) {
-                event.preventDefault(); // Prevent default link navigation for the submenu link
-                parentLi.classList.toggle('active');
+            const clickedElement = event.target; // What was actually clicked
 
-                // Close other open submenus at the same level within this parent dropdown
-                parentLi.closest('.dropdown-content').querySelectorAll('.dropdown-submenu.active').forEach(openSubmenu => {
-                    if (openSubmenu !== parentLi) {
-                        openSubmenu.classList.remove('active');
-                    }
-                });
-
-                // For the submenu arrow: find the arrow element inside this submenuLink and toggle its rotation
-                const arrow = this.querySelector('.submenu-arrow');
-                if (arrow) {
-                    arrow.style.transform = parentLi.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
-                }
+            // If this submenu link has a nested submenu AND the arrow was clicked, or if it's not yet active
+            if ((this.querySelector('.submenu-content') && !parentLi.classList.contains('active')) ||
+                (this.querySelector('.submenu-arrow') && this.querySelector('.submenu-arrow').contains(clickedElement))) {
+                event.preventDefault(); // Prevent default navigation
+                toggleMenuItemVisuals(this, 'li.dropdown-submenu', '.submenu-arrow');
             }
+            // If it's already active, or if it's a direct link within a submenu with no further nested menus,
+            // allow default navigation. No preventDefault here.
         });
     });
 
+    // Close mobile menu if a non-dropdown link is clicked within the mobile menu
+    if (navLinks) { // Ensure navLinks exists
+        navLinks.querySelectorAll('li:not(.dropdown) > a').forEach(link => {
+            link.addEventListener('click', () => {
+                // Check if the mobile menu is currently active before closing
+                if (navLinks.classList.contains('active')) {
+                    hamburgerMenu.click(); // Simulate click on hamburger to close menu
+                }
+            });
+        });
+    }
 
     // === Popup Modal Logic ===
     const consultationPopup = document.getElementById('consultation-popup');
@@ -170,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const popupFormSection = document.getElementById('consultation-form-section');
                 if (popupFormSection) popupFormSection.style.display = 'none';
                 popupSuccessDiv.style.display = 'block';
-                popupSuccessDiv.textContent = message; // Update message content
+                popupSuccessDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`; // Update message content with icon
 
                 setTimeout(() => {
                     popupSuccessDiv.style.display = 'none';
@@ -331,32 +373,63 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // === Image Slide Show (Hero Section) ===
     let currentSlide = 0;
-    const slides = document.querySelectorAll(".slide");
-    const leftArrow = document.querySelector(".arrow.left");
-    const rightArrow = document.querySelector(".arrow.right");
+    const slides = document.querySelectorAll(".hero .slide"); // Specific selector for hero slider
+    const leftArrow = document.querySelector(".hero .arrow.left");
+    const rightArrow = document.querySelector(".hero .arrow.right");
 
-    function showSlide(index) {
-        if (slides.length === 0) return;
-        slides.forEach((slide, i) => {
-            slide.classList.toggle("active", i === index);
-        });
-    }
-    function changeSlide(direction) {
-        currentSlide = (currentSlide + direction + slides.length) % slides.length;
-        showSlide(currentSlide);
-    }
+    // Only run slider logic if slides are found (i.e., on the homepage)
     if (slides.length > 0) {
-        showSlide(currentSlide);
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle("active", i === index);
+            });
+        }
+        function changeSlide(direction) {
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+        showSlide(currentSlide); // Initial display
+        if (leftArrow) {
+            leftArrow.addEventListener('click', () => changeSlide(-1));
+        }
+        if (rightArrow) {
+            rightArrow.addEventListener('click', () => changeSlide(1));
+        }
+        setInterval(() => changeSlide(1), 10000); // Auto slide every 10 seconds
     }
-    if (leftArrow) {
-        leftArrow.addEventListener('click', () => changeSlide(-1));
-    }
-    if (rightArrow) {
-        rightArrow.addEventListener('click', () => changeSlide(1));
-    }
-    if (slides.length > 1) {
-        setInterval(() => changeSlide(1), 10000);
-    }
+
+    // === Slider Initialization for Service Pages (if a hero section is present) ===
+    // This function can be called from individual HTML pages if they have a hero section with slider
+    window.initializeSlider = function(sliderId) {
+        let currentServiceSlide = 0;
+        const serviceSlides = document.querySelectorAll(`#${sliderId} .slide`);
+        const serviceLeftArrow = document.querySelector(`#${sliderId} .arrow.left`);
+        const serviceRightArrow = document.querySelector(`#${sliderId} .arrow.right`);
+
+        if (serviceSlides.length === 0) return; // Exit if no slides found for this ID
+
+        function showServiceSlide(index) {
+            serviceSlides.forEach((slide, i) => {
+                slide.classList.toggle("active", i === index);
+            });
+        }
+        function changeServiceSlide(direction) {
+            currentServiceSlide = (currentServiceSlide + direction + serviceSlides.length) % serviceSlides.length;
+            showServiceSlide(currentServiceSlide);
+        }
+        showServiceSlide(currentServiceSlide); // Initial display
+
+        if (serviceLeftArrow) {
+            serviceLeftArrow.addEventListener('click', () => changeServiceSlide(-1));
+        }
+        if (serviceRightArrow) {
+            serviceRightArrow.addEventListener('click', () => changeServiceSlide(1));
+        }
+        if (serviceSlides.length > 1) {
+            setInterval(() => changeServiceSlide(1), 10000); // Auto slide every 10 seconds
+        }
+    };
+
 
     // === Search Functionality ===
     const searchInput = document.getElementById('searchInput');
